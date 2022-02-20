@@ -1,0 +1,31 @@
+.logotag {
+  margin-left: 0.8em;
+  color: #1a1a1a;
+}
+
+.webheader {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.3px;
+  font-weight: bold;
+}
+
+.mobileheader {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.3px;
+  font-weight: bold;
+}
+
+.logotag {
+  margin-left: 0.8em;
+  color: #1a1a1a;
+}
+
+@media only screen and (max-width: 768px) {
+  .webheader {
+    display: none;
+  }
+}

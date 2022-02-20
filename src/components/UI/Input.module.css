@@ -1,0 +1,23 @@
+.textlabel {
+  display: block;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 12px;
+  margin-bottom: 0.5em;
+}
+
+.textinput {
+  width: 360px;
+  height: 48px;
+  border-radius: 6px;
+  background: #f2f2f2;
+
+  border: 0.5px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin-bottom: 0.5em;
+}
+
+::placeholder {
+  padding-left: 0.5em;
+}
