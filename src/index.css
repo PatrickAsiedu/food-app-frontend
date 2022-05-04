@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.box-inner-shadow{
+    box-shadow: inset 3px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+
+.box-outer-shadow{
+    box-shadow: 3px 9px 39px rgba(0, 44, 89, 0.1);
+
+}
+
+.height-calc{
+    height: calc(100% - 200px);
+ 
+}
+
+.margin-calc{
+    margin-left: calc(100% - 988px);
+  
+}
