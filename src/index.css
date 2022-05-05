@@ -11,12 +11,38 @@
 
 }
 
+#hey:checked{
+    @apply bg-[url('/src/assets/Vector.svg')] border-0;
+}
+
+
 .height-calc{
     height: calc(100% - 200px);
  
 }
 
+.side{
+    height: calc(100% - 120px);
+}
+
+.margin-top-calc{
+    margin-top: calc(5%)
+}
+
 .margin-calc{
     margin-left: calc(100% - 988px);
   
+}
+
+.singup-form-shadow{
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+}
+.margin-top{
+    margin-top: 27px;
+}
+
+.form-height{
+
+    height: calc(100% - 200px);
+
 }
