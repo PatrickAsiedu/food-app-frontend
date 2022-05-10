@@ -1,22 +1,31 @@
 import React from "react";
-import UserOrderFood from "./pages/User/UserOrderFood";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import { Route, Routes } from "react-router-dom";
+
+import UserOrderFood from "./pages/User/UserOrderFood";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminAddMenu from "./pages/Admin/AdminAddMenu";
 
 function App() {
   return (
     <React.Fragment>
-      {/* <Routes>
-       
-        <Route path="/Login" element={<Login></Login>}></Route>
-        <Route path="/Signup" element={<Signup></Signup>}></Route>
-      </Routes> */}
-      {/* <UserOrderFood></UserOrderFood> */}
-      {/* <AdminDashboard></AdminDashboard> */}
-      <AdminAddMenu></AdminAddMenu>
+      <BrowserRouter>
+        <Routes>
+          <Route index exact element={<Login />}  />
+          <Route  exact path="/register" element={<Signup />} />
+
+
+          {/* <Route exact path="/me" element={<UserOrderFood /> } /> */}
+          <Route exact path="/me/order" element={<UserOrderFood /> } />
+
+          <Route exact path="/admin" element={<AdminDashboard /> } />
+          <Route exact path="/admin/addmenu" element={<AdminAddMenu />} />
+        </Routes>
+      </BrowserRouter>
+
     </React.Fragment>
   );
 }

@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Input = (props) => {
+  const [viewPassword, setViewPassword] = useState(false);
+
+  const onViewPasswordHandler =() => {
+    setViewPassword(prev=>!prev)
+  };
+
+
   return (
     <div>
       <div className="flex justify-between">
@@ -16,11 +23,15 @@ const Input = (props) => {
       <div className="relative">
         <input
           className={`${props.style}`}
-          type={props.type}
+          type={props.type === 'password' ? ( viewPassword ? 'text' : 'password'  ) : props.type} 
           placeholder={props.placeholder}
+          name={props.name}
+          onChange={props.onChange}
+          value={props.value}
+          required
         />
         {props.type === "password" && (
-          <button type="button">
+          <button type="button" onClick={onViewPasswordHandler}>
             <svg
               className="absolute top-11 right-6"
               width="16"

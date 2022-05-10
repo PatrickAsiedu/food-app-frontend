@@ -7,7 +7,7 @@ const ToggleSwitch = (props) => {
         props.devicestatus
       } ${"relative inline-block bg-switch w-10 h-5 rounded-full cursor-pointer  "}`}
     >
-      <input className="peer sr-only" type="checkbox" />
+      <input className="peer sr-only" type="checkbox"  />
       <span
         className=" absolute w-10 h-5 peer-checked:bg-primary duration-500 rounded-full
               before:absolute before:content-[''] before:w-4 before:h-4 before:bg-white 
