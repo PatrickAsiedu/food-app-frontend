@@ -14,6 +14,9 @@ module.exports = {
         checkbox: "#23B65E",
         links: "#007AFF",
         switch: "#F2F2F2",
+        notification: "#DC2032",
+        bluebullet: "#00D4FF",
+        orangebullet: "#FFB800",
       },
       boxShadow: {
         switchshadow: "1px 1px 2px -1px rgba(51, 51, 51, 0.3)",
