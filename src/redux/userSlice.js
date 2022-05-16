@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import  API from '../network/api';
+import jwtDecode from "jwt-decode";
 
 const initialState = {
     status: '',
     user: {} ,
     isLoggedIn: false
 }
+
 
 
 export const logInUser = createAsyncThunk('user/login', async(userData) => {
@@ -20,13 +22,32 @@ try {
     return data
     
 }
-})
+});
+
+
 
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        setCurrentUser: (state, action)=>{
+            // console.log(action.payload)
+            state.user = jwtDecode(action.payload)
+            state.isLoggedIn = true;
+            state.status = 'Login successful'
+        },
+        logOutCurrentUser: (state) => {
+            state.user = {};
+            state.status="User logged out";
+            localStorage.clear();
+            state.isLoggedIn =false;
+        },
+        // getUserType : (state) => {
+        //     console.log('get user type', state)
+        //     return state.user.type
+        // }
+
     },
     extraReducers: builder => {
         builder.addCase(logInUser.pending, (state, action)=> {
@@ -40,16 +61,8 @@ const userSlice = createSlice({
             // console.log(action)
             if(action.payload.status===202){
                 state.user = action.payload.user;
-                // need to change type from number to word
-                // 0-user, 2-admin, 1-chef
-                if(action.payload.user.type === 0){
-                    state.user.type = 'user'
-                }else if( action.payload.user.type === 1){
-                    state.user.type = 'chef'
-                }else if(action.payload.type === 2){
-                    state.user.type = 'admin'
-                }
                 localStorage.setItem('user_token', action.payload.token);
+
             } else {
 
             }
@@ -57,5 +70,6 @@ const userSlice = createSlice({
     }
 })
 
+export const { setCurrentUser, logOutCurrentUser } = userSlice.actions;
 
 export default userSlice.reducer;

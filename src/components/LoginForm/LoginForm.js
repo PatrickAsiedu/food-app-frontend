@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import Input from "../UI/Input";
 import ToggleSwitch from "../UI/ToggleSwitch";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logInUser } from "../../redux/userSlice";
 
 const LoginForm = () => {
   const dispatch  = useDispatch();
-  const navigate = useNavigate();
 
   const [phone_number, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -17,14 +16,21 @@ const LoginForm = () => {
 
   const onSubmitHandler = async(e) => {
     e.preventDefault();
-    // TODO: handle login
     setIsLoggingIn(true)
+    setLogInError('')
     const response = await dispatch(logInUser({phone_number, password})).unwrap();
     // console.log(response)
     if(response.status===202){
-      // navigate user to dashboard
+      console.log(response)
       setIsLoggingIn(false)
-      navigate('/me/order')   //remember to change to /me
+      if(response.user.type==='user'){
+        window.location.href='/me';
+      }  else if(response.user.type === 'chef'){
+        window.location.href ='/chef';
+      }else if(response.user.type === 'admin'){
+        window.location.href = '/admin';
+      }
+      // navigate('/me/order')   //remember to change to /me
     }else{
       // theres an error, diplay the message
       setLogInError(response.errorMessage)
