@@ -25,6 +25,19 @@ try {
 });
 
 
+export const signUpUser = createAsyncThunk('user/signup', async(userData) => {
+    try {
+        const response = await API.post('/register', userData);
+        console.log(response)
+        
+    } catch (error) {
+        console.log(error.response);
+        const data = {status:error.response.status, errorMessage:error.response.data.message}
+        return data
+    }
+})
+
+
 
 
 const userSlice = createSlice({
