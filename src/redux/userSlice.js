@@ -29,10 +29,11 @@ export const signUpUser = createAsyncThunk('user/signup', async(userData) => {
     try {
         const response = await API.post('/register', userData);
         console.log(response)
-        
+        const data = {status: response.status, message: response.data.message}
+        return data;
     } catch (error) {
         console.log(error.response);
-        const data = {status:error.response.status, errorMessage:error.response.data.message}
+        const data = {status:error.response.status, errorMessage:error.response.data.error.message ||error.response.data.error[0].message}
         return data
     }
 })
@@ -79,6 +80,17 @@ const userSlice = createSlice({
             } else {
 
             }
+        })
+
+        // register 
+        builder.addCase(signUpUser.rejected, (state, action)=> {
+            state.status='rejected';
+        })
+        builder.addCase(signUpUser.pending, (state, action)=>{
+            state.status='pending';
+        })
+        builder.addCase(signUpUser.fulfilled, (state, action)=>{
+            state.status='account created'
         })
     }
 })

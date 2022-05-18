@@ -92,7 +92,7 @@ const LoginForm = () => {
         </span>
         <span>
           <Link
-            to="/Signup"
+            to="/register"
             className="text-primary font-normal text-links ml-4  "
           >
             Sign up now

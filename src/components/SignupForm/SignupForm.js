@@ -14,6 +14,8 @@ const SignupForm = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialState);
   const [isSigningUp, setIsSigningUp] = useState(false);
+  const [formError, setFormError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const signupFormHanlder =(e) => {
     setForm( {...form, [e.target.name]: e.target.value} )
@@ -21,12 +23,26 @@ const SignupForm = () => {
   }
 
   const submitFormHanlder =async(e) => {
+    setFormError('')
     e.preventDefault();
     setIsSigningUp(true);
+    console.log(form)
     // make the api calls
     const response = await dispatch(signUpUser(form)).unwrap();
-    console.log(form)
-    console.log(response)
+    if(response.errorMessage){
+      setFormError(response.errorMessage)
+    }
+    if(response.status===201){
+      setSuccessMessage(response.message)
+      // send the user to login screen after 1 minute
+      setTimeout(()=>{
+        window.location.href='/';
+      }, 60000)
+    }
+    if(response){
+      setIsSigningUp(false)
+    }
+
   }
   
 
@@ -67,6 +83,12 @@ const SignupForm = () => {
         value={form.password}
         onChange={signupFormHanlder}
       />
+
+      {/* jon added this to display error messages */}
+      <div><p className="text-notification font-normal text-center mt-[40px] ">{formError}</p></div>
+      <div><p className="text-checkbox font-normal text-center mt-[40px] ">{successMessage}</p></div>
+      {/* jon added this to display error messages */}
+
       <button type="submit" className="bg-primary h-[63px] w-full mt-[38px] text-white font-bold rounded-lg">
         {isSigningUp ? 'Creating your account' : 'Continue'}
       </button>
