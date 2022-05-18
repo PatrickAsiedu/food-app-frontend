@@ -5,7 +5,7 @@ import TotalDrinkOrders from "../../components/Cards/TotalDrinkOrders";
 import TotalComments from "../../components/Cards/TotalComments";
 import ChefSideBarNav from "../../components/ChefSideBarNav";
 
-const AdminDashboard = () => {
+const ChefDashboard = () => {
   return (
     <React.Fragment>
       <div className=" lg:flex h-screen ">
@@ -20,6 +20,7 @@ const AdminDashboard = () => {
             <TotalDrinkOrders></TotalDrinkOrders>
             <TotalComments></TotalComments>
           </div>
+
           <div className="w-full h-[400px] box-outer-shadow mt-12 rounded-3xl px-9">
             <div className="w-full pt-9 flex justify-evenly h-[72px] py-7  grid grid-cols-3">
               <h1>Name</h1>
@@ -32,10 +33,11 @@ const AdminDashboard = () => {
               <h1>Idont like</h1>
             </div>
           </div>
+          
         </main>
       </div>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default AdminDashboard;
+export default ChefDashboard

@@ -18,7 +18,7 @@ try {
     return data
 } catch (error) {
     // console.log(error.response);
-    const data = {status:error.response.status, errorMessage:error.response.data.message}
+    const data = {status:error.response.status, errorMessage:error.response.data.message || error.response.data?.error[0].message}
     return data
     
 }

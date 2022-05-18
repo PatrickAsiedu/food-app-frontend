@@ -8,6 +8,9 @@ const ProtectedRoute = ({Component, Permission}) => {
 
   // let permission = 'user' meaning only user can access this route, else redirect to user dashboard
 
+  if(!userType){
+    window.location.href='/'
+  }
   if(userType !== Permission){
     return <Navigate to='/' replace />
   }

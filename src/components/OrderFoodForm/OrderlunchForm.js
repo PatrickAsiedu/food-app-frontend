@@ -8,9 +8,9 @@ const OrderLunchForm = (props) => {
         props.devicestatus
       }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12   h-[750px]  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
     >
-      <h className="  mt-12 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
+      <h1 className="  mt-12 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
         Bon Appétit
-      </h>
+      </h1>
 
       <fieldset className="mt-[27px]">
         <legend className="">Choose Food</legend>

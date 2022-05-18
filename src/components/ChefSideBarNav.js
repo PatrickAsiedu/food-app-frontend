@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import BSLlogo from "../assets/logo-stack-dark 1 1.png";
-import ProfilePic from "../assets/unsplash_WNoLnJo7tS8.png";
-import OrderLunchForm from "../components/OrderFoodForm/OrderlunchForm";
-import ToggleSwitch from "../components/UI/ToggleSwitch";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import BSLlogo from '../assets/logo-stack-dark 1 1.png';
+import ToggleSwitch from './UI/ToggleSwitch';
+import { useDispatch } from 'react-redux';
+import { logOutCurrentUser } from '../redux/userSlice';
 
-const UserOrderFood = () => {
+const ChefSideBarNav = () => {
+    const dispatch = useDispatch();
   return (
-    <React.Fragment>
-      <div className=" lg:flex h-screen ">
-        <div className=" lg:pl-8 lg:h-full lg:border-r-2  lg:w-[30%] 2xl:w-[20%] lg:fixed ">
+    <div className=" lg:pl-8 lg:h-full lg:border-r-2  lg:w-[30%] 2xl:w-[20%] lg:fixed ">
           <header className="flex items-center justify-between  py-6 px-8  lg:pl-0">
             <div className="flex items-center">
               <img src={BSLlogo} alt="" />
@@ -35,13 +35,11 @@ const UserOrderFood = () => {
               </button>
             </div>
           </header>
-          <div className="px-6">
-            <OrderLunchForm devicestatus={"lg:hidden"}></OrderLunchForm>
-          </div>
+          <div className="px-6"></div>
 
           <nav className=" hidden lg:flex lg:flex-col  height-calc mt-24  flex-col justify-between">
             <div>
-              <a className=" group flex items-center py-6 pl-6 hover:bg-primary  ">
+              <Link to='/chef' className=" group flex items-center py-6 pl-6 hover:bg-primary  ">
                 <span>
                   <svg
                     className="group-hover:fill-white group-hover:opacity-100 fill-primary opacity-80"
@@ -57,25 +55,25 @@ const UserOrderFood = () => {
                 <span className=" ml-5 font-semibold text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium  ">
                   Dashboard
                 </span>
-              </a>
-              <a className="flex items-center py-6 pl-6 hover:bg-primary group">
+              </Link>
+              <Link to='/chef/addmenu' className="flex items-center py-6 pl-6 hover:bg-primary group">
                 <span>
                   <svg
                     className="group-hover:fill-white group-hover:opacity-100 fill-primary opacity-80"
-                    width="25"
-                    height="26"
-                    viewBox="0 0 25 26"
+                    width="21"
+                    height="29"
+                    viewBox="0 0 21 29"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path d="M19.3864 25.5H21.2727C22.2273 25.5 23.0114 24.7614 23.125 23.8295L25 5.10227H19.3182V0.5H17.0795V5.10227H11.4318L11.7727 7.76136C13.7159 8.29545 15.5341 9.26136 16.625 10.3295C18.2614 11.9432 19.3864 13.6136 19.3864 16.3409V25.5ZM0 24.3636V23.2273H17.0795V24.3636C17.0795 24.9773 16.5682 25.5 15.9091 25.5H1.13636C0.511364 25.5 0 24.9773 0 24.3636ZM17.0795 16.4091C17.0795 7.31818 0 7.31818 0 16.4091H17.0795ZM0 18.6818H17.0455V20.9545H0V18.6818Z" />
+                    <path d="M19.1111 0.722168H1.88891C1.43215 0.722168 0.994093 0.903616 0.671114 1.2266C0.348135 1.54957 0.166687 1.98763 0.166687 2.44439V26.5555C0.166687 27.0123 0.348135 27.4503 0.671114 27.7733C0.994093 28.0963 1.43215 28.2777 1.88891 28.2777H19.1111C19.5679 28.2777 20.0059 28.0963 20.3289 27.7733C20.6519 27.4503 20.8334 27.0123 20.8334 26.5555V2.44439C20.8334 1.98763 20.6519 1.54957 20.3289 1.2266C20.0059 0.903616 19.5679 0.722168 19.1111 0.722168ZM6.19446 21.3888H4.47224V19.6666H6.19446V21.3888ZM6.19446 17.9444H4.47224V16.2222H6.19446V17.9444ZM6.19446 14.4999H4.47224V12.7777H6.19446V14.4999ZM6.19446 11.0555H4.47224V9.33328H6.19446V11.0555ZM6.19446 7.61106H4.47224V5.88883H6.19446V7.61106ZM16.5278 21.3888H7.91669V19.6666H16.5278V21.3888ZM16.5278 17.9444H7.91669V16.2222H16.5278V17.9444ZM16.5278 14.4999H7.91669V12.7777H16.5278V14.4999ZM16.5278 11.0555H7.91669V9.33328H16.5278V11.0555ZM16.5278 7.61106H7.91669V5.88883H16.5278V7.61106Z" />
                   </svg>
                 </span>
                 <span className=" ml-5 font-semibold text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium">
-                  Order Food
+                  Add Menu
                 </span>
-              </a>
-              <a className="flex items-center py-6 pl-6  hover:bg-primary group  ">
+              </Link>
+              <Link to='/chef/orders' className="flex items-center py-6 pl-6  hover:bg-primary group  ">
                 <span>
                   <svg
                     className="group-hover:fill-white group-hover:opacity-100 fill-primary opacity-80"
@@ -85,17 +83,22 @@ const UserOrderFood = () => {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path d="M15.5 10.3333V16.7917H21.9583V14.2083H18.0833V10.3333H15.5Z" />
-                    <path d="M27.5021 10.9753C26.9195 9.59327 26.0737 8.33773 25.0118 7.27854C23.4044 5.67115 21.3612 4.57005 19.1347 4.11138C17.5894 3.79684 15.9965 3.79684 14.4511 4.11138C12.2226 4.56712 10.1776 5.66912 8.57148 7.27984C7.51217 8.34015 6.6667 9.59432 6.08115 10.974C5.47549 12.406 5.16448 13.9452 5.16665 15.5L5.16794 15.5323H2.58331L6.45831 20.6667L10.3333 15.5323H7.75127L7.74998 15.5C7.74626 13.6986 8.28403 11.9377 9.29352 10.4457C9.94467 9.48301 10.7737 8.65354 11.7361 8.00188C12.7151 7.34236 13.8132 6.87993 14.9691 6.64046C17.318 6.15751 19.7626 6.62707 21.7655 7.94591C23.7683 9.26475 25.1655 11.3249 25.6499 13.6736C25.8935 14.8773 25.8935 16.1176 25.6499 17.3213C25.4136 18.4781 24.9509 19.5769 24.2885 20.5543C23.9656 21.0335 23.5949 21.4843 23.1854 21.8925C22.3602 22.7166 21.3846 23.3748 20.3114 23.8313C19.7648 24.0623 19.1968 24.2388 18.6155 24.3583C17.4122 24.6017 16.1724 24.6017 14.9691 24.3583C13.8134 24.1213 12.7157 23.6592 11.7386 22.9981C11.2581 22.6734 10.8096 22.3036 10.3992 21.8938L8.57277 23.7202C9.65147 24.8004 10.9327 25.6571 12.343 26.2414C13.7533 26.8256 15.2651 27.1259 16.7916 27.125C18.3456 27.1244 19.8838 26.8139 21.3164 26.2118C23.3929 25.3332 25.1694 23.8703 26.4301 22.001C27.7275 20.0814 28.4195 17.8169 28.4166 15.5C28.4199 13.9455 28.1088 12.4065 27.5021 10.9753Z" />
+                    <path d="M13 31C14.1046 31 15 29.6569 15 28C15 26.3431 14.1046 25 13 25C11.8954 25 11 26.3431 11 28C11 29.6569 11.8954 31 13 31Z" />
+                    <path d="M24 31C25.1046 31 26 29.6569 26 28C26 26.3431 25.1046 25 24 25C22.8954 25 22 26.3431 22 28C22 29.6569 22.8954 31 24 31Z" />
+                    <path d="M29.4505 6.57143H8.26783L6.4791 2.02072C6.2443 1.42131 5.84687 0.909288 5.3372 0.549546C4.82752 0.189805 4.22855 -0.00145548 3.61621 8.3401e-06H0V3.28572H3.61776L10.9695 21.9896C11.2098 22.6008 11.7755 23 12.4002 23H24.8004C25.4468 23 26.0249 22.5745 26.2528 21.9354L30.9028 8.79258C30.99 8.54384 31.0191 8.27648 30.9878 8.01324C30.9565 7.75 30.8657 7.49867 30.7231 7.2806C30.5805 7.06253 30.3904 6.88418 30.1688 6.76071C29.9472 6.63725 29.7008 6.57231 29.4505 6.57143ZM23.2504 16.4286H20.1503V19.7143H17.0503V16.4286H13.9502V13.1429H17.0503V9.85715H20.1503V13.1429H23.2504V16.4286Z" />
                   </svg>
                 </span>
                 <span className=" ml-5 font-semibold text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium">
-                  History
+                  Orders
                 </span>
-              </a>
+                <div className="relative w-[31px] h-[26px] ml-3 bg-notification rounded-full text-primary">
+                  <span className="absolute left-[9px]">8</span>
+                </div>
+              </Link>
             </div>
+
             <div>
-              <a className=" flex items-center pl-6 py-6 ">
+              <div className=" flex items-center pl-6 py-6 ">
                 <span>
                   <svg
                     width="24"
@@ -116,8 +119,8 @@ const UserOrderFood = () => {
                 <ToggleSwitch
                   devicestatus={"ml-4 hidden lg:flex"}
                 ></ToggleSwitch>
-              </a>
-              <button className="flex items-center py-6 pl-6 ">
+              </div>
+              <button className="flex items-center py-6 pl-6 " onClick={() => dispatch(logOutCurrentUser())}>
                 <span>
                   <svg
                     width="27"
@@ -145,16 +148,7 @@ const UserOrderFood = () => {
             </div>
           </nav>
         </div>
+  )
+}
 
-        <main className="hidden lg:flex flex-col md:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%] ">
-          <div className="relative mt-6 w-full h-16 ">
-            <img className="absolute right-8" src={ProfilePic} alt="" />
-          </div>
-          <OrderLunchForm devicestatus={"flex"}></OrderLunchForm>
-        </main>
-      </div>
-    </React.Fragment>
-  );
-};
-
-export default UserOrderFood;
+export default ChefSideBarNav

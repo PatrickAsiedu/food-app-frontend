@@ -6,7 +6,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 
+import UserDashboard from "./pages/User/UserDashboard";
 import UserOrderFood from "./pages/User/UserOrderFood";
+import UserHistories from "./pages/User/UserHistories";
+
+
+import ChefDashboard from "./pages/Chef/ChefDashboard";
+import ChefAddMenu from "./pages/Chef/ChefAddMenu";
+import ChefOrders from "./pages/Chef/ChefOrders";
+
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminAddMenu from "./pages/Admin/AdminAddMenu";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -46,13 +54,15 @@ function App() {
           <Route  exact path="/register" element={<Signup />} />
 
           {/* user routes */}
-          <Route exact path="/me" element={<ProtectedRoute Component={UserOrderFood} Permission='user' />} />
+          <Route exact path="/me" element={<ProtectedRoute Component={UserDashboard} Permission='user' />} />
           <Route exact path="/me/order" element={<ProtectedRoute Component={UserOrderFood} Permission='user' />} />
+          <Route exact path="/me/history" element={<ProtectedRoute Component={UserHistories} Permission='user' />} />
           {/* <Route exact path="/me" element={<UserOrderFood /> } /> */}
 
           {/* chef routes */}
-          <Route exact path="/chef" element={<ProtectedRoute Component={AdminDashboard} Permission='chef' /> } />
-          <Route exact path="/chef/addmenu" element={<ProtectedRoute Component={AdminAddMenu} Permission='chef' /> } />
+          <Route exact path="/chef" element={<ProtectedRoute Component={ChefDashboard} Permission='chef' /> } />
+          <Route exact path="/chef/addmenu" element={<ProtectedRoute Component={ChefAddMenu} Permission='chef' /> } />
+          <Route exact path="/chef/orders" element={<ProtectedRoute Component={ChefOrders} Permission='chef' />} />
 
           {/* admin routes */}
           <Route exact path="/admin" element={<ProtectedRoute Component={AdminDashboard} Permission='admin' /> } />
