@@ -5,7 +5,7 @@ import jwtDecode from "jwt-decode";
 const initialState = {
     status: '',
     user: {} ,
-    isLoggedIn: false
+    isLoggedIn: false,
 }
 
 
@@ -36,7 +36,8 @@ export const signUpUser = createAsyncThunk('user/signup', async(userData) => {
         const data = {status:error.response.status, errorMessage:error.response.data.error.message ||error.response.data.error[0].message}
         return data
     }
-})
+});
+
 
 
 

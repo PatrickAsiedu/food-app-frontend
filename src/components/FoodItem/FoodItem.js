@@ -1,14 +1,16 @@
 import React from "react";
 
-const FoodItem = () => {
+const FoodItem = ({foodName, foodID, onClickDelete}) => {
+ 
+
   return (
     <div className="bg-primary/10 relative py-3 flex justify-between lg:justify-evenly  px-3 lg:px-6  ">
       <span className=" my-auto h-[10px] w-[10px]  bg-bluebullet rounded-full"></span>
 
       <div className="ml-2 max-w-[80%] lg:ml-5  ">
-        Plain rice and banku and okro whith shioto and fish
+        {foodName}
       </div>
-      <button>
+      <button onClick={()=>onClickDelete(foodID)}>
         <svg
           width="20"
           height="25"

@@ -4,7 +4,7 @@ import { Navigate,  } from 'react-router-dom';
 
 const ProtectedRoute = ({Component, Permission}) => {
   const userType = useSelector(state=>state.user.user.type);
-  console.log(userType, Permission)
+  // console.log(userType, Permission)
 
   // let permission = 'user' meaning only user can access this route, else redirect to user dashboard
 

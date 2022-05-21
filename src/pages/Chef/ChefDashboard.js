@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect} from "react";
 
 import TotalFoodOrders from "../../components/Cards/TotalFoodOrders";
 import TotalDrinkOrders from "../../components/Cards/TotalDrinkOrders";
 import TotalComments from "../../components/Cards/TotalComments";
 import ChefSideBarNav from "../../components/ChefSideBarNav";
+import { useDispatch } from "react-redux";
 
 const ChefDashboard = () => {
+  const dispatch = useDispatch();
+
+  
+
+
+
   return (
     <React.Fragment>
       <div className=" lg:flex h-screen ">

@@ -13,7 +13,7 @@ const UserOrderFood = () => {
           <div className="relative mt-6 w-full h-16 ">
             <img className="absolute right-8" src={ProfilePic} alt="" />
           </div>
-          <OrderLunchForm devicestatus={"flex"}></OrderLunchForm>
+          <OrderLunchForm devicestatus={"flex"} />
         </main>
       </div>
     </React.Fragment>

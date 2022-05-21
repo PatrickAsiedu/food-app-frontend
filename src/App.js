@@ -24,14 +24,14 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import store from "./redux/store";
 import { setCurrentUser } from "./redux/userSlice";
 import jwtDecode from "jwt-decode";
+import { getDrinks, getFoods } from "./redux/menuSlice";
 
 // check if user is already logged in, and add it to the state
 const token = localStorage.getItem('user_token');
 if(token){
   store.dispatch(setCurrentUser(token))
   const userType = jwtDecode(token).type;
-  console.log('user logged in')
-  console.log('userType ', userType)
+  console.log('user logged in with type: ', userType)
   // user logged in, we check the type and route to the appropriate page
   // if(userType==='user'){
   //   window.location.href='/me';
@@ -40,7 +40,18 @@ if(token){
   // }else if(userType === 'admin'){
   //   window.location.href ='/admin'
   // }
+
+
+  // /if user type is chef of admin ===> get all foods
+if(userType === 'chef'){
+  store.dispatch(getFoods());
+  store.dispatch(getDrinks());
 }
+}
+
+
+
+
 
 
 
