@@ -5,9 +5,15 @@ import TotalDrinkOrders from "../../components/Cards/TotalDrinkOrders";
 import TotalComments from "../../components/Cards/TotalComments";
 import ChefSideBarNav from "../../components/ChefSideBarNav";
 import { useDispatch } from "react-redux";
+import OrdersTable from "../../components/Cards/OrdersTable";
 
 const ChefDashboard = () => {
   const dispatch = useDispatch();
+
+  const today= new Date();
+  const totalFood = 0;
+  const totalDrink = 0;
+  const totalComments = 0;
 
   
 
@@ -22,24 +28,14 @@ const ChefDashboard = () => {
           <h1 className="mt-[5%] text-primary font-bold text-base">
             WELCOME CHEFF
           </h1>
+          <h1 className="text-primary font-bold text-base text-right">Today: {today.toDateString()} </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[50px] lg:gap-9 ">
-            <TotalFoodOrders></TotalFoodOrders>
-            <TotalDrinkOrders></TotalDrinkOrders>
-            <TotalComments></TotalComments>
+            <TotalFoodOrders value={totalFood} />
+            <TotalDrinkOrders value={totalDrink} />
+            <TotalComments value={totalComments}/>
           </div>
 
-          <div className="w-full h-[400px] box-outer-shadow mt-12 rounded-3xl px-9">
-            <div className="w-full pt-9 flex justify-evenly h-[72px] py-7  grid grid-cols-3">
-              <h1>Name</h1>
-              <h1>Food choice</h1>
-              <h1>Comments</h1>
-            </div>
-            <div className="w-full mt-6 bg-primary/10  grid grid-cols-3 text-sm">
-              <h1 className="">brightjhkjshdfkj naymeeejehjhhjhjkg</h1>
-              <h1>Bhhhhkanku and Tilapi</h1>
-              <h1>Idont like</h1>
-            </div>
-          </div>
+          <OrdersTable />
           
         </main>
       </div>

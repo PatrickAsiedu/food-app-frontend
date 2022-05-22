@@ -1,24 +1,30 @@
 import React, { useState } from 'react'
 import ChefSideBarNav from '../../components/ChefSideBarNav';
 
-import AddDrinkForm from "../../components/AddDrinkForm/AddDrinkForm";
-import AddFoodForm from "../../components/AddFoodForm/AddFoodForm";
+
 import FoodItem from "../../components/FoodItem/FoodItem";
 import DrinkItem from "../../components/DrinkItem/DrinkItem";
 import { useSelector } from 'react-redux';
+import CustomInput from '../../components/AddFoodForm/CustomInput';
 
 const ChefAddMenu = () => {
-  const foodInitialState = {id: 60, name: 'Curried Rice'};
-  const drinkInitialState = { id: 1, name: 'Sobolo'};
+  // const foodInitialState = {id: 60, name: 'Curried Rice'};
+  // const drinkInitialState = { id: 1, name: 'Sobolo'};
 
-  const [selectedFoods, setSelectedFoods ] = useState([foodInitialState]);
-  const [selectedDrinks, setSelectedDrinks] =useState([drinkInitialState]);
+  const [selectedFoods, setSelectedFoods ] = useState([]);
+  const [selectedDrinks, setSelectedDrinks] =useState([]);
 
   const foodList = useSelector(state=>state.menu.foodList);
-  console.log(foodList)
-
   const drinkList = useSelector(state=>state.menu.drinkList);
 
+// food here is an object with id and name
+  const addToSelectedFoods = (food) => {
+    setSelectedFoods([...selectedFoods, food])
+  }
+
+  const addToSelectedDrinks = (drink) => {
+    setSelectedDrinks([...selectedDrinks, drink])
+  }
 
   const onClickDeleteSelectedFoodItem =(foodID) => {
     setSelectedFoods(selectedFoods.filter(food=> food.id !== foodID))
@@ -34,10 +40,14 @@ const ChefAddMenu = () => {
         <ChefSideBarNav />
 
         <main className=" lg:flex flex-col lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] px-8  lg:px-[90px] 2xl:px-[300px] text-base text-primary ">
-          <div className="w-full  box-outer-shadow mt-[5%] px-6 rounded-3xl 2xl:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary">
-            <AddFoodForm />
+          <div className="w-full  box-outer-shadow mt-[5%] px-6 rounded-3xl 2xl:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary mb-5">
+            {/* <AddFoodForm /> */}
+
+            <CustomInput label="Add Food" itemList={foodList} addToSelectedItems={addToSelectedFoods} styling={{ zIndex: 4 }} />
+
+            <CustomInput label="Add Drink" itemList={drinkList} addToSelectedItems={addToSelectedDrinks} styling={{ zIndex: 1 }} />
             
-            <AddDrinkForm />
+            {/* <AddDrinkForm /> */}
           </div>
 
           <div className="mt-12 w-full box-outer-shadow h-screen px-6 rounded-3xl lg:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary">

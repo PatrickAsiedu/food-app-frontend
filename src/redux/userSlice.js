@@ -6,6 +6,9 @@ const initialState = {
     status: '',
     user: {} ,
     isLoggedIn: false,
+    myOrders:{},
+    currentMenu:{},
+    getMenuRequestStatus: null,
 }
 
 
@@ -37,6 +40,29 @@ export const signUpUser = createAsyncThunk('user/signup', async(userData) => {
         return data
     }
 });
+
+export const getMyOrders = createAsyncThunk('user/getOrders', async()=>{
+    try{
+        const response = await API.get('/order');
+        return response.data
+    }catch(error){
+        console.log(error.response);
+        const data = {status:error.response.status, errorMessage:error.response.data.error.message ||error.response.data.error[0].message}
+        return data
+    }
+})
+
+export const getMenu = createAsyncThunk('user/getmenu', async(menuDate)=>{
+    try {
+        const response = await API.get(`/menu?menu_date=${menuDate}`);
+        const data = {status: response.status, data: response.data.data}
+        return data
+    } catch (error) {
+        console.log(error.response);
+        const data = {status:error.response.status, errorMessage:error.response.data.error.message ||error.response.data.error[0].message}
+        return data
+    }
+})
 
 
 
@@ -92,6 +118,24 @@ const userSlice = createSlice({
         })
         builder.addCase(signUpUser.fulfilled, (state, action)=>{
             state.status='account created'
+        })
+
+        // order
+        builder.addCase(getMyOrders.fulfilled, (state, action)=>{
+            state.myOrders = action.payload.data
+        })
+
+        // menu
+        builder.addCase(getMenu.fulfilled, (state, action)=>{
+            console.log(action.payload.status)
+            if(action.payload.status===200){
+                state.currentMenu = action.payload.data
+                state.getMenuRequestStatus = 'successful'
+            }
+        })
+        builder.addCase(getMenu.pending, (state, action)=>{
+            console.log('get menu request still pending')
+            state.getMenuRequestStatus = 'pending'
         })
     }
 })

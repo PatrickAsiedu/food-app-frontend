@@ -22,7 +22,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 
 import store from "./redux/store";
-import { setCurrentUser } from "./redux/userSlice";
+import { getMyOrders, setCurrentUser } from "./redux/userSlice";
 import jwtDecode from "jwt-decode";
 import { getDrinks, getFoods } from "./redux/menuSlice";
 
@@ -46,6 +46,9 @@ if(token){
 if(userType === 'chef'){
   store.dispatch(getFoods());
   store.dispatch(getDrinks());
+}
+if(userType === 'user'){
+  store.dispatch(getMyOrders())
 }
 }
 

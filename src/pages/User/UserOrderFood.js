@@ -1,9 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import ProfilePic from "../../assets/unsplash_WNoLnJo7tS8.png";
 import OrderLunchForm from "../../components/OrderFoodForm/OrderlunchForm";
 import UserSideBarNav from "../../components/UserSideBarNav";
+import { getMenu } from "../../redux/userSlice";
 
 const UserOrderFood = () => {
+  const today = new Date();
+  const queryDate = today.toISOString().split('T')[0];
+
+  const dispatch = useDispatch()
+  dispatch(getMenu(queryDate));
+
+
+  
   return (
     <React.Fragment>
       <div className=" lg:flex h-screen ">
@@ -13,7 +23,7 @@ const UserOrderFood = () => {
           <div className="relative mt-6 w-full h-16 ">
             <img className="absolute right-8" src={ProfilePic} alt="" />
           </div>
-          <OrderLunchForm devicestatus={"flex"} />
+          <OrderLunchForm devicestatus={"flex"} menuDate={today} />
         </main>
       </div>
     </React.Fragment>
