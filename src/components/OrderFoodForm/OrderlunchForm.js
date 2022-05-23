@@ -1,73 +1,90 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getMenu } from "../../redux/userSlice";
 
-const OrderLunchForm = (props) => {
-  const menuDate = new Date(props.menuDate)
+const OrderLunchForm = ({devicestatus, menuDate}) => {
+  const dispatch = useDispatch();
+  const [menu, setMenu] = useState();
+  const [menuLoading, setMenuLoading] = useState(false);
+  const menuQueryDate = new Date(menuDate);
+  console.log(menuDate)
 
-  const menu = useSelector(state=>state.user.currentMenu);
-  const getMenuRequestStatus = useSelector(state=>state.user.getMenuRequestStatus);
-  console.log(getMenuRequestStatus)
+  useEffect(() => {
+    dispatch(getMenu(menuDate))
+    .then((response)=>
+      setMenu(response.payload.data)
+    )
 
+  },[] )
+
+  console.log(menu)
+
+
+
+  
+  
+
+
+
+
+
+    // console.log(menu)
 
   return (
       <React.Fragment>
-        {
-          getMenuRequestStatus==='pending'? 
-          (<h1 className="  mt-10 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
-            Loading Menu...
+        {menuLoading ? (<>Menu Loading</>):
+         ( <form
+          action=""
+          className={`${
+            devicestatus
+          }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12   h-[750px]  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
+          >
+          
+          <h1 className="  mt-10 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
+            Menu for {menuQueryDate.toDateString()}
           </h1>
-          ):
-          (
-            <form
-            action=""
-            className={`${
-              props.devicestatus
-            }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12   h-[750px]  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
-            >
+
+          
+          <fieldset className="mt-[27px]">
+            <legend className="">Choose Food</legend>
+
+            {/* {menu.foods.map(food=>(
+              <div key={food.food_id} className="relative  mt-[18px] flex  items-center  py-[18px]  rounded-lg pl-5 ">
+                <input
+                  className=" peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
+                  type="radio"
+                  id={food.food_id}
+                  name={food.food_name}
+                />
+                <label className="ml-[14px]" htmlFor="hey">
+                  {food.food_name}
+                </label>
+              </div>
+            ))} */}
+
             
-            <h1 className="  mt-10 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
-              Menu for {menuDate.toDateString()}
-            </h1>
+          </fieldset>
 
-            {getMenuRequestStatus=== 'pending' && <h1 className="mt-5">Loading menu</h1>}
-            <fieldset className="mt-[27px]">
-              <legend className="">Choose Food</legend>
-
-              {menu.foods.map(food=>(
-                <div key={food.food_id} className="relative  mt-[18px] flex  items-center  py-[18px]  rounded-lg pl-5 ">
-                  <input
-                    className=" peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
-                    type="radio"
-                    id={food.food_id}
-                    name={food.food_name}
-                  />
-                  <label className="ml-[14px]" htmlFor="hey">
-                    {food.food_name}
-                  </label>
-                </div>
-              ))}
-
-              
-            </fieldset>
-
-            <label className="mt-10" htmlFor="">
-              Comments
-            </label>
-            <textarea
-              className="bg-primary mt-[18px] rounded-lg h-[164px] text-white px-4 pt-4  text-sm"
-              name=""
-              id=""
-              cols="30"
-              rows="7"
-            ></textarea>
-            <div className="mt-8 pb-10 flex justify-center">
-              <button type="submit" className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold">
-                Place Order
-              </button>
-            </div>
-          </form>
-          )
-        }
+          <label className="mt-10" htmlFor="">
+            Comments
+          </label>
+          <textarea
+            className="bg-primary mt-[18px] rounded-lg h-[164px] text-white px-4 pt-4  text-sm"
+            name=""
+            id=""
+            cols="30"
+            rows="7"
+          ></textarea>
+          <div className="mt-8 pb-10 flex justify-center">
+            <button type="submit" className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold">
+              Place Order
+            </button>
+          </div>
+        </form>
+        )}
+          
+        
+        
       </React.Fragment>
     // <form
     //   action=""

@@ -25,6 +25,7 @@ import store from "./redux/store";
 import { getMyOrders, setCurrentUser } from "./redux/userSlice";
 import jwtDecode from "jwt-decode";
 import { getDrinks, getFoods } from "./redux/menuSlice";
+import { getOrder } from "./redux/chefSlice";
 
 // check if user is already logged in, and add it to the state
 const token = localStorage.getItem('user_token');
@@ -46,6 +47,7 @@ if(token){
 if(userType === 'chef'){
   store.dispatch(getFoods());
   store.dispatch(getDrinks());
+  store.dispatch(getOrder());
 }
 if(userType === 'user'){
   store.dispatch(getMyOrders())
