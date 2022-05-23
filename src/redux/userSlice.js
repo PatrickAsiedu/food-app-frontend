@@ -59,7 +59,7 @@ export const getMenu = createAsyncThunk('user/getmenu', async(menuDate)=>{
         return data
     } catch (error) {
         console.log(error.response);
-        const data = {status:error.response.status, errorMessage:error.response.data.error.message ||error.response.data.error[0].message}
+        const data = {status: error.response.status, errorMessage:error.response.data.message ||error.response.data.error[0].message}
         return data
     }
 })
@@ -131,11 +131,17 @@ const userSlice = createSlice({
             if(action.payload.status===200){
                 state.currentMenu = action.payload.data
                 state.getMenuRequestStatus = 'successful'
+            }else{
+                console.log(action.payload)
             }
         })
         builder.addCase(getMenu.pending, (state, action)=>{
             console.log('get menu request still pending')
             state.getMenuRequestStatus = 'pending'
+        })
+        builder.addCase(getMenu.rejected, (state, action)=>{
+            console.log(action.payload)
+            state.getMenuRequestStatus = 'rejected'
         })
     }
 })

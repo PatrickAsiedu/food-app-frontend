@@ -6,7 +6,7 @@ const OrderLunchForm = (props) => {
 
   const menu = useSelector(state=>state.user.currentMenu);
   const getMenuRequestStatus = useSelector(state=>state.user.getMenuRequestStatus);
-  console.log(menu.foods)
+  console.log(getMenuRequestStatus)
 
 
   return (
@@ -61,7 +61,7 @@ const OrderLunchForm = (props) => {
               rows="7"
             ></textarea>
             <div className="mt-8 pb-10 flex justify-center">
-              <button className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold">
+              <button type="submit" className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold">
                 Place Order
               </button>
             </div>
