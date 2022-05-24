@@ -3,13 +3,13 @@ import React from "react";
 import TotalFoodOrders from "../../components/Cards/TotalFoodOrders";
 import TotalDrinkOrders from "../../components/Cards/TotalDrinkOrders";
 import TotalComments from "../../components/Cards/TotalComments";
-import ChefSideBarNav from "../../components/ChefSideBarNav";
+import AdminSideBarNav from "../../components/AdminSideBarNav";
 
 const AdminDashboard = () => {
   return (
     <React.Fragment>
       <div className=" lg:flex h-screen ">
-        <ChefSideBarNav />
+       <AdminSideBarNav />
 
         <main className=" lg:flex flex-col lg:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%] px-8  lg:px-[90px] text-base text-primary ">
           <h1 className="mt-[5%] text-primary font-bold text-base">

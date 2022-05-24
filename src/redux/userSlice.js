@@ -52,10 +52,24 @@ export const getMyOrders = createAsyncThunk('user/getOrders', async()=>{
 })
 
 export const getMenu = createAsyncThunk('user/getmenu', async(menuDate)=>{
+    console.log(menuDate)
     try {
         const response = await API.get(`/menu?menu_date=${menuDate}`);
         const data = {status: response.status, data: response.data.data}
         return data
+    } catch (error) {
+        console.log(error.response);
+        const data = {status: error.response.status, errorMessage:error.response.data.message ||error.response.data.error[0].message, date:error.response.data.date}
+        return data
+    }
+})
+
+
+export const orderLunch = createAsyncThunk('user/order', async(orderData)=>{
+    try {
+        const response = await API.post('/order', orderData);
+        console.log(response)
+        return { status: response.status, message: response.data.message}
     } catch (error) {
         console.log(error.response);
         const data = {status: error.response.status, errorMessage:error.response.data.message ||error.response.data.error[0].message}
@@ -124,7 +138,7 @@ const userSlice = createSlice({
             state.myOrders = action.payload.data
         })
 
-        // menu
+        // menu this is redundant
         builder.addCase(getMenu.fulfilled, (state, action)=>{
             console.log(action.payload.status)
             if(action.payload.status===200){

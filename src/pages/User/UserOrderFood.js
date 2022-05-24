@@ -5,7 +5,7 @@ import UserSideBarNav from "../../components/UserSideBarNav";
 
 
 const UserOrderFood = () => {
-  const menuDate = '2022-05-25'
+  const menuDate = '2022-05-24'
   
 
 

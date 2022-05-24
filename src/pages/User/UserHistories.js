@@ -23,20 +23,22 @@ const UserHistories = () => {
           <h3 className="text-center">User Order Histories</h3>
 
           <div className="w-full h-[400px] box-outer-shadow mt-12 rounded-3xl px-5 ">
-            <div className="w-full pt-9 flex justify-evenly h-[72px] py-7  grid grid-cols-4">
+            <div className="w-full pt-9 flex justify-evenly h-[72px] py-7  grid grid-cols-5">
               <h1>Food Choice</h1>
               <h1>Drink Choice</h1>
               <h1>Comments</h1>
-              <h1>Order Date</h1>
+              <h1>Menu Date</h1>
+              <h1>Ordered on</h1>
             </div>
             {Object.keys(orders).length===0 && 'No orders found for user'}
             
             {orders.map(order=>(
-              <div className="w-full mt-6 bg-primary/10  grid grid-cols-4 text-sm" key={order.id}>
+              <div className="w-full mt-6 bg-primary/10  grid grid-cols-5 text-sm" key={order.id}>
               <h1>{order.food_name}</h1>
               <h1>{order.drink_name}</h1>
               <h1>{order.comment}</h1>
-              <h1>{order.created_at}</h1>
+              <h1>{order.menu_date.split('T')[0]}</h1>
+              <h1>{order.created_at.split('T')[0]}</h1>
             </div>
             ))}
            

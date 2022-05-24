@@ -17,6 +17,9 @@ import ChefOrders from "./pages/Chef/ChefOrders";
 
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminAddMenu from "./pages/Admin/AdminAddMenu";
+import AdminOrders from "./pages/Admin/AdminOrders";
+
+
 import ProtectedRoute from "./components/ProtectedRoute";
 
 
@@ -83,6 +86,7 @@ function App() {
           {/* admin routes */}
           <Route exact path="/admin" element={<ProtectedRoute Component={AdminDashboard} Permission='admin' /> } />
           <Route exact path="/admin/addmenu" element={<ProtectedRoute Component={AdminAddMenu} Permission='admin' /> } />
+          <Route exact path="/admin/orders" element={<ProtectedRoute Component={AdminOrders} Permission='admin' />} />
         </Routes>
       </BrowserRouter>
 
