@@ -11,9 +11,13 @@
 
 }
 
-#hey:checked{
+.check_me:checked{
     @apply bg-[url('/src/assets/Vector.svg')] border-0;
 }
+
+/* .check_me{
+    background:  url('/src/assets/Vector.svg') !important
+} */
 
 
 .height-calc{

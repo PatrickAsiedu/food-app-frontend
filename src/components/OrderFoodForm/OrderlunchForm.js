@@ -5,10 +5,14 @@ import { getMenu, orderLunch } from "../../redux/userSlice";
 const OrderLunchForm = (props) => {
   const dispatch = useDispatch();
   const [menu, setMenu] = useState();
+  const [food, setFood] = useState('');
+  const [drink, setDrink] = useState('');
+  const [comment, setComment] = useState('')
+
   const [error, setError] = useState(null);
   const [noMenuFoundDate, setNoMenuFoundDate] = useState();
   
-  const [order, setOrder] = useState({});
+
 
   // async funtion to dispatch the get menu aciton
   const getMenuRequest = async(menuDate) => {
@@ -39,8 +43,7 @@ const OrderLunchForm = (props) => {
   //   return (<RenderLoadingOrder />)
 
 
-    // console.log(menu)
-  // getMenuRequest(props.menuDate);
+
 
   if(error){
     return (
@@ -50,26 +53,34 @@ const OrderLunchForm = (props) => {
     )
   }
 
+
   const onFormSubmitHandler = async(e) => {
     e.preventDefault();
-    setOrder({...order, menu_id: menu.menu_id })
+    const order = {}
+    order.menu_id = menu.menu_id;
+    order.food_id = food;
+    order.comment =comment
+    order.drink = drink
+ 
 
-    // TODO: check if at least food id and menu id exist
-    if(!Object.keys(order).includes('menu_id' && 'food_id')){
-      // We cannot order
-      return alert('Select at least one food')
+    if(order.menu_id && !order.food_id){
+      return alert('Please select at least  one food (_^_)')
     }
 
     console.log(order)
-    // const response = await dispatch(orderLunch(order)).unwrap();
-    // if(response.status===400){
-    //   alert(response.errorMessage)
-    // }else{
-    //   alert('order placed successfully')
-    // }
+    const response = await dispatch(orderLunch(order)).unwrap();
+    console.log(response)
+    if(response.status === 400){
+      return alert(response.errorMessage)
+    }
+    else{
+      alert('order placed successfully')
+    }
    
 
   }
+
+
   
 
   
@@ -87,49 +98,44 @@ const OrderLunchForm = (props) => {
             Menu for {props.menuDate}
           </h1>
 
-          
+
           <fieldset className="mt-[27px]">
             <legend className="">Choose Food</legend>
-
             {menu.foods.map(food=>(
               <div key={food.food_id} className="relative  mt-[18px] flex  items-center  py-[18px]  rounded-lg pl-5 ">
                 <input
-                  className="hey peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
+                  className="check_me peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
                   type="radio"
                   key={food.food_id}
-                  id='hey'
-                  name={food.food_name}
-                  onClick={(e)=>{
-                    console.log('selected food id: ', food.food_id, ' name: ', food.food_name)
-                  }}
+                  id={food.food_id}
+                  name="radio buttons"
+                  onClick={(e)=>setFood(e.target.id)}
                 />
                 <label className="ml-[14px]" htmlFor="hey">
                   {food.food_name}
                 </label>
               </div>
             ))}
-
-          </fieldset>
-
-
-          {/* <fieldset className="mt-[35px] mb-[20px]">
+        
             <legend className="">Choose Drink</legend>
             {menu.drinks.map(drink=>(
               <div key={drink.drink_id} className="relative  mt-[18px] flex  items-center  py-[18px]  rounded-lg pl-5 ">
                 <input
-                  className="hey peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
+                  className="check_me peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
                   type="radio"
                   key={drink.drink_id}
                   id={drink.drink_id}
-                  name={drink.drink_name}
-                  onClick={(e)=>setOrder({...order, drink_id: e.target.id})}
+                  name="radio buttons drink"
+                  onClick={(e)=>setDrink(e.target.id)}
                 />
                 <label className="ml-[14px]" htmlFor="hey">
                   {drink.drink_name}
                 </label>
               </div>
             ))}
-          </fieldset> */}
+          </fieldset>
+
+
 
           <label className="mt-10" htmlFor="">
             Comments
@@ -137,8 +143,8 @@ const OrderLunchForm = (props) => {
           <textarea
             className="bg-primary mt-[18px] rounded-lg h-[164px] text-white px-4 pt-4  text-sm"
             name="comment"
-            value={order.comment}
-            onChange={(e)=>setOrder({...order, comment: e.target.value, menu_id: menu.menu_id})}
+            value={comment}
+            onChange={(e)=>setComment(e.target.value)}
             cols="30"
             rows="7"
           />
