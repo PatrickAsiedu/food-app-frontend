@@ -13,7 +13,7 @@ const OrderLunchForm = (props) => {
   // async funtion to dispatch the get menu aciton
   const getMenuRequest = async(menuDate) => {
     const response = await dispatch(getMenu(menuDate)).unwrap()
-    console.log(response)
+    // console.log(response)
     if(response.status === 200){
       setMenu(response.data)
     }else if(response.status === 401){
@@ -39,7 +39,7 @@ const OrderLunchForm = (props) => {
   //   return (<RenderLoadingOrder />)
 
 
-    console.log(menu)
+    // console.log(menu)
   // getMenuRequest(props.menuDate);
 
   if(error){
@@ -60,12 +60,13 @@ const OrderLunchForm = (props) => {
       return alert('Select at least one food')
     }
 
-    const response = await dispatch(orderLunch(order)).unwrap();
-    if(response.status===400){
-      alert(response.errorMessage)
-    }else{
-      alert('order placed successfully')
-    }
+    console.log(order)
+    // const response = await dispatch(orderLunch(order)).unwrap();
+    // if(response.status===400){
+    //   alert(response.errorMessage)
+    // }else{
+    //   alert('order placed successfully')
+    // }
    
 
   }
@@ -93,12 +94,14 @@ const OrderLunchForm = (props) => {
             {menu.foods.map(food=>(
               <div key={food.food_id} className="relative  mt-[18px] flex  items-center  py-[18px]  rounded-lg pl-5 ">
                 <input
-                  className=" peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
+                  className="hey peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
                   type="radio"
                   key={food.food_id}
-                  id={food.food_id}
+                  id='hey'
                   name={food.food_name}
-                  onClick={(e)=>setOrder({...order, food_id: e.target.id})}
+                  onClick={(e)=>{
+                    console.log('selected food id: ', food.food_id, ' name: ', food.food_name)
+                  }}
                 />
                 <label className="ml-[14px]" htmlFor="hey">
                   {food.food_name}
@@ -106,8 +109,27 @@ const OrderLunchForm = (props) => {
               </div>
             ))}
 
-            
           </fieldset>
+
+
+          {/* <fieldset className="mt-[35px] mb-[20px]">
+            <legend className="">Choose Drink</legend>
+            {menu.drinks.map(drink=>(
+              <div key={drink.drink_id} className="relative  mt-[18px] flex  items-center  py-[18px]  rounded-lg pl-5 ">
+                <input
+                  className="hey peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
+                  type="radio"
+                  key={drink.drink_id}
+                  id={drink.drink_id}
+                  name={drink.drink_name}
+                  onClick={(e)=>setOrder({...order, drink_id: e.target.id})}
+                />
+                <label className="ml-[14px]" htmlFor="hey">
+                  {drink.drink_name}
+                </label>
+              </div>
+            ))}
+          </fieldset> */}
 
           <label className="mt-10" htmlFor="">
             Comments
