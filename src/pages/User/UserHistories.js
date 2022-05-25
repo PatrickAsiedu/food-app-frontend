@@ -1,13 +1,29 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, {useEffect, useState} from "react";
+import { useDispatch} from "react-redux";
 import ProfilePic from "../../assets/unsplash_WNoLnJo7tS8.png";
 import UserSideBarNav from "../../components/UserSideBarNav";
+import { getMyOrders } from "../../redux/userSlice";
 
 const UserHistories = () => {
+  const dispatch = useDispatch();
+  const [orders, setOrders] = useState();
+
+  useEffect(() => {
+    const getOrders = async() =>{
+     const response=  await dispatch(getMyOrders()).unwrap()
+    //  console.log(response)
+     if(response.status === 200){
+       setOrders(response.data.data)
+     }
+    };
+
+    getOrders();
+  }, [])
+  // console.log(orders)
+  
 
 
-  const orders = useSelector(state=>state.user.myOrders);
-  console.log(orders)
+
 
   
   return (
@@ -30,9 +46,10 @@ const UserHistories = () => {
               <h1>Menu Date</h1>
               <h1>Ordered on</h1>
             </div>
-            {Object.keys(orders).length===0 && 'No orders found for user'}
+            {!orders && 'No orders found for user'}
             
-            {orders.map(order=>(
+            
+            {orders && orders.map(order=>(
               <div className="w-full mt-6 bg-primary/10  grid grid-cols-5 text-sm" key={order.id}>
               <h1>{order.food_name}</h1>
               <h1>{order.drink_name}</h1>
@@ -40,7 +57,7 @@ const UserHistories = () => {
               <h1>{order.menu_date.split('T')[0]}</h1>
               <h1>{order.created_at.split('T')[0]}</h1>
             </div>
-            ))}
+            ))} 
            
 
           </div>
