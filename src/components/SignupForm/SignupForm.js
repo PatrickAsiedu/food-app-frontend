@@ -1,10 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../UI/Input";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signUpUser } from "../../redux/userSlice";
+
+const initialState = {
+  name: "",
+  phone_number : "",
+  password: ""
+}
 
 const SignupForm = () => {
+  const dispatch = useDispatch();
+  const [form, setForm] = useState(initialState);
+  const [isSigningUp, setIsSigningUp] = useState(false);
+  const [formError, setFormError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const signupFormHanlder =(e) => {
+    setForm( {...form, [e.target.name]: e.target.value} )
+    // console.log(form)
+  }
+
+  const submitFormHanlder =async(e) => {
+    setFormError('')
+    e.preventDefault();
+    setIsSigningUp(true);
+    console.log(form)
+    // make the api calls
+    const response = await dispatch(signUpUser(form)).unwrap();
+    if(response.errorMessage){
+      setFormError(response.errorMessage)
+    }
+    if(response.status===201){
+      setSuccessMessage(response.message)
+      // send the user to login screen after 1 minute
+      setTimeout(()=>{
+        window.location.href='/';
+      }, 60000)
+    }
+    if(response){
+      setIsSigningUp(false)
+    }
+
+  }
+  
+
+
   return (
-    <form className=" flex flex-col mt-[22px] singup-form-shadow text-primary px-[22px] md:px-12  lg:px-[22px] 2xl:w-[516px] lg:mx-auto  ">
+    <form onSubmit={submitFormHanlder} className=" flex flex-col mt-[22px] singup-form-shadow text-primary px-[22px] md:px-12  lg:px-[22px] 2xl:w-[516px] lg:mx-auto  ">
       <h1 className=" text-2xl font-semibold text-center mt-[40px] mb-[27px]">
         Nice to see you here
       </h1>
@@ -14,14 +58,20 @@ const SignupForm = () => {
         placeholder="Enter Name"
         id="Name"
         type="text"
-      ></Input>
+        name="name"
+        value={form.name}
+        onChange={signupFormHanlder}
+      />
       <Input
         style={"w-full border mt-[22px] mb-[21px] h-[61px] pl-6 "}
         label="Phone Number"
         placeholder="Enter Phone Number"
         id="Phone Number"
         type="text"
-      ></Input>
+        name='phone_number'
+        value={form.phone_number}
+        onChange={signupFormHanlder}
+      />
       <Input
         forgotpasswordlink={"hidden"}
         style={"w-full border mt-[22px]  h-[61px] pl-6 "}
@@ -29,9 +79,18 @@ const SignupForm = () => {
         placeholder="Enter Password"
         id="Password"
         type="password"
-      ></Input>
-      <button className="bg-primary h-[63px] w-full mt-[38px] text-white font-bold rounded-lg">
-        Continue
+        name="password"
+        value={form.password}
+        onChange={signupFormHanlder}
+      />
+
+      {/* jon added this to display error messages */}
+      <div><p className="text-notification font-normal text-center mt-[40px] ">{formError}</p></div>
+      <div><p className="text-checkbox font-normal text-center mt-[40px] ">{successMessage}</p></div>
+      {/* jon added this to display error messages */}
+
+      <button type="submit" className="bg-primary h-[63px] w-full mt-[38px] text-white font-bold rounded-lg">
+        {isSigningUp ? 'Creating your account' : 'Continue'}
       </button>
 
       <div className=" w-full border border-black/10 h-[0px] mt-10"></div>
@@ -41,7 +100,7 @@ const SignupForm = () => {
         </span>
         <span>
           <Link
-            to="/Login"
+            to="/"
             className="text-primary font-normal text-links ml-4  "
           >
             Sign in

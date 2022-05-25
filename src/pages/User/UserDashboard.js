@@ -1,13 +1,9 @@
 import React from "react";
 import ProfilePic from "../../assets/unsplash_WNoLnJo7tS8.png";
-import OrderLunchForm from "../../components/OrderFoodForm/OrderlunchForm";
 import UserSideBarNav from "../../components/UserSideBarNav";
-
 import Profile from "../../components/UI/Profile";
 
-const UserOrderFood = () => {
-  const menuDate = "2022-05-24";
-
+const UserDashboard = () => {
   return (
     <React.Fragment>
       <div className=" lg:flex h-screen ">
@@ -17,11 +13,12 @@ const UserOrderFood = () => {
           <div className="relative mt-6 w-full h-16 ">
             <Profile></Profile>
           </div>
-          <OrderLunchForm devicestatus={"flex"} menuDate={menuDate} />
+
+          <h3>UserDashboard</h3>
         </main>
       </div>
     </React.Fragment>
   );
 };
 
-export default UserOrderFood;
+export default UserDashboard;

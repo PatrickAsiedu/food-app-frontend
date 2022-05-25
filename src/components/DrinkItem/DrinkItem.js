@@ -1,12 +1,12 @@
 import React from "react";
 
-const DrinkItem = () => {
+const DrinkItem = ({drinkName, drinkID, onClickDelete}) => {
   return (
     <div className="bg-primary/10 relative py-3 flex justify-between lg:justify-evenly  px-3 lg:px-6  ">
       <span className=" my-auto h-[10px] w-[10px]  bg-orangebullet rounded-full"></span>
 
-      <div className="ml-2 max-w-[80%] lg:ml-5  ">Sobolo</div>
-      <button>
+      <div className="ml-2 max-w-[80%] lg:ml-5  ">{drinkName}</div>
+      <button onClick={()=>onClickDelete(drinkID)}>
         <svg
           width="20"
           height="25"

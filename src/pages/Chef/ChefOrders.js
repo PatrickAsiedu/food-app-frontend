@@ -1,25 +1,21 @@
 import React from "react";
+import ChefSideBarNav from "../../components/ChefSideBarNav";
+import DrinkCard from "../../components/Cards/DrinkCard";
+import FoodCard from "../../components/Cards/FoodCard";
 
-import TotalFoodOrders from "../../components/Cards/TotalFoodOrders";
-import TotalDrinkOrders from "../../components/Cards/TotalDrinkOrders";
-import TotalComments from "../../components/Cards/TotalComments";
-import AdminSideBarNav from "../../components/AdminSideBarNav";
-
-const AdminDashboard = () => {
+const ChefOrders = () => {
   return (
     <React.Fragment>
       <div className=" lg:flex h-screen ">
-       <AdminSideBarNav />
+        <ChefSideBarNav />
 
         <main className=" lg:flex flex-col lg:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%] px-8  lg:px-[90px] text-base text-primary ">
-          <h1 className="mt-[5%] text-primary font-bold text-base">
-            WELCOME CHEFF
-          </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[50px] lg:gap-9 ">
-            <TotalFoodOrders></TotalFoodOrders>
-            <TotalDrinkOrders></TotalDrinkOrders>
-            <TotalComments></TotalComments>
+            <FoodCard></FoodCard>
+            <FoodCard></FoodCard>
+            <FoodCard></FoodCard>
           </div>
+
           <div className="w-full h-[400px] box-outer-shadow mt-12 rounded-3xl px-9">
             <div className="w-full pt-9 flex justify-evenly h-[72px] py-7  grid grid-cols-3">
               <h1>Name</h1>
@@ -38,4 +34,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default ChefOrders;

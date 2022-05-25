@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import BSLlogo from "../assets/logo-stack-dark 1 1.png";
-import ProfilePic from "../assets/unsplash_WNoLnJo7tS8.png";
-import OrderLunchForm from "../components/OrderFoodForm/OrderlunchForm";
-import ToggleSwitch from "../components/UI/ToggleSwitch";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import BSLlogo from '../assets/logo-stack-dark 1 1.png';
+import ToggleSwitch from './UI/ToggleSwitch';
+import { useDispatch } from 'react-redux';
+import { logOutCurrentUser } from '../redux/userSlice';
 
-const UserOrderFood = () => {
+const UserSideBarNav = () => {
+    const dispatch = useDispatch();
+
+
   return (
-    <React.Fragment>
-      <div className=" lg:flex h-screen ">
-        <div className=" lg:pl-8 lg:h-full lg:border-r-2  lg:w-[30%] 2xl:w-[20%] lg:fixed ">
+    <div className=" lg:pl-8 lg:h-full lg:border-r-2  lg:w-[30%] 2xl:w-[20%] lg:fixed ">
           <header className="flex items-center justify-between  py-6 px-8  lg:pl-0">
             <div className="flex items-center">
               <img src={BSLlogo} alt="" />
@@ -36,12 +38,12 @@ const UserOrderFood = () => {
             </div>
           </header>
           <div className="px-6">
-            <OrderLunchForm devicestatus={"lg:hidden"}></OrderLunchForm>
+            {/* <OrderLunchForm devicestatus={"lg:hidden"}></OrderLunchForm> */}
           </div>
 
           <nav className=" hidden lg:flex lg:flex-col  height-calc mt-24  flex-col justify-between">
             <div>
-              <a className=" group flex items-center py-6 pl-6 hover:bg-primary  ">
+              <Link to="/me" className=" group flex items-center py-6 pl-6 hover:bg-primary">
                 <span>
                   <svg
                     className="group-hover:fill-white group-hover:opacity-100 fill-primary opacity-80"
@@ -57,8 +59,8 @@ const UserOrderFood = () => {
                 <span className=" ml-5 font-semibold text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium  ">
                   Dashboard
                 </span>
-              </a>
-              <a className="flex items-center py-6 pl-6 hover:bg-primary group">
+              </Link>
+              <Link to="/me/order" className="flex items-center py-6 pl-6 hover:bg-primary group">
                 <span>
                   <svg
                     className="group-hover:fill-white group-hover:opacity-100 fill-primary opacity-80"
@@ -74,8 +76,8 @@ const UserOrderFood = () => {
                 <span className=" ml-5 font-semibold text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium">
                   Order Food
                 </span>
-              </a>
-              <a className="flex items-center py-6 pl-6  hover:bg-primary group  ">
+              </Link>
+              <Link to="/me/history" className="flex items-center py-6 pl-6  hover:bg-primary group  ">
                 <span>
                   <svg
                     className="group-hover:fill-white group-hover:opacity-100 fill-primary opacity-80"
@@ -92,10 +94,11 @@ const UserOrderFood = () => {
                 <span className=" ml-5 font-semibold text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium">
                   History
                 </span>
-              </a>
+              </Link>
             </div>
             <div>
-              <a className=" flex items-center pl-6 py-6 ">
+                {/* TODO; implement darkmode feature */}
+              <div className=" flex items-center pl-6 py-6 ">
                 <span>
                   <svg
                     width="24"
@@ -116,8 +119,9 @@ const UserOrderFood = () => {
                 <ToggleSwitch
                   devicestatus={"ml-4 hidden lg:flex"}
                 ></ToggleSwitch>
-              </a>
-              <button className="flex items-center py-6 pl-6 ">
+              </div>
+
+              <button className="flex items-center py-6 pl-6 " onClick={()=>dispatch(logOutCurrentUser())}>
                 <span>
                   <svg
                     width="27"
@@ -145,16 +149,7 @@ const UserOrderFood = () => {
             </div>
           </nav>
         </div>
+  )
+}
 
-        <main className="hidden lg:flex flex-col md:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%] ">
-          <div className="relative mt-6 w-full h-16 ">
-            <img className="absolute right-8" src={ProfilePic} alt="" />
-          </div>
-          <OrderLunchForm devicestatus={"flex"}></OrderLunchForm>
-        </main>
-      </div>
-    </React.Fragment>
-  );
-};
-
-export default UserOrderFood;
+export default UserSideBarNav

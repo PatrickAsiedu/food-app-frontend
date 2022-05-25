@@ -1,6 +1,6 @@
 import React from "react";
 
-const TotalDrinkOrders = () => {
+const TotalDrinkOrders = (props) => {
   return (
     <div className="w-[247px] 2xl:w-[320px] h-[180px] box-outer-shadow rounded-3xl flex flex-col pl-9  justify-evenly ">
       <svg
@@ -24,7 +24,7 @@ const TotalDrinkOrders = () => {
         />
       </svg>
       <h1 className=" ">Total Drink Orders</h1>
-      <h1 className="text-2xl font-bold">8</h1>
+      <h1 className="text-2xl font-bold">{props.value}</h1>
     </div>
   );
 };
