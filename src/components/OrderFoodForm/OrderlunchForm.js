@@ -60,7 +60,7 @@ const OrderLunchForm = (props) => {
     order.menu_id = menu.menu_id;
     order.food_id = food;
     order.comment =comment
-    order.drink = drink
+    order.drink_id = drink
  
 
     if(order.menu_id && !order.food_id){
