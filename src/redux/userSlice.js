@@ -43,7 +43,7 @@ export const signUpUser = createAsyncThunk('user/signup', async(userData) => {
 export const getMyOrders = createAsyncThunk('user/getOrders', async()=>{
     try{
         const response = await API.get('/order');
-        return response.data
+        return {status : response.status, data: response.data}
     }catch(error){
         console.log(error.response);
         const data = {status:error.response.status, errorMessage:error.response.data.error.message ||error.response.data.error[0].message}
@@ -71,8 +71,8 @@ export const orderLunch = createAsyncThunk('user/order', async(orderData)=>{
         console.log(response)
         return { status: response.status, message: response.data.message}
     } catch (error) {
-        // console.log(error.response);
-        const data = {status: error.response.status, errorMessage: error.response.data.message }
+        console.log(error.response);
+        const data = {status: error.response.status, errorMessage:error.response.data.message ||error.response.data.error[0].message}
         return data
     }
 })
@@ -135,12 +135,12 @@ const userSlice = createSlice({
 
         // order
         builder.addCase(getMyOrders.fulfilled, (state, action)=>{
-            state.myOrders = action.payload.data
+            state.myOrders = action.payload.data.data
         })
 
         // menu this is redundant
         builder.addCase(getMenu.fulfilled, (state, action)=>{
-            // console.log(action.payload.status)
+            console.log(action.payload.status)
             if(action.payload.status===200){
                 state.currentMenu = action.payload.data
             }else{

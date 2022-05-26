@@ -4,11 +4,13 @@ import ChefSideBarNav from '../../components/ChefSideBarNav';
 
 import FoodItem from "../../components/FoodItem/FoodItem";
 import DrinkItem from "../../components/DrinkItem/DrinkItem";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CustomInput from '../../components/AddFoodForm/CustomInput';
 import AddDateForm from '../../components/AddFoodForm/AddDateForm';
+import { addMenu } from '../../redux/chefSlice';
 
 const ChefAddMenu = () => {
+  const dispatch = useDispatch();
   // const foodInitialState = {id: 60, name: 'Curried Rice'};
   // const drinkInitialState = { id: 1, name: 'Sobolo'};
 
@@ -16,8 +18,8 @@ const ChefAddMenu = () => {
   const [selectedDrinks, setSelectedDrinks] =useState([]);
   const [menuDate, setMenuDate] = useState();
  
-  const foodList = useSelector(state=>state.menu.foodList);
-  const drinkList = useSelector(state=>state.menu.drinkList);
+  const foodList = useSelector(state=>state.chef.foodList);
+  const drinkList = useSelector(state=>state.chef.drinkList);
 
 // food here is an object with id and name
   const addToSelectedFoods = (food) => {
@@ -35,9 +37,37 @@ const ChefAddMenu = () => {
   const onClickDeleteSelectedDrinkItem =(drinkID) => {
     setSelectedDrinks(selectedDrinks.filter(drink=> drink.id !== drinkID))
   }
-  const onFormSubmitHandler=(e)=>{
+  const onFormSubmitHandler= async(e)=>{
     e.preventDefault();
-    console.log('making order')
+    const menu = {};
+    menu.menu_date = menuDate
+    menu.foods_id = selectedFoods.map(food=>food.id)
+    menu.drinks_id = selectedDrinks.map(drink=>drink.id)
+    console.log(menu)
+
+    if(!menu.menu_date){
+      return alert('Please select a menu date')
+    }
+
+    if(!menu.foods_id){
+      return alert('You are creating a menun without foods..')
+    }
+
+    if(!menu.drinks_id){
+      return alert('You are creating a menun without foods..')
+    }
+    
+
+    const response = await dispatch(addMenu(menu)).unwrap();
+    console.log(response)
+    if(response.status=== 400){
+     return alert(response.errorMessage)
+    }
+    if(response.status === 201){
+      return alert(response.message)
+    }
+    
+
   }
 
   return (

@@ -15,7 +15,7 @@ const CustomInput = ({label, itemList, addToSelectedItems, styling}) => {
     const handleOnSearch = (string, results) => {
       // onSearch will have as the first callback parameter
       // the string searched and for the second the results.
-      console.log(string, results)
+      // console.log(string, results)
     }
   
     const handleOnHover = (result) => {

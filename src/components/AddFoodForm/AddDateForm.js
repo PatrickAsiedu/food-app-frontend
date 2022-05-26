@@ -9,6 +9,7 @@ const AddDateForm = ({setMenuDate}) => {
                 className="w-full border-b h-12 outline-0 "
                 type="date" 
                 onSelect={(e)=>setMenuDate(e.target.value)}
+                required
             />
 
 
