@@ -52,7 +52,8 @@ const LoginForm = () => {
         label="Phone Number"
         placeholder="Enter Phone Number"
         id="Phone Number"
-        type="number"
+        type="text"
+        title="Enter a valid phone number starting with 0 and of length 10"
         name="phone_number"
         value={phone_number}
         onChange={(e)=>setPhoneNumber(e.target.value)}
@@ -62,8 +63,9 @@ const LoginForm = () => {
         style={"w-full border mt-[22px]  h-[61px] pl-6 "}
         label="Password"
         placeholder="Enter Password"
-        id="Paword"
+        id="Pasword"
         type="password"
+        title="Enter password"
         name="password"
         value={password}
         onChange={(e)=>setPassword(e.target.value)}ss
