@@ -3,6 +3,7 @@ import Profile from "../../components/UI/Profile";
 import { useState, useEffect } from "react";
 import OrderLunchForm from "../../components/OrderFoodForm/OrderlunchForm";
 import UserSideBarNav from "../../components/UserSideBarNav";
+import AlreadyOrderedModal from "../../components/UI/Modals/AlreadyOrderedModal";
 
 const UserOrderFood = () => {
   // const menuDate = '2022-05-26';
@@ -34,11 +35,13 @@ const UserOrderFood = () => {
 
   return (
     <React.Fragment>
+      {/* <AlreadyOrderedModal></AlreadyOrderedModal> */}
+
       <div className=" lg:flex h-screen ">
         <UserSideBarNav />
 
         <main className="hidden lg:flex flex-col md:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%] ">
-          <div className="relative mt-6 w-full h-16 ">
+          <div className="relative mt-6 w-full h-16 mb-[50px] ">
             <Profile></Profile>
           </div>
           <OrderLunchForm devicestatus={"flex"} menuDate={menuQueryDate} />
