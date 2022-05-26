@@ -11,6 +11,7 @@ const OrderLunchForm = (props) => {
 
   const [error, setError] = useState(null);
   const [noMenuFoundDate, setNoMenuFoundDate] = useState();
+  const [ordering, setOrdering] = useState(false);
   
 
 
@@ -56,6 +57,7 @@ const OrderLunchForm = (props) => {
 
   const onFormSubmitHandler = async(e) => {
     e.preventDefault();
+    setOrdering(true)
     const order = {}
     order.menu_id = menu.menu_id;
     order.food_id = food;
@@ -64,6 +66,7 @@ const OrderLunchForm = (props) => {
  
 
     if(order.menu_id && !order.food_id){
+      setOrdering(false)
       return alert('Please select at least  one food (_^_)')
     }
 
@@ -71,9 +74,11 @@ const OrderLunchForm = (props) => {
     const response = await dispatch(orderLunch(order)).unwrap();
     console.log(response)
     if(response.status === 400){
+      setOrdering(false)
       return alert(response.errorMessage)
     }
     else{
+      setOrdering(false)
       alert('order placed successfully')
     }
    
@@ -91,7 +96,7 @@ const OrderLunchForm = (props) => {
           onSubmit={onFormSubmitHandler}
           className={`${
             props.devicestatus
-          }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12   h-[750px]  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
+          }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12     lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
           >
           
           <h1 className="  mt-10 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
@@ -150,7 +155,7 @@ const OrderLunchForm = (props) => {
           />
           <div className="mt-8 pb-10 flex justify-center">
             <button type="submit" className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold">
-              Place Order
+              {ordering  ? 'Placing your order' : 'Order lunch'}
             </button>
           </div>
         </form>):

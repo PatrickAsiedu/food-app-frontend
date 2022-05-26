@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Input = (props) => {
   const [viewPassword, setViewPassword] = useState(false);
@@ -15,9 +16,9 @@ const Input = (props) => {
           {props.label}
         </label>
         {props.type === "password" && (
-          <a className={`${props.forgotpasswordlink}  ${"text-links"}`} href="">
+          <Link className={`${props.forgotpasswordlink}  ${"text-links"}`} to="/resetpassword">
             Forgot Password ?
-          </a>
+          </Link>
         )}
       </div>
       <div className="relative">
@@ -26,6 +27,8 @@ const Input = (props) => {
           type={props.type === 'password' ? ( viewPassword ? 'text' : 'password'  ) : props.type} 
           placeholder={props.placeholder}
           name={props.name}
+          pattern={props.type === 'text' && '[0]{1}[0-9]{9}'}
+          title={props.title}
           onChange={props.onChange}
           value={props.value}
           required
