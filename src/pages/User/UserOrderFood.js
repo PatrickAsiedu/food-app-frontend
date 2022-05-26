@@ -1,12 +1,36 @@
 import React from "react";
 import Profile from "../../components/UI/Profile";
+import { useState, useEffect } from "react";
 import OrderLunchForm from "../../components/OrderFoodForm/OrderlunchForm";
 import UserSideBarNav from "../../components/UserSideBarNav";
 
 const UserOrderFood = () => {
-  const menuDate = "2022-05-26";
+  // const menuDate = '2022-05-26';
+  const [menuQueryDate, setMenuQueryDate] = useState("");
 
-  // TODO: get menu for only
+  // TODO: get menu
+  // if time is before 7 am get todays menu; else get tommorrow's menu
+  useEffect(() => {
+    const dateNow = new Date();
+    // console.log(dateNow.getHours())
+    if (dateNow.getHours() < 7) {
+      setMenuQueryDate(dateNow.toISOString().split("T")[0]);
+      // console.log(dateNow.toISOString().split('T')[0])
+      console.log(
+        "current time before 07:00AM.... so we are getting today's menu ie. ",
+        menuQueryDate
+      );
+    } else {
+      let tomorrow = new Date();
+      tomorrow.setDate(dateNow.getDate() + 1);
+      setMenuQueryDate(tomorrow.toISOString().split("T")[0]);
+      // console.log(tomorrow.toISOString().split('T')[0])
+      console.log(
+        "Current time after 07:00AM .... so we are getting tommorow's menu ie. ",
+        menuQueryDate
+      );
+    }
+  }, [menuQueryDate]);
 
   return (
     <React.Fragment>
@@ -17,7 +41,7 @@ const UserOrderFood = () => {
           <div className="relative mt-6 w-full h-16 ">
             <Profile></Profile>
           </div>
-          <OrderLunchForm devicestatus={"flex"} menuDate={menuDate} />
+          <OrderLunchForm devicestatus={"flex"} menuDate={menuQueryDate} />
         </main>
       </div>
     </React.Fragment>
