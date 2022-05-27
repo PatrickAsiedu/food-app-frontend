@@ -87,12 +87,12 @@ const OrderLunchForm = (props) => {
             props.devicestatus
           }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12     lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
         >
-          <h1 className="  mt-10 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
+          <h1 className="  mt-10 lg:mt-14 text-center font-bold text-primary text-xl lg:text-2xl">
             Menu for {props.menuDate}
           </h1>
 
           <fieldset className="mt-[27px]">
-            <legend className="">Choose Food</legend>
+            <legend className="font-semibold">Choose Food</legend>
             {menu.foods.map((food) => (
               <div
                 key={food.food_id}
@@ -106,13 +106,13 @@ const OrderLunchForm = (props) => {
                   name="radio buttons"
                   onClick={(e) => setFood(e.target.id)}
                 />
-                <label className="ml-[14px]" htmlFor="hey">
+                <label className="ml-[14px] " htmlFor="hey">
                   {food.food_name}
                 </label>
               </div>
             ))}
 
-            <legend className="">Choose Drink</legend>
+            <legend className="mt-6 font-semibold">Choose Drink</legend>
             {menu.drinks.map((drink) => (
               <div
                 key={drink.drink_id}
@@ -126,18 +126,18 @@ const OrderLunchForm = (props) => {
                   name="radio buttons drink"
                   onClick={(e) => setDrink(e.target.id)}
                 />
-                <label className="ml-[14px]" htmlFor="hey">
+                <label className="ml-[14px]  " htmlFor="hey">
                   {drink.drink_name}
                 </label>
               </div>
             ))}
           </fieldset>
 
-          <label className="mt-10" htmlFor="">
+          <label className="mt-10 font-semibold" htmlFor="">
             Comments
           </label>
           <textarea
-            className="bg-primary mt-[18px] rounded-lg h-[164px] text-white px-4 pt-4  text-sm"
+            className="bg-primary/80 mt-[18px] rounded-lg h-[164px] text-white px-4 pt-4  text-sm  border-primary border-2 outline-white"
             name="comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
@@ -147,7 +147,7 @@ const OrderLunchForm = (props) => {
           <div className="mt-8 pb-10 flex justify-center">
             <button
               type="submit"
-              className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold"
+              className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold "
             >
               {ordering ? "Placing your order" : "Order lunch"}
             </button>
