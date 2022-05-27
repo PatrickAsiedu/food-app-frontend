@@ -144,7 +144,7 @@ const OrderLunchForm = (props) => {
             cols="30"
             rows="7"
           />
-          <div className="mt-8 pb-10 flex justify-center">
+          <div className="  mt-8 pb-10 flex justify-center">
             <button
               type="submit"
               className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold "
