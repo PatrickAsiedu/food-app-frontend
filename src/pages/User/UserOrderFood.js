@@ -40,11 +40,12 @@ const UserOrderFood = () => {
       <div className=" lg:flex h-screen ">
         <UserSideBarNav />
 
-        <main className="hidden lg:flex flex-col md:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%] ">
+        <main className="hidden lg:flex flex-col md:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%]  ">
           <div className="relative mt-6 w-full h-16 mb-[50px] ">
             <Profile></Profile>
           </div>
           <OrderLunchForm devicestatus={"flex"} menuDate={menuQueryDate} />
+          <div className=" pt-[120px]"></div>
         </main>
       </div>
     </React.Fragment>
