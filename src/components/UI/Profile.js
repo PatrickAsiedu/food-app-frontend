@@ -6,7 +6,7 @@ const Profile = () => {
   let initials = name[0];
 
   return (
-    <div className="bg-checkbox h-[62px] w-[62px] rounded-full absolute right-8">
+    <div className="bg-checkbox h-[62px] w-[62px] rounded-full absolute right-8 ">
       <span className="absolute top-4 left-5 font-semibold text-2xl text-primary">
         {initials}
       </span>
