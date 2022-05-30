@@ -72,7 +72,7 @@ export const orderLunch = createAsyncThunk('user/order', async(orderData)=>{
         return { status: response.status, message: response.data.message}
     } catch (error) {
         console.log(error.response);
-        const data = {status: error.response.status, errorMessage:error.response.data.message ||error.response.data.error[0].message}
+        const data = {status: error.response.status, errorMessage:error.response.data.message ||error.response.data.error[0].message, order:error.response.data?.order}
         return data
     }
 })

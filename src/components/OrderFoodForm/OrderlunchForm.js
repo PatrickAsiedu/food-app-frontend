@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getMenu, orderLunch } from "../../redux/userSlice";
+// import AlreadyOrderedModal from "../UI/Modals/AlreadyOrderedModal";
 
 const OrderLunchForm = (props) => {
   const dispatch = useDispatch();
@@ -21,7 +22,9 @@ const OrderLunchForm = (props) => {
       setMenu(response.data);
     } else if (response.status === 401) {
       setError(response.errorMessage);
-      setNoMenuFoundDate(response.date);
+      const dd = new Date(response.date);
+
+      setNoMenuFoundDate(dd.toDateString());
     }
   };
 
@@ -46,7 +49,7 @@ const OrderLunchForm = (props) => {
     return (
       <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
         <h1 className=" mt-10 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
-          {error.replace("specified date", noMenuFoundDate.split("T")[0])}
+          {error.replace("specified date", noMenuFoundDate )}
         </h1>
       </div>
     );
@@ -72,7 +75,11 @@ const OrderLunchForm = (props) => {
     if (response.status === 400) {
       setOrdering(false);
       return alert(response.errorMessage);
-    } else {
+    }else if(response.status===401){
+      setOrdering(false);
+      return alert(response.errorMessage)
+    } 
+    else {
       setOrdering(false);
       alert("order placed successfully");
     }
@@ -80,6 +87,7 @@ const OrderLunchForm = (props) => {
 
   return (
     <React.Fragment>
+      {/* {orderedAlreadyModal && <AlreadyOrderedModal /> } */}
       {menu ? (
         <form
           onSubmit={onFormSubmitHandler}

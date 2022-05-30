@@ -54,6 +54,7 @@ const LoginForm = () => {
         id="Phone Number"
         type="text"
         title="Enter a valid phone number starting with 0 and of length 10"
+        pattern='[0]{1}[0-9]{9}'
         name="phone_number"
         value={phone_number}
         onChange={(e)=>setPhoneNumber(e.target.value)}

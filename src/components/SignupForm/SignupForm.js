@@ -71,6 +71,8 @@ const SignupForm = () => {
         name='phone_number'
         value={form.phone_number}
         onChange={signupFormHanlder}
+        pattern='[0]{1}[0-9]{9}'
+        title="Enter a valid phone number starting with 0 and of length 10"
       />
       <Input
         forgotpasswordlink={"hidden"}

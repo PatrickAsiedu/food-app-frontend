@@ -6,6 +6,8 @@ const initialState = {
     orders: {},
     foodList: [],
     drinkList: [],
+    allOrders: [],
+    allMenus: [],
 
 }
 
@@ -27,7 +29,16 @@ export const getDrinks = createAsyncThunk('chef/fetchAllDrinks', async()=>{
     }
 });
 
-export const getOrders = createAsyncThunk('chefgetOders', async(orderDate)=>{
+export const getAllOrders = createAsyncThunk('chef/getAllOrder', async()=>{
+    try {
+        const response = await API.get('/menu/all');
+        return response
+    } catch (error) {
+        return error.response
+    }
+})
+
+export const getOrders = createAsyncThunk('chef/getOders', async(orderDate)=>{
     try {
         const response = await API.get(`/order/daily?menu_date=${orderDate}`);
         console.log(response)
