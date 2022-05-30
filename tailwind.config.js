@@ -17,6 +17,7 @@ module.exports = {
         notification: "#DC2032",
         bluebullet: "#00D4FF",
         orangebullet: "#FFB800",
+        tablehighligh: "#E4EBF2",
       },
       boxShadow: {
         switchshadow: "1px 1px 2px -1px rgba(51, 51, 51, 0.3)",
