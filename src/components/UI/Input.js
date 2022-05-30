@@ -35,12 +35,8 @@ const Input = (props) => {
           }
           placeholder={props.placeholder}
           name={props.name}
-<<<<<<< HEAD
-          pattern={props.type === "text" && "[0]{1}[0-9]{9}"}
-=======
           // pattern={props.type === 'text' && '[0]{1}[0-9]{9}'}
           pattern={props?.pattern}
->>>>>>> develop
           title={props.title}
           onChange={props.onChange}
           value={props.value}
