@@ -9,11 +9,11 @@ const AdminDashboard = () => {
   return (
     <React.Fragment>
       <div className=" lg:flex h-screen ">
-       <AdminSideBarNav />
+        <AdminSideBarNav />
 
         <main className=" lg:flex flex-col lg:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%] px-8  lg:px-[90px] text-base text-primary ">
           <h1 className="mt-[5%] text-primary font-bold text-base">
-            WELCOME CHEFF
+            WELCOME ADMIN ,
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[50px] lg:gap-9 ">
             <TotalFoodOrders></TotalFoodOrders>
