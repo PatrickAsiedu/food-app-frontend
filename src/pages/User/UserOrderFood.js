@@ -3,10 +3,10 @@ import Profile from "../../components/UI/Profile";
 import { useState, useEffect } from "react";
 import OrderLunchForm from "../../components/OrderFoodForm/OrderlunchForm";
 import UserSideBarNav from "../../components/UserSideBarNav";
-import AlreadyOrderedModal from "../../components/UI/Modals/AlreadyOrderedModal";
+// import AlreadyOrderedModal from "../../components/UI/Modals/AlreadyOrderedModal";
 
 const UserOrderFood = () => {
-  // const menuDate = '2022-05-26';
+  // const customMenuDate = '2022-05-28';
   const [menuQueryDate, setMenuQueryDate] = useState("");
 
   // TODO: get menu

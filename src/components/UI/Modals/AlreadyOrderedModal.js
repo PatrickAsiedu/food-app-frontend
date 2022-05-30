@@ -1,6 +1,15 @@
 import React from "react";
 
-const AlreadyOrderedModal = () => {
+const AlreadyOrderedModal = (props) => {
+
+  const onNoClick =() =>{
+    props.setModalState(false);
+    window.location.href='/me'
+  }
+
+  const onYesClick =() => {
+    props.setModalState(false)
+  }
   return (
     <React.Fragment>
       <div className="bg-black/50 h-screen fixed z-10 top-0 w-full"></div>
@@ -8,19 +17,19 @@ const AlreadyOrderedModal = () => {
         <div className="flex justify-center mt-[68px]">
           <div className="text-center w-[549px] text-primary font-normal leading-9">
             <span> You already placed order for </span>
-            <span>banku and tilapia</span> and <span> Samea</span> dated
+            <span>{props.message.food_name}</span> and <span> {props.message.drink_name}</span> <br/> on 
             <span>
-              May 24,2022. <br />{" "}
+              {props.message.created_at}. <br />{" "}
             </span>{" "}
             Do you want to re-place Order?
           </div>
         </div>
         <div className="  flex justify-center">
           <div className="w-[549px] px-4 flex justify-between text-white font-bold">
-            <button className="bg-primary w-[101px]  lg:w-[153px] h-[63px] rounded-lg">
+            <button className="bg-primary w-[101px]  lg:w-[153px] h-[63px] rounded-lg" onClick={onYesClick}>
               Yes
             </button>
-            <button className="ml-[60px] lg:ml-[123px]  w-[101px]  bg-notification lg:w-[153px] h-[63px] rounded-lg">
+            <button className="ml-[60px] lg:ml-[123px]  w-[101px]  bg-notification lg:w-[153px] h-[63px] rounded-lg" onClick={onNoClick}>
               No
             </button>
           </div>
