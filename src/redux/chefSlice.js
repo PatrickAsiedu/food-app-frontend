@@ -40,10 +40,14 @@ export const getAllOrders = createAsyncThunk('chef/getAllOrder', async()=>{
 
 export const getOrders = createAsyncThunk('chef/getOders', async(orderDate)=>{
     try {
-        const response = await API.get(`/order/daily?menu_date=${orderDate}`);
-        console.log(response)
+        let query = '';
+        orderDate ? query = `/order/daily?menu_date=${orderDate}` : query = "/order/daily" 
+        const response = await API.get(query);
+        // console.log(response)
+        const data = {status: response.status, data:response.data.data}
+        return data
     } catch (error) {
-        // console.log(error.response);
+        console.log(error.response);
         const data = {status:error.response.status, errorMessage:error.response.data.message || error.response.data?.error[0].message}
         return data
     }
@@ -62,6 +66,19 @@ export const addMenu = createAsyncThunk('chef/add/Menu', async(menuData)=>{
     }
 })
 
+export const getMenu = createAsyncThunk('chef/getmenu', async(menuDate)=>{
+    console.log(menuDate)
+    try {
+        const response = await API.get(`/menu?menu_date=${menuDate}`);
+        const data = {status: response.status, data: response.data.data}
+        return data
+    } catch (error) {
+        console.log(error.response);
+        const data = {status: error.response.status, errorMessage:error.response.data.message ||error.response.data.error[0].message, date:error.response.data.date}
+        return data
+    }
+})
+
 const chefSlice = createSlice({
     name: 'admin',
     initialState,
@@ -76,7 +93,13 @@ const chefSlice = createSlice({
         
         builder.addCase(getOrders.fulfilled, (state, action)=>{
             console.log(action.payload)
+            // if(action.payload.status === 200){
+            //     state.todayOrders = action.payload.data
+            // }
+            
         })
+
+       
 
     }
 });
