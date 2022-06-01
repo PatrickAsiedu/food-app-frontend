@@ -16,9 +16,9 @@ const AdminUserManagement = () => {
 
         <main className=" lg:flex flex-col lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] px-8  lg:px-[90px] 2xl:px-[300px] text-base text-primary ">
           <AdminTopNavBar></AdminTopNavBar>
-          {/* <SignupApprovaltile></SignupApprovaltile> */}
+          <SignupApprovaltile></SignupApprovaltile>
           {/* <ResetPasswordApprovaltile></ResetPasswordApprovaltile> */}
-          <ShowAllUsersTable></ShowAllUsersTable>
+          {/* <ShowAllUsersTable></ShowAllUsersTable> */}
 
           <div className=" pt-[120px]"></div>
         </main>
