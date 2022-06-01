@@ -13,8 +13,8 @@ const Header = () => {
       </div>
 
       <div>
-        <ToggleSwitch devicestatus={"mr-4 lg:hidden"}></ToggleSwitch>
-        <button>
+        {/* <ToggleSwitch devicestatus={"mr-4 lg:hidden"}></ToggleSwitch> */}
+        <button className="flex lg:hidden">
           <svg
             width="26"
             height="17"

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import Profile from "../../components/UI/Profile";
 import UserSideBarNav from "../../components/UserSideBarNav";
 import { getMyOrders } from "../../redux/userSlice";
+import UserTitlebar from "../../components/Usertitle bar/Usertitlebar";
 
 const UserHistories = () => {
   const dispatch = useDispatch();
@@ -27,15 +28,9 @@ const UserHistories = () => {
         <UserSideBarNav />
 
         <main className="hidden lg:flex flex-col md:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%] ">
-          <div className="relative mt-6 w-full h-16 ">
-            <Profile></Profile>
-          </div>
+          <UserTitlebar title="Your Order History"></UserTitlebar>
 
           <div className="lg:px-[90px] 2xl:px-[200px] text-primary">
-            <h1 className="text-left font-semibold mt-12 text-xl ">
-              Your Order History
-            </h1>
-
             <div className=" w-full  box-outer-shadow mt-12 rounded-3xl px-5 ">
               <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-5 gap-3   ">
                 <h1 className="font-semibold pl-3">Food Choice</h1>

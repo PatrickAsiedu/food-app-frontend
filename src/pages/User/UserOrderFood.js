@@ -3,6 +3,7 @@ import Profile from "../../components/UI/Profile";
 import { useState, useEffect } from "react";
 import OrderLunchForm from "../../components/OrderFoodForm/OrderlunchForm";
 import UserSideBarNav from "../../components/UserSideBarNav";
+import UserTitlebar from "../../components/Usertitle bar/Usertitlebar";
 // import AlreadyOrderedModal from "../../components/UI/Modals/AlreadyOrderedModal";
 
 const UserOrderFood = () => {
@@ -41,9 +42,7 @@ const UserOrderFood = () => {
         <UserSideBarNav />
 
         <main className="hidden lg:flex flex-col md:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%]  ">
-          <div className="relative mt-6 w-full h-16 mb-[50px] ">
-            <Profile></Profile>
-          </div>
+          <UserTitlebar title="Place Your Order"></UserTitlebar>
           <OrderLunchForm devicestatus={"flex"} menuDate={menuQueryDate} />
           <div className=" pt-[120px]"></div>
         </main>

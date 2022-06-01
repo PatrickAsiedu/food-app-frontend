@@ -62,7 +62,7 @@ const UserSideBarNav = () => {
           >
             <span>
               <svg
-                className="group-hover:fill-white group-hover:opacity-100 fill-primary opacity-80"
+                className="group-hover:fill-white group-hover:opacity-100 fill-primary opacity-80 "
                 width="31"
                 height="31"
                 viewBox="0 0 31 31"
@@ -80,7 +80,7 @@ const UserSideBarNav = () => {
         </div>
         <div>
           {/* TODO; implement darkmode feature */}
-          <div className=" flex items-center pl-6 py-6 ">
+          {/* <div className=" flex items-center pl-6 py-6 ">
             <span>
               <svg
                 width="24"
@@ -99,7 +99,7 @@ const UserSideBarNav = () => {
               Dark mode
             </span>
             <ToggleSwitch devicestatus={"ml-4 hidden lg:flex"}></ToggleSwitch>
-          </div>
+          </div> */}
 
           <button
             className="flex items-center py-6 pl-6 "
