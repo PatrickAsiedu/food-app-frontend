@@ -11,7 +11,7 @@ const initialState = {
 
 }
 
-export const getFoods = createAsyncThunk('admin/fetchAllFoods', async()=>{
+export const getFoodsAdmin = createAsyncThunk('admin/fetchAllFoods', async()=>{
     try {
         const response = await API.get('/food');
         return response.data.foods
@@ -20,7 +20,7 @@ export const getFoods = createAsyncThunk('admin/fetchAllFoods', async()=>{
     }
 });
 
-export const getDrinks = createAsyncThunk('admin/fetchAllDrinks', async()=>{
+export const getDrinksAdmin = createAsyncThunk('admin/fetchAllDrinks', async()=>{
     try {
         const response = await API.get('/drink');
         return response.data.drinks
@@ -40,8 +40,12 @@ export const getAllOrders = createAsyncThunk('admin/getAllOrder', async()=>{
 
 export const getOrders = createAsyncThunk('admin/getOders', async(orderDate)=>{
     try {
-        const response = await API.get(`/order/daily?menu_date=${orderDate}`);
-        console.log(response)
+        let query = '';
+        orderDate ? query = `/order/daily?menu_date=${orderDate}` : query = "/order/daily" 
+        const response = await API.get(query);
+        // console.log(response)
+        const data = {status: response.status, data:response.data.data}
+        return data
     } catch (error) {
         // console.log(error.response);
         const data = {status:error.response.status, errorMessage:error.response.data.message || error.response.data?.error[0].message}
@@ -63,11 +67,25 @@ export const addMenu = createAsyncThunk('admin/add/Menu', async(menuData)=>{
 });
 
 
+export const getMenu = createAsyncThunk('admin/getmenu', async(menuDate)=>{
+    console.log(menuDate)
+    try {
+        const response = await API.get(`/menu?menu_date=${menuDate}`);
+        const data = {status: response.status, data: response.data.data}
+        return data
+    } catch (error) {
+        console.log(error.response);
+        const data = {status: error.response.status, errorMessage:error.response.data.message ||error.response.data.error[0].message, date:error.response.data.date}
+        return data
+    }
+})
+
+
 export const getAllUsers = createAsyncThunk('admin/getallusers', async()=>{
     try{
         const response = await API.get('/allusers');
         console.log(response)
-        // return { status: response.status, data: response.data}
+        return { status: response.status, data: response.data.data}
     }catch(error){
         console.log(error.response)
     }
@@ -76,7 +94,18 @@ export const getAllUsers = createAsyncThunk('admin/getallusers', async()=>{
 const adminSlice = createSlice({
     name: 'admin',
     initialState,
-    reducers:{}
+    reducers:{},
+    extraReducers: builder => {
+        builder.addCase(getFoodsAdmin.fulfilled, (state, action) => {
+            state.foodList = action.payload
+        })
+        builder.addCase(getDrinksAdmin.fulfilled, (state, action)=>{
+            state.drinkList = action.payload
+        })
+        builder.addCase(getAllUsers.fulfilled, (state, action)=>{
+            state.allUsers = action.payload.data
+        })
+    }
 })
 
 

@@ -8,7 +8,9 @@ import { getMenu, getOrders } from "../../redux/chefSlice";
 const ChefOrders = () => {
   const dispatch = useDispatch();
   const [orders, setOrders ] = useState();
-  const [selectedDate, setSelectedDate] = useState('2022-05-31');
+  const today = new Date();
+  const defaultSelectedDate = today.toISOString().split('T')[0];
+  const [selectedDate, setSelectedDate] = useState(defaultSelectedDate);
   const [error, setError] = useState();
 
   const [foodSummary, setFoodSummary] = useState()
@@ -33,7 +35,7 @@ const ChefOrders = () => {
         const count = response.data.filter(orderfood=>orderfood.food_id===menufood.food_id).length;
         return {"count":count, ...menufood}
       })
-      console.log(tempFoods)
+      // console.log(tempFoods)
       
       setFoodSummary(tempFoods)
 
@@ -41,15 +43,16 @@ const ChefOrders = () => {
         const count = response.data.filter(orderDrink=>orderDrink.drink_id===menuDrink.drink_id).length;
         return {"count":count, ...menuDrink}
       })
-      console.log(tempDrinks)
-      
+      // console.log(tempDrinks)
       setDrinkSummary(tempDrinks)
 
 
-
-      // get all food id and drink id
-
     } else if(response.status ===400){
+      // handle error on no order found here
+      // first clear all states set by the if block above
+      setOrders('')
+      setFoodSummary('')
+      setDrinkSummary('')
       setError(response.errorMessage)
     }
 
@@ -61,6 +64,7 @@ const ChefOrders = () => {
 
 console.log(foodSummary)
 console.log(drinkSummary)
+console.log(error)
 
   const onDateChange =(e) => {
     setSelectedDate(e.target.value)
@@ -73,9 +77,7 @@ console.log(drinkSummary)
         <ChefSideBarNav />
 
         <main className=" lg:flex flex-col lg:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%] px-8  lg:px-[90px] text-base text-primary  ">
-          <h1 className=" ml-3 mt-[40px] font-semibold mb-3">Foods</h1>
-          {/* <h1 className="text-primary font-bold text-base text-right">Date: {today.toDateString()}</h1> */}
-          <div className="text-right"> 
+        <div className=" mt-[40px] text-right"> 
             <form>
               <label className="text-primary font-bold text-base">Select Date: </label>
               <input
@@ -86,12 +88,13 @@ console.log(drinkSummary)
             </form>
           </div>
 
+          <h1 className=" ml-3 mt-[40px] font-semibold mb-3">Foods</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9">
             {foodSummary && foodSummary.map(food=>(
               <FoodCard key={food.food_id} foodName={food.food_name} total={food.count} />
             ))}
-            
           </div>
+
           <h1 className=" ml-3 mt-[50px] font-semibold mb-3">Drinks</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9 ">
             {drinkSummary && drinkSummary.map(drink=>(
@@ -107,7 +110,7 @@ console.log(drinkSummary)
               <h1>Comments</h1>
               <h1>Ordered on</h1>
             </div>
-            {orders && (orders.map(order=>(
+            {orders ? (orders.map(order=>(
               <div key={order.id} className="w-full mt-6 bg-primary/10  grid grid-cols-5 text-sm ">
               <h1 className="">{order.name}</h1>
               <h1>{order.food_name}</h1>
@@ -115,9 +118,8 @@ console.log(drinkSummary)
               <h1>{order.comment}</h1>
               <h1>{order.created_at.split('T')[0]}</h1>
             </div>
-            )))}
-            {/* TODO, come back to fix this */}
-            {error && <p>No others found</p>}
+            ))) : (<div className="mt-5">--- No orders found ---</div>)}
+            
           </div>
         </main>
       </div>

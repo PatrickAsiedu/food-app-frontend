@@ -92,7 +92,7 @@ const chefSlice = createSlice({
         })
         
         builder.addCase(getOrders.fulfilled, (state, action)=>{
-            console.log(action.payload)
+            // console.log(action.payload)
             // if(action.payload.status === 200){
             //     state.todayOrders = action.payload.data
             // }

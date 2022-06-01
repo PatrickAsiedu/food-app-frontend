@@ -7,14 +7,15 @@ import { logOutCurrentUser } from "../redux/userSlice";
 import Header from "./Layout/Header";
 import Notificationtile from "./UI/Noficationtile";
 
-const AdminSideBarNav = () => {
+const AdminSideBarNav = (props) => {
   const dispatch = useDispatch();
+
 
   return (
     <React.Fragment>
       <div className=" lg:pl-8 lg:h-full lg:border-r-2  lg:w-[30%] 2xl:w-[20%] lg:fixed ">
         <div className="px-6"></div>
-        <Header></Header>
+        <Header />
 
         <nav className=" hidden lg:flex lg:flex-col  height-calc mt-24  flex-col justify-between">
           <div>
@@ -79,7 +80,7 @@ const AdminSideBarNav = () => {
               <span className=" ml-5 font-semibold text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium">
                 Orders
               </span>
-              <Notificationtile></Notificationtile>
+              <Notificationtile  value={props.ordersCount || 0}/>
             </Link>
 
             <Link
