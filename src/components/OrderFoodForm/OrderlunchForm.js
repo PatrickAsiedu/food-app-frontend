@@ -49,7 +49,7 @@ const OrderLunchForm = (props) => {
     return (
       <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
         <h1 className=" mt-10 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
-          {error.replace("specified date", noMenuFoundDate )}
+          {error.replace("specified date", noMenuFoundDate)}
         </h1>
       </div>
     );
@@ -75,11 +75,10 @@ const OrderLunchForm = (props) => {
     if (response.status === 400) {
       setOrdering(false);
       return alert(response.errorMessage);
-    }else if(response.status===401){
+    } else if (response.status === 401) {
       setOrdering(false);
-      return alert(response.errorMessage)
-    } 
-    else {
+      return alert(response.errorMessage);
+    } else {
       setOrdering(false);
       alert("order placed successfully");
     }
@@ -93,13 +92,13 @@ const OrderLunchForm = (props) => {
           onSubmit={onFormSubmitHandler}
           className={`${
             props.devicestatus
-          }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12     lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
+          }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12 md:px-14    lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
         >
           <h1 className="  mt-10 lg:mt-14 text-center font-bold text-primary text-xl lg:text-2xl">
             Menu for {props.menuDate}
           </h1>
 
-          <fieldset className="mt-[27px]">
+          <fieldset className="mt-[27px] ">
             <legend className="font-semibold">Choose Food</legend>
             {menu.foods.map((food) => (
               <div
