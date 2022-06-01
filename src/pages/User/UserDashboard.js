@@ -11,18 +11,21 @@ const UserDashboard = () => {
 
   return (
     <React.Fragment>
-      <div className=" lg:flex h-screen ">
+      <div className="px-8 lg:px-0 lg:flex h-screen ">
         <UserSideBarNav />
 
-        <main className="hidden lg:flex flex-col md:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%]    relative ">
+        <main className=" lg:flex lg:flex-col   lg:px-0 lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%]  ">
+          <h1 className="lg:hidden font-semibold text-xl text-primary ">
+            {greeting}
+          </h1>
           <UserTitlebar title={greeting}></UserTitlebar>
-          <div className="text-center px-12 mt-[153px] text-primary font-medium text-xl w-[700px] mx-auto ">
-            Looks like you have not placed an order for today
+          <div className="text-center px-12 mt-[100px] lg:mt-[153px] text-primary font-medium text-xl lg:w-[700px] lg:mx-auto  ">
+            Looks like you have not placed an order for today .
           </div>
-          <div className="mt-[100px] px-[100px] flex mx-auto">
+          <div className="mt-[100px] lg:px-[100px] md:px-[120px] flex lg:flex lg:mx-auto justify-between">
             <Link
               to="/me/order"
-              className="h-[362px] w-[258px] flex flex-col bg-tablehighligh rounded-[20px] justify-center items-center hover:bg-primary/80 group active:bg-primary"
+              className="w-[130px] h-[237px] lg:h-[362px] lg:w-[258px] flex flex-col bg-tablehighligh rounded-[20px] justify-center items-center hover:bg-primary/80 group active:bg-primary"
             >
               <svg
                 className="fill-primary opacity-80 group-hover:fill-white "
@@ -40,7 +43,7 @@ const UserDashboard = () => {
             </Link>
             <Link
               to="/me/history"
-              className="h-[362px] w-[258px] flex flex-col bg-tablehighligh rounded-[20px] justify-center items-center hover:bg-primary/80 group active:bg-primary ml-[100px]"
+              className=" w-[130px] h-[237px] lg:h-[362px] lg:w-[258px] flex flex-col bg-tablehighligh rounded-[20px] justify-center items-center hover:bg-primary/80 group active:bg-primary lg:ml-[100px]"
             >
               <svg
                 className="fill-primary opacity-80 group-hover:fill-white "
@@ -54,7 +57,7 @@ const UserDashboard = () => {
                 <path d="M79.845 31.8637C78.1534 27.8514 75.6979 24.2063 72.615 21.1312C67.9483 16.4646 62.0164 13.2679 55.5525 11.9362C51.066 11.023 46.4415 11.023 41.955 11.9362C35.485 13.2594 29.548 16.4587 24.885 21.135C21.8096 24.2133 19.355 27.8544 17.655 31.86C15.8967 36.0173 14.9937 40.4861 15 45L15.0037 45.0937H7.5L18.75 60L30 45.0937H22.5037L22.5 45C22.4892 39.7701 24.0505 34.6577 26.9812 30.3262C28.8717 27.5313 31.2786 25.1232 34.0725 23.2312C36.9148 21.3165 40.1029 19.974 43.4587 19.2787C50.2782 17.8766 57.3754 19.2398 63.1902 23.0687C69.0049 26.8976 73.0612 32.8788 74.4675 39.6975C75.1749 43.192 75.1749 46.7929 74.4675 50.2875C73.7814 53.6461 72.4382 56.836 70.515 59.6737C69.5775 61.065 68.5012 62.3737 67.3125 63.5587C64.9169 65.9514 62.0844 67.8622 58.9687 69.1875C57.3818 69.8583 55.7326 70.3708 54.045 70.7175C50.5516 71.4243 46.9521 71.4243 43.4587 70.7175C40.1036 70.0296 36.9167 68.6878 34.08 66.7687C32.6848 65.826 31.3827 64.7524 30.1912 63.5625L24.8887 68.865C28.0205 72.001 31.7401 74.4883 35.8346 76.1846C39.9291 77.8808 44.318 78.7526 48.75 78.75C53.2614 78.7481 57.7272 77.8468 61.8862 76.0987C67.9148 73.5481 73.0726 69.301 76.7325 63.8737C80.4992 58.3008 82.5083 51.7264 82.5 45C82.5094 40.487 81.6063 36.0188 79.845 31.8637Z" />
               </svg>
 
-              <h1 className="mt-[62px] font-semibold text-base text-primary hover:text-white opacity-80 group-hover:text-white">
+              <h1 className="mt-[45px] font-semibold text-base text-primary hover:text-white opacity-80 group-hover:text-white">
                 History
               </h1>
             </Link>

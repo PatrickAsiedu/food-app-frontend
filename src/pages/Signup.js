@@ -16,6 +16,7 @@ const Signup = () => {
             </div>
           </div>
           <SignupForm></SignupForm>
+          <div className=" pt-[120px]"></div>
         </div>
         <div className=" hidden fixed ml-[50%] h-screen  lg:flex lg:w-[50%]">
           <div className="bg-primary rounded-[62px] mx-auto w-[75%] h-[90%] mt-[5%]"></div>

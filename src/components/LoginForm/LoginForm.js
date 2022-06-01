@@ -49,19 +49,21 @@ const LoginForm = () => {
       </h1>
 
       <Input
-        styling={"w-full border mt-[22px] mb-[21px] h-[61px] pl-6 "}
+        styling={
+          "w-full border mt-[22px] mb-[21px] h-[61px] pl-6 outline-links "
+        }
         label="Phone Number"
         placeholder="Enter Phone Number"
         id="Phone Number"
         type="text"
         title="Enter a valid phone number starting with 0 and of length 10"
-        pattern='[0]{1}[0-9]{9}'
+        pattern="[0]{1}[0-9]{9}"
         name="phone_number"
         value={phone_number}
         onChange={(e) => setPhoneNumber(e.target.value)}
       />
       <Input
-        styling={"w-full border mt-[22px]  h-[61px] pl-6 "}
+        styling={"w-full border mt-[22px]  h-[61px] pl-6 outline-links "}
         label="Password"
         placeholder="Enter Password"
         id="Pasword"

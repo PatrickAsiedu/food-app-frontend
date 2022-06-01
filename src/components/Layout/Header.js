@@ -1,20 +1,29 @@
-import React from "react";
 import BSLlogo from "../../assets/logo-stack-dark 1 1.png";
 import ToggleSwitch from "../UI/ToggleSwitch";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { toggleHamburger } from "../../redux/userSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  // const [showHamburger, setshowHamburger] = useState(false);
+
+  const onHamburgerClickHandler = () => {
+    dispatch(toggleHamburger());
+  };
+
   return (
-    <header className="flex items-center justify-between  py-6 px-8  lg:pl-0">
+    <header className="flex items-center justify-between  py-6  lg:pl-0">
       <div className="flex items-center">
         <img src={BSLlogo} alt="" />
         <span className="  ml-3 font-bold text-base ">
-          BSL <span className="text-primary">ORDERS</span>{" "}
+          BSL <span className="text-primary">ORDERS</span>
         </span>
       </div>
 
       <div>
         {/* <ToggleSwitch devicestatus={"mr-4 lg:hidden"}></ToggleSwitch> */}
-        <button className="flex lg:hidden">
+        <button onClick={onHamburgerClickHandler} className="flex lg:hidden">
           <svg
             width="26"
             height="17"

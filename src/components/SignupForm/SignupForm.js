@@ -53,7 +53,9 @@ const SignupForm = () => {
         Nice to see you here
       </h1>
       <Input
-        styling={"w-full border mt-[22px] mb-[21px] h-[61px] pl-6 "}
+        styling={
+          "w-full border mt-[22px] mb-[21px] h-[61px] pl-6 outline-links "
+        }
         label="Name"
         placeholder="Enter Name"
         id="Name"
@@ -63,7 +65,9 @@ const SignupForm = () => {
         onChange={signupFormHanlder}
       />
       <Input
-        styling={"w-full border mt-[22px] mb-[21px] h-[61px] pl-6 "}
+        styling={
+          "w-full border mt-[22px] mb-[21px] h-[61px] pl-6 outline-links "
+        }
         label="Phone Number"
         placeholder="Enter Phone Number"
         id="Phone Number"
@@ -71,7 +75,7 @@ const SignupForm = () => {
         name="phone_number"
         value={form.phone_number}
         onChange={signupFormHanlder}
-        pattern='[0]{1}[0-9]{9}'
+        pattern="[0]{1}[0-9]{9}"
         title="Enter a valid phone number starting with 0 and of length 10"
       />
       <Input
