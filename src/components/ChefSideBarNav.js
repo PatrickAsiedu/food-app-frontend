@@ -6,8 +6,9 @@ import { useDispatch } from "react-redux";
 import { logOutCurrentUser } from "../redux/userSlice";
 import Header from "./Layout/Header";
 
-const ChefSideBarNav = () => {
+const ChefSideBarNav = (props) => {
   const dispatch = useDispatch();
+  const ordersCount = props.orderTotal || 0
   return (
     <div className=" lg:pl-8 lg:h-full lg:border-r-2  lg:w-[30%] 2xl:w-[20%] lg:fixed ">
       <Header></Header>
@@ -78,7 +79,7 @@ const ChefSideBarNav = () => {
               Orders
             </span>
             <div className="relative w-[31px] h-[26px] ml-3 bg-notification rounded-full text-primary">
-              <span className="absolute left-[9px]">8</span>
+              <span className="absolute left-[9px]">{ordersCount}</span>
             </div>
           </Link>
         </div>

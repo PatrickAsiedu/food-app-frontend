@@ -25,7 +25,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import store from "./redux/store";
 import { setCurrentUser } from "./redux/userSlice";
 import jwtDecode from "jwt-decode";
-import { getDrinks, getFoods, getOrders } from "./redux/chefSlice.js";
+import { getDrinks, getFoods } from "./redux/chefSlice.js";
+import { getAllUsers, getDrinksAdmin, getFoodsAdmin } from "./redux/adminSlice";
 
 // check if user is already logged in, and add it to the state
 const token = localStorage.getItem("user_token");
@@ -52,7 +53,11 @@ if (token) {
     // store.dispatch(getMyOrders())
   }
   if (userType === 'admin'){
-    // 
+    // only dispatch acitons according to admin logic
+    store.dispatch(getFoodsAdmin());
+    store.dispatch(getDrinksAdmin());
+    store.dispatch(getAllUsers());
+
   }
 }
 
@@ -66,13 +71,7 @@ function App() {
           <Route exact path="/register" element={<Signup />} />
 
           {/* user routes */}
-          <Route
-            exact
-            path="/me"
-            element={
-              <ProtectedRoute Component={UserDashboard} Permission="user" />
-            }
-          />
+          <Route exact path="/me" element={ <ProtectedRoute Component={UserDashboard} Permission="user" />} />
           <Route
             exact
             path="/me/order"
@@ -143,7 +142,7 @@ function App() {
                 Permission="admin"
               />
             }
-          ></Route>
+          />
         </Routes>
       </BrowserRouter>
     </React.Fragment>

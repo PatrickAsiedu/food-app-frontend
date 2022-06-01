@@ -22,7 +22,7 @@ const ChefDashboard = () => {
   useEffect(()=>{
     const getTodayOrder = async() =>{
       const menuDate = today.toISOString().split('T')[0];
-      const response = await dispatch(getOrders('2022-05-28')).unwrap();
+      const response = await dispatch(getOrders(menuDate)).unwrap();
       // console.log(response);
       if(response.status=== 200){
         setOrders(response.data)
@@ -39,7 +39,7 @@ console.log(orders)
   return (
     <React.Fragment>
       <div className=" lg:flex h-screen ">
-        <ChefSideBarNav />
+        <ChefSideBarNav  orderTotal ={orders?.length}/>
 
         <main className=" lg:flex flex-col lg:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%] px-8  lg:px-[90px] text-base text-primary ">
           <h1 className="mt-[5%] text-primary font-bold text-base">
@@ -52,7 +52,7 @@ console.log(orders)
             <TotalComments value={totalComments}/>
           </div>
 
-        {orders ? <OrdersTable orders={orders} /> : <h1>No orders placed yet</h1>}
+        {orders ? <OrdersTable orders={orders} /> : <h1 className="text-primary text-base text-center mt-[50px]">No orders placed yet</h1>}
           
         </main>
       </div>

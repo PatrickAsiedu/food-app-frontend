@@ -1,9 +1,10 @@
 import React from "react";
 
-const Notificationtile = () => {
+const Notificationtile = ({value}) => {
+
   return (
     <div className=" w-[31px] h-[26px] ml-3 bg-notification rounded-full text-primary flex justify-center align-center">
-      <span className=" ">8</span>
+      <span className=" ">{value || 0}</span>
     </div>
   );
 };
