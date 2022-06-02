@@ -1,8 +1,8 @@
 import React from "react";
 
-const TotalFoodOrder = ({value}) => {
+const TotalFoodOrder = ({ value }) => {
   return (
-    <div className="lg:w-[247px] 2xl:w-[320px] h-[180px] box-outer-shadow rounded-3xl flex flex-col pl-9  justify-evenly  ">
+    <div className=" w-full lg:w-[247px] 2xl:w-[320px] h-[180px] box-outer-shadow rounded-3xl flex flex-col pl-9  justify-evenly  ">
       <svg
         width="31"
         height="31"

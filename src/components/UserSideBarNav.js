@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import BSLlogo from "../assets/logo-stack-dark 1 1.png";
 import ToggleSwitch from "./UI/ToggleSwitch";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,17 +17,17 @@ const UserSideBarNav = () => {
     dispatch(toggleHamburger());
   };
 
-  // const onDashboardLinkClickHandler = () => {
-  //   dispatch(toggleHamburger());
-  // };
+  const onDashboardLinkClickHandler = () => {
+    dispatch(toggleHamburger());
+  };
 
-  // const onOrderFoodLinkClickHandler = () => {
-  //   dispatch(toggleHamburger());
-  // };
+  const onOrderFoodLinkClickHandler = () => {
+    dispatch(toggleHamburger());
+  };
 
-  // const onHistoryLinkClickHandler = () => {
-  //   dispatch(toggleHamburger());
-  // };
+  const onHistoryLinkClickHandler = () => {
+    dispatch(toggleHamburger());
+  };
 
   // const onBlurHamburgerHandler = () => {
   //   setonblur(true);
@@ -65,9 +65,9 @@ const UserSideBarNav = () => {
         </button>
 
         <div className="mt-8 lg:mt-0 ">
-          <Link
+          <NavLink
             to="/me"
-            // onClick={onDashboardLinkClickHandler}
+            onClick={onDashboardLinkClickHandler}
             className=" group flex items-center py-6 pl-6 hover:bg-primary "
           >
             <span>
@@ -85,9 +85,9 @@ const UserSideBarNav = () => {
             <span className=" ml-5 font-semibold text-white lg:text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium  ">
               Dashboard
             </span>
-          </Link>
-          <Link
-            // onClick={onOrderFoodLinkClickHandler}
+          </NavLink>
+          <NavLink
+            onClick={onOrderFoodLinkClickHandler}
             to="/me/order"
             className="flex items-center py-6 pl-6 hover:bg-primary group"
           >
@@ -106,9 +106,9 @@ const UserSideBarNav = () => {
             <span className=" ml-5 font-semibold text-white lg:text-primary  opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium">
               Order Food
             </span>
-          </Link>
-          <Link
-            // onClick={onHistoryLinkClickHandler}
+          </NavLink>
+          <NavLink
+            onClick={onHistoryLinkClickHandler}
             to="/me/history"
             className="flex items-center py-6 pl-6  hover:bg-primary group  "
           >
@@ -128,7 +128,7 @@ const UserSideBarNav = () => {
             <span className=" ml-5 font-semibold text-white  lg:text-primary  opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium">
               History
             </span>
-          </Link>
+          </NavLink>
         </div>
         <div>
           {/* TODO; implement darkmode feature */}
@@ -162,7 +162,7 @@ const UserSideBarNav = () => {
                 className={
                   !showHamburger
                     ? "fill-primary opacity-80"
-                    : "fill-white opacity-80"
+                    : "fill-white opacity-80 lg:fill-primary lg:opacity-80 "
                 }
                 width="27"
                 height="31"
