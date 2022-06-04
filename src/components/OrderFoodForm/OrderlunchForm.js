@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { getMenu, orderLunch } from "../../redux/userSlice";
 // import AlreadyOrderedModal from "../UI/Modals/AlreadyOrderedModal";
 
+import RenderLoading from "../UI/RenderLoading";
+
 const OrderLunchForm = (props) => {
   const dispatch = useDispatch();
   const [menu, setMenu] = useState();
@@ -34,13 +36,13 @@ const OrderLunchForm = (props) => {
     }
   }, [props.menuDate]);
 
-  const RenderLoadingOrder = () => (
-    <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
-      <h1 className=" mt-8 mb-8 lg:mt-20 text-center font-semibold text-primary text-xl">
-        Loading ...
-      </h1>
-    </div>
-  );
+  // const RenderLoadingOrder = () => (
+  //   <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
+  //     <h1 className=" mt-8 mb-8 lg:mt-20 text-center font-semibold text-primary text-xl">
+  //       Loading ...
+  //     </h1>
+  //   </div>
+  // );
 
   // if(props.menuDate===undefined)
   //   return (<RenderLoadingOrder />)
@@ -161,7 +163,7 @@ const OrderLunchForm = (props) => {
           </div>
         </form>
       ) : (
-        <RenderLoadingOrder />
+        <RenderLoading />
       )}
     </React.Fragment>
   );
