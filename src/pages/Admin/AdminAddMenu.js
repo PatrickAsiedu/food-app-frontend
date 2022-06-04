@@ -17,6 +17,9 @@ const AdminAddMenu = () => {
 
   const foodList = useSelector(state=>state.admin.foodList);
   const drinkList = useSelector(state=>state.admin.drinkList);
+  const chefList = useSelector(state=>state.admin.allUsers.filter(user=>user.type==='chef'));
+
+  console.log(chefList)
 
   // food here is an object with id and name
   const addToSelectedFoods = (food) => {
@@ -85,7 +88,7 @@ const AdminAddMenu = () => {
               placeholder='Enter chef name'
               onChange={(e)=>setChefName(e.target.value)}
             />
-            <CustomInput label="Select Chef"  styling={{ zIndex: 7 }} />
+            <CustomInput label="Select Chef" itemList={chefList} styling={{ zIndex: 7 }} />
 
             <CustomInput label="Add Food" itemList={foodList} addToSelectedItems={addToSelectedFoods} styling={{ zIndex: 4 }} />
 

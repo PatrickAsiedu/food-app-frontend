@@ -74,15 +74,15 @@ const AdminOrders = () => {
 
           <h1 className=" ml-3 mt-[40px] font-semibold mb-3">Foods</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9">
-            {foodSummary && foodSummary.map(food=>(
+            {foodSummary ? foodSummary.map(food=>(
               <FoodCard key={food.food_id} foodName={food.food_name} total={food.count} />
-            ))}
+            )): (<div className="mt-3">--- No Food found ---</div>)}
           </div>
           <h1 className=" ml-3 mt-[50px] font-semibold mb-3">Drinks</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9 ">
-            {drinkSummary && drinkSummary.map(drink=>(
+            {drinkSummary ? drinkSummary.map(drink=>(
               <DrinkCard key={drink.drink_id}  drinkName={drink.drink_name}  total={drink.count}/>
-            ))}
+            )) : (<div className="mt-3">--- No Drink found ---</div>)}
           </div>
 
           <div className="w-full  box-outer-shadow mt-12 rounded-3xl px-9 h-[400px] ">
