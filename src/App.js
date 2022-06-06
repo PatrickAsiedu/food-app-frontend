@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import ResetPassword from "./pages/ResetPassword";
 
 import UserDashboard from "./pages/User/UserDashboard";
 import UserOrderFood from "./pages/User/UserOrderFood";
@@ -52,15 +53,13 @@ if (token) {
   if (userType === "user") {
     // store.dispatch(getMyOrders())
   }
-  if (userType === 'admin'){
+  if (userType === "admin") {
     // only dispatch acitons according to admin logic
     store.dispatch(getFoodsAdmin());
     store.dispatch(getDrinksAdmin());
     store.dispatch(getAllUsers());
-
   }
 }
-
 
 function App() {
   return (
@@ -69,9 +68,16 @@ function App() {
         <Routes>
           <Route index exact element={<Login />} />
           <Route exact path="/register" element={<Signup />} />
+          <Route exact path="/resetpassword" element={<ResetPassword />} />
 
           {/* user routes */}
-          <Route exact path="/me" element={ <ProtectedRoute Component={UserDashboard} Permission="user" />} />
+          <Route
+            exact
+            path="/me"
+            element={
+              <ProtectedRoute Component={UserDashboard} Permission="user" />
+            }
+          />
           <Route
             exact
             path="/me/order"

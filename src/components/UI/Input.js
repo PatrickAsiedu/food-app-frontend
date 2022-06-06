@@ -11,7 +11,7 @@ const Input = (props) => {
   return (
     <div>
       <div className="flex justify-between">
-        <label className=" text-sm font-normal" htmlFor={props.id}>
+        <label className=" text-sm font-medium" htmlFor={props.id}>
           {props.label}
         </label>
       </div>
