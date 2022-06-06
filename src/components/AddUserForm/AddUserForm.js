@@ -1,17 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../redux/adminSlice";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
 
 const AddUserForm = () => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone_number, setPhone_number] = useState("");
+  const [type, setType] = useState('user')
+
+  const [error, setError] = useState('');
+  const [addingUser, setAddingUser] = useState(false);
+
+  const onFormSubmitHandler = async(e) => {
+    e.preventDefault()
+    setAddingUser(true)
+    setError('')
+    // TODO; add validation to the varoius fields
+    const newUser = {
+      name, password, phone_number, type
+    }
+
+    const response = await dispatch(addUser(newUser)).unwrap()
+    console.log(response)
+    if(response.status===422){
+      setError(response.errorMessage)
+      setAddingUser(false)
+    } else if(response.status === 201){
+      setError('')
+      alert('User Added successfully')
+      setAddingUser(false)
+    }
+
+
+    console.log(newUser)
+    setAddingUser(false)
+    
+
+  }
+
   return (
     <form
       className="w-[728px] mx-auto box-outer-shadow px-12 rounded-3xl mt-14 text-primary"
-      action=""
+      onSubmit={onFormSubmitHandler}
     >
       <h1 className="mt-[74px] font-semibold text-2xl text-center mb-8">
         Add User Account
       </h1>
-      <Select></Select>
+      <Select setType={setType}></Select>
 
       <Input
         styling={
@@ -21,7 +59,10 @@ const AddUserForm = () => {
         placeholder="Enter Name"
         id="Name"
         type="text"
-      ></Input>
+        name="name"
+        onChange={(e)=>setName(e.target.value)}
+      />
+
       <Input
         styling={
           "w-full border mt-[22px] mb-[21px] h-[61px] pl-6  rounded-lg outline-links"
@@ -30,7 +71,12 @@ const AddUserForm = () => {
         placeholder="Enter Phone Number"
         id="Phone Number"
         type="text"
-      ></Input>
+        name='phone_number'
+        pattern="[0]{1}[0-9]{9}"
+        title="Please enter a valid phone number starting with 0 and of length 10 digits"
+        onChange={(e)=>setPhone_number(e.target.value)}
+      />
+
       <Input
         forgotpasswordlink={"hidden"}
         styling={
@@ -40,10 +86,14 @@ const AddUserForm = () => {
         placeholder="Enter Password"
         id="Password"
         type="password"
-      ></Input>
+        name='password'
+        onChange={(e)=>setPassword(e.target.value)}
+      />
+
+      {error && <p className="text-notification font-normal text-center mt-8">{error}</p>}
       <div className="flex justify-center">
-        <button className="bg-primary h-[63px] w-[238px] mt-[38px] mb-12 text-white font-bold rounded-lg outline-links">
-          Add User
+        <button type="submit" className="bg-primary h-[63px] w-[238px] mt-[38px] mb-12 text-white font-bold rounded-lg outline-links">
+          { addingUser ?  'Adding User...' : 'Add User' }
         </button>
       </div>
     </form>

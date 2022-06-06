@@ -1,24 +1,58 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { approveUser, denyUser } from "../../redux/adminSlice";
 
 const SignupApprovalTable = () => {
-  const userList = useSelector((state) => state.admin.allUsers);
+  const dispatch = useDispatch()
+
+  const userList = useSelector((state) => state.admin.allUsers.filter(user=>user.status==='PENDING'));
+
+
+
+  const approveUserFunc = async(id) => {
+    console.log('approve user with id: ', id);
+    const response = await dispatch(approveUser({user_id: id})).unwrap()
+    if(response.status===200){
+      alert('User approved succesfully')
+    }else if(response.status===400){
+      alert('User cannot be approved')
+    }
+    window.location.reload();
+
+    
+  }
+
+  const rejectUserFunc = async(id) => {
+    console.log('reject user with id: ', id)
+    const response = await dispatch(denyUser({user_id: id})).unwrap()
+    if(response.status===200){
+      alert('User rejected succesfully')
+    }else if(response.status===400){
+      alert('User cannot be denied')
+    }
+    window.location.reload();
+    
+  }
+
+ console.log(userList.length)
+
   return (
     <div className=" w-full  box-outer-shadow  rounded-3xl px-5 ">
-      <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-5 gap-3   ">
+      <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-6 gap-3   ">
         <h1 className="font-semibold pl-3">Name</h1>
         <h1 className="font-semibold ">Number</h1>
         <h1 className="font-semibold ">Account Type</h1>
+        <h1 className="font-semibold ">Status</h1>
         <h1 className="font-semibold ">Date Registered</h1>
         <h1 className="font-semibold ">Action</h1>
       </div>
 
       <div className="mt-6 pb-24">
-        {userList &&
+        {userList & userList.length !==0  ?
           userList.map((user) => (
             <div
               key={user.id}
-              className="w-full mt-6 bg-tablehighligh/50 grid grid-cols-5 text-sm gap-3 "
+              className="w-full mt-6 bg-tablehighligh/50 grid grid-cols-6 text-sm gap-3 "
             >
               <h1 className="py-4 font-medium break-words pl-3 ">
                 {user.name}
@@ -28,8 +62,11 @@ const SignupApprovalTable = () => {
               </h1>
               <h1 className="py-4 font-medium break-words   ">{user.type}</h1>
               <h1 className="py-4 font-medium break-words   ">{user.status}</h1>
+              <h1 className="py-4 font-medium break-words   ">{user.created_at.slice(0, -5).replace('T', " ")}</h1>
               <div className="flex ">
-                <button>
+                <button
+                  onClick={()=>approveUserFunc(user.id)}
+                >
                   <svg
                     className="fill-checkbox"
                     width="25"
@@ -41,7 +78,10 @@ const SignupApprovalTable = () => {
                     <path d="M7.5 3.75C6.50544 3.75 5.55161 4.14509 4.84835 4.84835C4.14509 5.55161 3.75 6.50544 3.75 7.5V17.5C3.75 18.4946 4.14509 19.4484 4.84835 20.1517C5.55161 20.8549 6.50544 21.25 7.5 21.25H13.7975C13.7658 21.0432 13.7499 20.8342 13.75 20.625C13.75 20.4112 13.7713 20.2025 13.8125 20H7.5C6.83696 20 6.20107 19.7366 5.73223 19.2678C5.26339 18.7989 5 18.163 5 17.5V7.5C5 6.83696 5.26339 6.20107 5.73223 5.73223C6.20107 5.26339 6.83696 5 7.5 5H17.5C18.163 5 18.7989 5.26339 19.2678 5.73223C19.7366 6.20107 20 6.83696 20 7.5V11.3013C20.4487 11.3763 20.87 11.5325 21.25 11.7513V7.5C21.25 6.50544 20.8549 5.55161 20.1517 4.84835C19.4484 4.14509 18.4946 3.75 17.5 3.75H7.5ZM17.3175 9.8175C17.4349 9.70014 17.5008 9.54097 17.5008 9.375C17.5008 9.20903 17.4349 9.04986 17.3175 8.9325C17.2001 8.81514 17.041 8.74921 16.875 8.74921C16.709 8.74921 16.5499 8.81514 16.4325 8.9325L10.625 14.7413L8.5675 12.6825C8.45014 12.5651 8.29097 12.4992 8.125 12.4992C7.95903 12.4992 7.79986 12.5651 7.6825 12.6825C7.56514 12.7999 7.49921 12.959 7.49921 13.125C7.49921 13.291 7.56514 13.4501 7.6825 13.5675L10.1825 16.0675C10.2406 16.1257 10.3095 16.1719 10.3855 16.2034C10.4614 16.2349 10.5428 16.2511 10.625 16.2511C10.7072 16.2511 10.7886 16.2349 10.8645 16.2034C10.9405 16.1719 11.0094 16.1257 11.0675 16.0675L17.3175 9.8175V9.8175ZM21.875 15C21.875 15.663 21.6116 16.2989 21.1428 16.7678C20.6739 17.2366 20.038 17.5 19.375 17.5C18.712 17.5 18.0761 17.2366 17.6072 16.7678C17.1384 16.2989 16.875 15.663 16.875 15C16.875 14.337 17.1384 13.7011 17.6072 13.2322C18.0761 12.7634 18.712 12.5 19.375 12.5C20.038 12.5 20.6739 12.7634 21.1428 13.2322C21.6116 13.7011 21.875 14.337 21.875 15ZM23.75 20.625C23.75 22.1813 22.5 23.75 19.375 23.75C16.25 23.75 15 22.1875 15 20.625C15 20.1277 15.1975 19.6508 15.5492 19.2992C15.9008 18.9475 16.3777 18.75 16.875 18.75H21.875C22.3723 18.75 22.8492 18.9475 23.2008 19.2992C23.5525 19.6508 23.75 20.1277 23.75 20.625Z" />
                   </svg>
                 </button>
-                <button className="ml-8 ">
+
+                <button className="ml-8 "
+                onClick={()=>rejectUserFunc(user.id)}
+                >
                   <svg
                     className="fill-red-500"
                     width="15"
@@ -56,9 +96,10 @@ const SignupApprovalTable = () => {
                     />
                   </svg>
                 </button>
+
               </div>
             </div>
-          ))}
+          )) : <p className="text-center mt-5">----List empty----</p>}
       </div>
     </div>
   );

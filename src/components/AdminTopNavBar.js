@@ -1,10 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const AdminTopNavBar = () => {
+const AdminTopNavBar = ({setCurrentTab }) => {
+    const totalSignUps = useSelector((state) => state.admin.allUsers.filter(user=>user.status==='PENDING'))
+    const totalResets = useSelector((state) => state.admin.allUsers.filter(user=>user.status==='RESET_REQUIRED'))
+    const totalUsers = useSelector((state) => state.admin.allUsers)
+
+
+
   return (
     <nav className=" w-full mx-auto py-3 bg-primary mt-6 flex justify-evenly  text-white px-8  rounded-2xl mb-14">
-      <Link to="/admin/usermanagement/adduser" className="flex  items-center">
+      <button  className="flex  items-center" onClick={()=>setCurrentTab(1)}>
         <svg
           width="20"
           height="18"
@@ -18,9 +24,9 @@ const AdminTopNavBar = () => {
           />
         </svg>
         <span className="ml-2">Add User</span>
-      </Link>
+      </button>
 
-      <Link to="/admin/usermanagement/signupapproval" className="flex">
+      <button className="flex" onClick={()=>setCurrentTab(2)}>
         <svg
           width="20"
           height="20"
@@ -34,10 +40,10 @@ const AdminTopNavBar = () => {
           />
         </svg>
 
-        <span className="ml-2">Signup Approval</span>
-      </Link>
+        <span className="ml-2">Signup Approval {totalSignUps.length}</span>
+      </button>
 
-      <Link to="/admin/usermanagement/resetpasswordapproval" className="flex ">
+      <button  className="flex "  onClick={()=>setCurrentTab(3)}>
         <svg
           width="20"
           height="20"
@@ -50,11 +56,12 @@ const AdminTopNavBar = () => {
             fill="white"
           />
         </svg>
-        <span className="ml-2 whitespace-nowrap">Reset Password Approval</span>
-      </Link>
-      <Link
-        to="/admin/usermanagement/resetpasswordapproval"
+        <span className="ml-2 whitespace-nowrap">Reset Password Approval {totalResets.length}</span>
+      </button>
+
+      <button
         className="flex  items-center"
+        onClick={()=>setCurrentTab(4)}
       >
         <svg
           width="18"
@@ -69,8 +76,8 @@ const AdminTopNavBar = () => {
           />
         </svg>
 
-        <span className="ml-2 whitespace-nowrap">Show All Users</span>
-      </Link>
+        <span className="ml-2 whitespace-nowrap">Show All Users {totalUsers.length}</span>
+      </button>
     </nav>
   );
 };
