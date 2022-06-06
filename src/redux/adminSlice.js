@@ -89,7 +89,44 @@ export const getAllUsers = createAsyncThunk('admin/getallusers', async()=>{
     }catch(error){
         console.log(error.response)
     }
+});
+
+
+export const addUser = createAsyncThunk('admin/adduser', async(user) => {
+    try {
+        const response = await API.post('/user', user);
+        console.log(response);
+        return {status: response.status}
+    } catch (error) {
+        // console.log(error.response);
+        return {status: error.response.status, errorMessage: error.response.data.message}
+    }
+});
+
+
+export const approveUser = createAsyncThunk('admin/approveuser', async(userID)=>{
+    try {
+        const response = await API.put('/user/approve', userID);
+        console.log(response);
+        return {status: response.status}
+    } catch (error) {
+        console.log(error.response)
+        return {status: error.response.status, errorMessage: error.response.data.message}
+    }
 })
+
+
+export const denyUser = createAsyncThunk('admin/denyuser', async(userID)=>{
+    try {
+        const response = await API.put('/approvalrequest/deny', userID);
+        console.log(response);
+        return {status: response.status}
+    } catch (error) {
+        console.log(error.response)
+        return {status: error.response.status, errorMessage: error.response.data.message}
+    }
+})
+
 
 const adminSlice = createSlice({
     name: 'admin',

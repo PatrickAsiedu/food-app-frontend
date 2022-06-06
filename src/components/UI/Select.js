@@ -1,6 +1,6 @@
 import React from "react";
 
-const Select = () => {
+const Select = ({setType}) => {
   return (
     <div className="flex justify-center text-primary">
       <div className="mb-3 xl:w-96 text-primary">
@@ -8,6 +8,7 @@ const Select = () => {
         <select
           name="usertype"
           id="usertype"
+          onChange={(e)=>setType(e.target.value)}
           className="form-select appearance-none text-primary
       block
       w-full
@@ -24,6 +25,7 @@ const Select = () => {
       m-0
       focus:text-primary focus:bg-white focus:border-links focus:outline-links"
           //   aria-label="Default select example"
+          
         >
           <option value="" className="hover:bg-primary">
             Choose User Type

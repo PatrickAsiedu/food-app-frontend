@@ -22,7 +22,7 @@ const ShowAllUsersTable = () => {
             <h1 className="py-4 font-medium break-words   ">{user.phone_number}</h1>
             <h1 className="py-4 font-medium break-words   ">{user.type}</h1>
             <h1 className="py-4 font-medium break-words   ">{user.status}</h1>
-            <h1 className="py-4 font-medium break-words   ">{user.created_at}</h1>
+            <h1 className="py-4 font-medium break-words   ">{user.created_at.slice(0, -5).replace('T', " ")}</h1>
           </div>
         ))}
 
