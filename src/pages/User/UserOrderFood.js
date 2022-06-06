@@ -1,5 +1,4 @@
 import React from "react";
-import Profile from "../../components/UI/Profile";
 import { useState, useEffect } from "react";
 import OrderLunchForm from "../../components/OrderFoodForm/OrderlunchForm";
 import UserSideBarNav from "../../components/UserSideBarNav";

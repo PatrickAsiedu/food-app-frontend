@@ -1,11 +1,11 @@
 import React from "react";
 
 import AdminSideBarNav from "../../components/AdminSideBarNav";
-import AddUserForm from "../../components/AddUserForm/AddUserForm";
-import { Link } from "react-router-dom";
+// import AddUserForm from "../../components/AddUserForm/AddUserForm";
+// import { Link } from "react-router-dom";
 import AdminTopNavBar from "../../components/AdminTopNavBar";
-import SignupApprovaltile from "../../components/SignupApprovaltile/SignupApprovaltile";
-import ResetPasswordApprovaltile from "../../components/ResetPassApprovaltile/ResetPasswordApprovaltile";
+// import SignupApprovaltile from "../../components/SignupApprovaltile/SignupApprovaltile";
+// import ResetPasswordApprovaltile from "../../components/ResetPassApprovaltile/ResetPasswordApprovaltile";
 import ShowAllUsersTable from "../../components/AllusersTable/ShowAllUsers";
 
 const AdminUserManagement = () => {
