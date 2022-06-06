@@ -15,6 +15,22 @@ const AdminSideBarNav = (props) => {
     dispatch(toggleHamburger());
   };
 
+  const onDashboardLinkClickHandler = () => {
+    dispatch(toggleHamburger());
+  };
+
+  const onAddMenuLinkClickHandler = () => {
+    dispatch(toggleHamburger());
+  };
+
+  const onOrdersLinkClickHandler = () => {
+    dispatch(toggleHamburger());
+  };
+
+  const onUserManagementLinkClickHandler = () => {
+    dispatch(toggleHamburger());
+  };
+
   return (
     <React.Fragment>
       <div className="  lg:pl-8 sm:h-full sm:border-r-2 sm:w-[10%]  lg:w-[30%] 2xl:w-[20%] sm:fixed  ">
@@ -49,6 +65,7 @@ const AdminSideBarNav = (props) => {
             <Link
               to="/admin"
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary  "
+              onClick={onDashboardLinkClickHandler}
             >
               <span>
                 <svg
@@ -69,6 +86,7 @@ const AdminSideBarNav = (props) => {
             <Link
               to="/admin/addmenu"
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary"
+              onClick={onAddMenuLinkClickHandler}
             >
               <span>
                 <svg
@@ -89,6 +107,7 @@ const AdminSideBarNav = (props) => {
             <Link
               to="/admin/orders"
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary  "
+              onClick={onOrdersLinkClickHandler}
             >
               <span>
                 <svg
@@ -113,6 +132,7 @@ const AdminSideBarNav = (props) => {
             <Link
               to="/admin/usermanagement"
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary  "
+              onClick={onUserManagementLinkClickHandler}
             >
               <span>
                 <svg
