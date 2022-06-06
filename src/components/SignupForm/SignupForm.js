@@ -16,6 +16,7 @@ const SignupForm = () => {
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [formError, setFormError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [formhasError, setFormHasError] = useState("");
 
   const signupFormHanlder = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -30,9 +31,11 @@ const SignupForm = () => {
     // make the api calls
     const response = await dispatch(signUpUser(form)).unwrap();
     if (response.errorMessage) {
+      setFormHasError(true);
       setFormError(response.errorMessage);
     }
     if (response.status === 201) {
+      setFormHasError(false);
       setSuccessMessage(response.message);
       // send the user to login screen after 1 minute
       setTimeout(() => {
@@ -80,7 +83,7 @@ const SignupForm = () => {
       />
       <Input
         forgotpasswordlink={"hidden"}
-        styling={"w-full border mt-[22px]  h-[61px] pl-6 "}
+        styling={"w-full border mt-[22px]  h-[61px] pl-6   outline-links"}
         label="Password"
         placeholder="Enter Password"
         id="Password"
@@ -91,32 +94,51 @@ const SignupForm = () => {
       />
 
       {/* jon added this to display error messages */}
-      <div>
-        <p className="text-notification font-normal text-center mt-[40px] ">
-          {formError}
-        </p>
-      </div>
-      <div>
-        <p className="text-checkbox font-normal text-center mt-[40px] ">
-          {successMessage}
-        </p>
-      </div>
+      {formhasError && (
+        <div>
+          <p
+            className={
+              formhasError
+                ? "text-notification font-normal text-center mt-[40px] "
+                : ""
+            }
+          >
+            {formError}
+          </p>
+        </div>
+      )}
+      {!formhasError && (
+        <div>
+          <p
+            className={
+              formhasError
+                ? "text-checkbox font-normal text-center mt-[40px] "
+                : ""
+            }
+          >
+            {successMessage}
+          </p>
+        </div>
+      )}
       {/* jon added this to display error messages */}
 
       <button
         type="submit"
-        className="bg-primary h-[63px] w-full mt-[38px] text-white font-bold rounded-lg"
+        className="bg-primary h-[63px] w-full mt-6 text-white font-bold rounded-lg"
       >
-        {isSigningUp ? "Creating your account" : "Continue"}
+        {isSigningUp ? "Creating your account..." : "Continue"}
       </button>
 
       <div className=" w-full border border-black/10 h-[0px] mt-10"></div>
-      <div className="self-center mt-[38px] text-center mb-10">
+      <div className="self-center mt-[38px] text-center mb-10 text-sm ">
         <span className=" font-normal text-forgotpassword ">
           Have an account?
         </span>
         <span>
-          <Link to="/" className="text-primary font-normal text-links ml-4  ">
+          <Link
+            to="/"
+            className="hover:underline font-normal text-links ml-4  "
+          >
             Sign in
           </Link>
         </span>

@@ -41,13 +41,12 @@ const LoginForm = () => {
 
   return (
     <form
-      className=" flex flex-col mt-[22px] singup-form-shadow text-primary px-[22px] md:px-12  lg:px-[22px] 2xl:w-[516px] lg:mx-auto "
+      className="  flex flex-col mt-[22px] singup-form-shadow text-primary px-[22px] md:px-12  lg:px-[22px] 2xl:w-[516px] lg:mx-auto "
       onSubmit={onSubmitHandler}
     >
       <h1 className=" text-2xl font-semibold text-center mt-[40px] mb-[27px]">
         Nice to see you here
       </h1>
-
       <Input
         styling={
           "w-full border mt-[22px] mb-[21px] h-[61px] pl-6 outline-links "
@@ -74,36 +73,38 @@ const LoginForm = () => {
         onChange={(e) => setPassword(e.target.value)}
         ss
       />
+      <div className="flex justify-between mt-[38px] text-sm ">
+        <div className="flex  items-center">
+          <ToggleSwitch />
 
-      <div className="flex  items-center mt-[38px]">
-        <ToggleSwitch />
-
-        <label className=" ml-2" htmlFor="rememberme">
-          Remember me
-        </label>
+          <label className=" ml-2" htmlFor="rememberme">
+            Remember me
+          </label>
+        </div>
+        <Link className="text-links hover:underline" to="/resetpassword">
+          Forgot Password ?
+        </Link>
       </div>
 
       {/* jon added this to display error messages */}
       <div>
-        <p className="text-notification font-normal text-center mt-4 ">
+        <p className="text-notification font-normal text-center mt-8 ">
           {logInError}
         </p>
       </div>
       {/* jon added this to display error messages */}
-
-      <button className="bg-primary h-[63px] w-full mt-[51px] text-white font-bold rounded-lg">
+      <button className="bg-primary h-[63px] w-full mt-6 text-white font-bold rounded-lg">
         {isLoggingIn ? "Logging you in..." : "Continue"}
       </button>
-
       <div className=" w-full border border-black/10 h-[0px] mt-10"></div>
-      <div className="self-center mt-[38px] text-center pb-20">
+      <div className="self-center mt-[38px] text-center pb-20 text-sm ">
         <span className=" font-normal text-forgotpassword ">
           Don't Have an account?
         </span>
         <span>
           <Link
             to="/register"
-            className="text-primary font-normal text-links ml-4  "
+            className="hover:underline font-normal text-links ml-4  "
           >
             Sign up now
           </Link>

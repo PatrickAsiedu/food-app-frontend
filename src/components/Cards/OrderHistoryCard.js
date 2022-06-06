@@ -2,7 +2,7 @@ import React from "react";
 
 const OrderHistoryCard = (props) => {
   return (
-    <div className="lg:hidden w-full  box-outer-shadow rounded-3xl px-6 flex-col pt-6 text-primary ">
+    <div className="sm:hidden w-full  box-outer-shadow rounded-3xl px-6 flex-col pt-6 text-primary ">
       <h1 className="font-medium text-base text-primary break-words ">
         {props.foodname} ,
         <span className=" ml-4 text-sm font-normal text-primary/30 ">Food</span>
