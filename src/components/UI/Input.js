@@ -11,17 +11,9 @@ const Input = (props) => {
   return (
     <div>
       <div className="flex justify-between">
-        <label className=" text-base font-normal" htmlFor={props.id}>
+        <label className=" text-sm font-normal" htmlFor={props.id}>
           {props.label}
         </label>
-        {props.type === "password" && (
-          <Link
-            className={`${props.forgotpasswordlink}  ${"text-links"}`}
-            to="/resetpassword"
-          >
-            Forgot Password ?
-          </Link>
-        )}
       </div>
       <div className="relative">
         <input

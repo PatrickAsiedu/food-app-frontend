@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const AdminTopNavBar = () => {
   return (
-    <nav className=" w-full mx-auto h-14 bg-primary mt-6 flex justify-evenly items-center text-white px-8  rounded-2xl mb-14">
+    <nav className=" w-full mx-auto py-3 bg-primary mt-6 flex justify-evenly  text-white px-8  rounded-2xl mb-14">
       <Link to="/admin/usermanagement/adduser" className="flex  items-center">
         <svg
           width="20"

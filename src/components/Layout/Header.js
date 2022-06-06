@@ -16,14 +16,14 @@ const Header = () => {
     <header className="flex items-center justify-between  py-6  lg:pl-0">
       <div className="flex items-center">
         <img src={BSLlogo} alt="" />
-        <span className="  ml-3 font-bold text-base ">
+        <span className="  ml-3 font-bold text-base sm:hidden lg:flex ">
           BSL <span className="text-primary">ORDERS</span>
         </span>
       </div>
 
       <div>
         {/* <ToggleSwitch devicestatus={"mr-4 lg:hidden"}></ToggleSwitch> */}
-        <button onClick={onHamburgerClickHandler} className="flex lg:hidden">
+        <button onClick={onHamburgerClickHandler} className="flex sm:hidden">
           <svg
             width="26"
             height="17"

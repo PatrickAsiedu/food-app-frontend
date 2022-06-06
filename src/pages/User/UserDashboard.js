@@ -11,21 +11,21 @@ const UserDashboard = () => {
 
   return (
     <React.Fragment>
-      <div className="px-8 lg:px-0 lg:flex h-screen ">
+      <div className="px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen ">
         <UserSideBarNav />
 
-        <main className=" lg:flex lg:flex-col   lg:px-0 lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%]  ">
-          <h1 className="lg:hidden font-semibold text-xl text-primary ">
+        <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]  lg:px-0 lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8  ">
+          <h1 className=" lg:mt-0 sm:hidden font-semibold text-xl text-primary ">
             {greeting}
           </h1>
           <UserTitlebar title={greeting}></UserTitlebar>
           <div className="text-center px-12 mt-[100px] lg:mt-[153px] text-primary font-medium text-xl lg:w-[700px] lg:mx-auto  ">
             Looks like you have not placed an order for today .
           </div>
-          <div className="mt-[100px] lg:px-[100px] md:px-[120px] flex lg:flex lg:mx-auto justify-between">
+          <div className="mt-[100px] lg:px-[100px] md:px-[50px] flex lg:flex lg:mx-auto justify-between">
             <Link
               to="/me/order"
-              className="w-[130px] h-[237px] lg:h-[362px] lg:w-[258px] flex flex-col bg-tablehighligh rounded-[20px] justify-center items-center hover:bg-primary/80 group active:bg-primary"
+              className="w-[150px] h-[237px] sm:w-[200px] sm:h-[300px] lg:h-[362px] lg:w-[258px] flex flex-col bg-tablehighligh rounded-[20px] justify-center items-center hover:bg-primary/80 group active:bg-primary"
             >
               <svg
                 className="fill-primary opacity-80 group-hover:fill-white "
@@ -43,7 +43,7 @@ const UserDashboard = () => {
             </Link>
             <Link
               to="/me/history"
-              className=" w-[130px] h-[237px] lg:h-[362px] lg:w-[258px] flex flex-col bg-tablehighligh rounded-[20px] justify-center items-center hover:bg-primary/80 group active:bg-primary lg:ml-[100px]"
+              className=" w-[150px] h-[237px] sm:w-[200px] sm:h-[300px] lg:h-[362px] lg:w-[258px] flex flex-col bg-tablehighligh rounded-[20px] justify-center items-center hover:bg-primary/80 group active:bg-primary lg:ml-[100px]"
             >
               <svg
                 className="fill-primary opacity-80 group-hover:fill-white "
