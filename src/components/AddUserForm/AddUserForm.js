@@ -9,44 +9,44 @@ const AddUserForm = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [phone_number, setPhone_number] = useState("");
-  const [type, setType] = useState('user')
+  const [type, setType] = useState("user");
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [addingUser, setAddingUser] = useState(false);
 
-  const onFormSubmitHandler = async(e) => {
-    e.preventDefault()
-    setAddingUser(true)
-    setError('')
+  const onFormSubmitHandler = async (e) => {
+    e.preventDefault();
+    setAddingUser(true);
+    setError("");
     // TODO; add validation to the varoius fields
     const newUser = {
-      name, password, phone_number, type
+      name,
+      password,
+      phone_number,
+      type,
+    };
+
+    const response = await dispatch(addUser(newUser)).unwrap();
+    console.log(response);
+    if (response.status === 422) {
+      setError(response.errorMessage);
+      setAddingUser(false);
+    } else if (response.status === 201) {
+      setError("");
+      alert("User Added successfully");
+      setAddingUser(false);
     }
 
-    const response = await dispatch(addUser(newUser)).unwrap()
-    console.log(response)
-    if(response.status===422){
-      setError(response.errorMessage)
-      setAddingUser(false)
-    } else if(response.status === 201){
-      setError('')
-      alert('User Added successfully')
-      setAddingUser(false)
-    }
-
-
-    console.log(newUser)
-    setAddingUser(false)
-    
-
-  }
+    console.log(newUser);
+    setAddingUser(false);
+  };
 
   return (
     <form
-      className="w-[728px] mx-auto box-outer-shadow px-12 rounded-3xl mt-14 text-primary"
+      className="w-full mx-auto box-outer-shadow px-12 rounded-3xl sm:w-full lg:w-[728px]  text-primary pt-12"
       onSubmit={onFormSubmitHandler}
     >
-      <h1 className="mt-[74px] font-semibold text-2xl text-center mb-8">
+      <h1 className=" font-semibold text-2xl text-center mb-8">
         Add User Account
       </h1>
       <Select setType={setType}></Select>
@@ -60,7 +60,7 @@ const AddUserForm = () => {
         id="Name"
         type="text"
         name="name"
-        onChange={(e)=>setName(e.target.value)}
+        onChange={(e) => setName(e.target.value)}
       />
 
       <Input
@@ -71,10 +71,10 @@ const AddUserForm = () => {
         placeholder="Enter Phone Number"
         id="Phone Number"
         type="text"
-        name='phone_number'
+        name="phone_number"
         pattern="[0]{1}[0-9]{9}"
         title="Please enter a valid phone number starting with 0 and of length 10 digits"
-        onChange={(e)=>setPhone_number(e.target.value)}
+        onChange={(e) => setPhone_number(e.target.value)}
       />
 
       <Input
@@ -86,14 +86,21 @@ const AddUserForm = () => {
         placeholder="Enter Password"
         id="Password"
         type="password"
-        name='password'
-        onChange={(e)=>setPassword(e.target.value)}
+        name="password"
+        onChange={(e) => setPassword(e.target.value)}
       />
 
-      {error && <p className="text-notification font-normal text-center mt-8">{error}</p>}
+      {error && (
+        <p className="text-notification font-normal text-center mt-8">
+          {error}
+        </p>
+      )}
       <div className="flex justify-center">
-        <button type="submit" className="bg-primary h-[63px] w-[238px] mt-[38px] mb-12 text-white font-bold rounded-lg outline-links">
-          { addingUser ?  'Adding User...' : 'Add User' }
+        <button
+          type="submit"
+          className="bg-primary h-[63px] w-[238px] mt-[38px] mb-12 text-white font-bold rounded-lg outline-links"
+        >
+          {addingUser ? "Adding User..." : "Add User"}
         </button>
       </div>
     </form>

@@ -1,16 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Notificationtile from "./UI/Noficationtile";
 
-const AdminTopNavBar = ({setCurrentTab }) => {
-    const totalSignUps = useSelector((state) => state.admin.allUsers.filter(user=>user.status==='PENDING'))
-    const totalResets = useSelector((state) => state.admin.allUsers.filter(user=>user.status==='RESET_REQUIRED'))
-    const totalUsers = useSelector((state) => state.admin.allUsers)
-
-
+const AdminTopNavBar = ({ setCurrentTab }) => {
+  const totalSignUps = useSelector((state) =>
+    state.admin.allUsers.filter((user) => user.status === "PENDING")
+  );
+  const totalResets = useSelector((state) =>
+    state.admin.allUsers.filter((user) => user.status === "RESET_REQUIRED")
+  );
+  const totalUsers = useSelector((state) => state.admin.allUsers);
 
   return (
     <nav className=" w-full mx-auto py-3 bg-primary mt-6 flex justify-evenly  text-white px-8  rounded-2xl mb-14">
-      <button  className="flex  items-center" onClick={()=>setCurrentTab(1)}>
+      <button className="flex  items-center" onClick={() => setCurrentTab(1)}>
         <svg
           width="20"
           height="18"
@@ -23,10 +26,10 @@ const AdminTopNavBar = ({setCurrentTab }) => {
             fill="white"
           />
         </svg>
-        <span className="ml-2">Add User</span>
+        <span className="ml-2 sm:hidden lg:flex">Add User</span>
       </button>
 
-      <button className="flex" onClick={()=>setCurrentTab(2)}>
+      <button className="flex" onClick={() => setCurrentTab(2)}>
         <svg
           width="20"
           height="20"
@@ -40,10 +43,11 @@ const AdminTopNavBar = ({setCurrentTab }) => {
           />
         </svg>
 
-        <span className="ml-2">Signup Approval {totalSignUps.length}</span>
+        <span className="ml-2 sm:hidden lg:flex">Signup Approval</span>
+        <Notificationtile value={totalSignUps.length}></Notificationtile>
       </button>
 
-      <button  className="flex "  onClick={()=>setCurrentTab(3)}>
+      <button className="flex " onClick={() => setCurrentTab(3)}>
         <svg
           width="20"
           height="20"
@@ -56,13 +60,13 @@ const AdminTopNavBar = ({setCurrentTab }) => {
             fill="white"
           />
         </svg>
-        <span className="ml-2 whitespace-nowrap">Reset Password Approval {totalResets.length}</span>
+        <span className="ml-2 whitespace-nowrap sm:hidden lg:flex">
+          Reset Password Approval
+        </span>
+        <Notificationtile value={totalResets.length}></Notificationtile>
       </button>
 
-      <button
-        className="flex  items-center"
-        onClick={()=>setCurrentTab(4)}
-      >
+      <button className="flex  items-center" onClick={() => setCurrentTab(4)}>
         <svg
           width="18"
           height="15"
@@ -76,7 +80,10 @@ const AdminTopNavBar = ({setCurrentTab }) => {
           />
         </svg>
 
-        <span className="ml-2 whitespace-nowrap">Show All Users {totalUsers.length}</span>
+        <span className="ml-2 whitespace-nowrap sm:hidden lg:flex">
+          Show All Users
+        </span>
+        <Notificationtile value={totalUsers.length}></Notificationtile>
       </button>
     </nav>
   );

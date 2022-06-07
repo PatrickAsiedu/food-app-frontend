@@ -11,6 +11,12 @@ import { toggleHamburger } from "../redux/userSlice";
 const AdminSideBarNav = (props) => {
   const dispatch = useDispatch();
   const showHamburger = useSelector((state) => state.user.showHamburger);
+  const totalSignUps = useSelector((state) =>
+    state.admin.allUsers.filter((user) => user.status === "PENDING")
+  );
+  const totalResets = useSelector((state) =>
+    state.admin.allUsers.filter((user) => user.status === "RESET_REQUIRED")
+  );
   const onCloseHamburgerHandler = () => {
     dispatch(toggleHamburger());
   };
@@ -149,7 +155,10 @@ const AdminSideBarNav = (props) => {
               <span className=" ml-5 font-semibold text-white sm:text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium  sm:hidden lg:flex">
                 User Management
               </span>
-              {/* <Notificationtile></Notificationtile> */}
+              <Notificationtile
+                status={"sm:hidden lg:flex"}
+                value={totalSignUps.length + totalResets.length}
+              ></Notificationtile>
             </Link>
           </div>
 

@@ -24,6 +24,11 @@
 } */
 
 
+::-webkit-scrollbar {
+    display: none;
+}
+
+
 .height-calc{
     height: calc(100% - 200px);
  
