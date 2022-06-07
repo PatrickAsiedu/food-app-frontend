@@ -8,6 +8,7 @@ const initialState = {
   isLoggedIn: false,
   myOrders: {},
   currentMenu: {},
+  currentOrder: {},
   showHamburger: false,
 };
 
@@ -67,9 +68,10 @@ export const getMyOrders = createAsyncThunk("user/getOrders", async () => {
 });
 
 export const getMenu = createAsyncThunk("user/getmenu", async (menuDate) => {
-  console.log(menuDate);
+  console.log('menu date from useSlice: ', menuDate);
+  const queryString = menuDate ?  `/menu?menu_date=${menuDate}` : '/menu'
   try {
-    const response = await API.get(`/menu?menu_date=${menuDate}`);
+    const response = await API.get(queryString);
     const data = { status: response.status, data: response.data.data };
     return data;
   } catch (error) {
@@ -160,15 +162,17 @@ const userSlice = createSlice({
 
     // menu this is redundant
     builder.addCase(getMenu.fulfilled, (state, action) => {
-      console.log(action.payload.status);
+      // console.log(action.payload.status);
       if (action.payload.status === 200) {
-        state.currentMenu = action.payload.data;
+        // state.currentMenu = action.payload;
+        // state.currentOrder = action.payload.data.user_order[0]
       } else {
-        console.log(action.payload);
+        // state.currentMenu = action.payload
+        // console.log(action.payload);
       }
     });
     builder.addCase(getMenu.pending, (state, action) => {
-      console.log("get menu request still pending");
+      // console.log("get menu request still pending");
     });
     builder.addCase(getMenu.rejected, (state, action) => {
       console.log(action.payload);

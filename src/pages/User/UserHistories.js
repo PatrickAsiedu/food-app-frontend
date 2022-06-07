@@ -4,7 +4,7 @@ import UserSideBarNav from "../../components/UserSideBarNav";
 import UserTitlebar from "../../components/Usertitle bar/Usertitlebar";
 
 import UserOrderHistoryTable from "../../components/Cards/UserOrderHistoryTable";
-import OrderHistoryCard from "../../components/Cards/OrderHistoryCard";
+// import OrderHistoryCard from "../../components/Cards/OrderHistoryCard";
 
 const UserHistories = () => {
   return (
@@ -14,7 +14,8 @@ const UserHistories = () => {
 
         <main className="lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]  lg:px-0 lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8 ">
           <UserTitlebar title="Your Order History"></UserTitlebar>
-          <OrderHistoryCard></OrderHistoryCard>
+
+          {/* <OrderHistoryCard></OrderHistoryCard> */}
 
           <UserOrderHistoryTable />
 

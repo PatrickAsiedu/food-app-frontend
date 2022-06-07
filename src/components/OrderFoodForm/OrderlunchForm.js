@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { getMenu, orderLunch } from "../../redux/userSlice";
 // import AlreadyOrderedModal from "../UI/Modals/AlreadyOrderedModal";
 
+import { formatDateToDateAndTimeString, formatDateToDateString } from "../../utils/util-functions";
+
 import RenderLoading from "../UI/RenderLoading";
 
 const OrderLunchForm = (props) => {
@@ -11,6 +13,7 @@ const OrderLunchForm = (props) => {
   const [food, setFood] = useState("");
   const [drink, setDrink] = useState("");
   const [comment, setComment] = useState("");
+
 
   const [error, setError] = useState(null);
   const [noMenuFoundDate, setNoMenuFoundDate] = useState();
@@ -22,6 +25,7 @@ const OrderLunchForm = (props) => {
     // console.log(response)
     if (response.status === 200) {
       setMenu(response.data);
+      
     } else if (response.status === 401) {
       setError(response.errorMessage);
       const dd = new Date(response.date);
@@ -46,6 +50,7 @@ const OrderLunchForm = (props) => {
 
   // if(props.menuDate===undefined)
   //   return (<RenderLoadingOrder />)
+  console.log(menu)
 
   if (error) {
     return (
@@ -55,6 +60,21 @@ const OrderLunchForm = (props) => {
         </h1>
       </div>
     );
+  }
+
+  const RenderOrderAlready = () =>  {
+    console.log(menu.user_order)
+    return (
+      <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
+        <h1 className=" mt-8 mb-8 lg:mt-20 text-center font-semibold text-primary text-xl">
+          You have ordered for {formatDateToDateString(menu.menu_date)} 's lunch already 
+        </h1>
+        <h1>Food: {menu.user_order[0].food_name} </h1>
+        <h1>Drink: {menu.user_order[0].drink_name}</h1>
+        <h1>Comment: {menu.user_order[0].comment || '---'}</h1>
+        <h1>Ordered at: {formatDateToDateAndTimeString(menu.user_order[0].created_at)}</h1>
+      </div>
+    )
   }
 
   const onFormSubmitHandler = async (e) => {
@@ -89,8 +109,8 @@ const OrderLunchForm = (props) => {
   return (
     <React.Fragment>
       {/* {orderedAlreadyModal && <AlreadyOrderedModal /> } */}
-      {menu ? (
-        <form
+      {menu ? ( !menu.user_order ? 
+        (<form
           onSubmit={onFormSubmitHandler}
           className={`${
             props.devicestatus
@@ -161,7 +181,7 @@ const OrderLunchForm = (props) => {
               {ordering ? "Placing your order" : "Order lunch"}
             </button>
           </div>
-        </form>
+        </form>): (<RenderOrderAlready />)
       ) : (
         <RenderLoading />
       )}
