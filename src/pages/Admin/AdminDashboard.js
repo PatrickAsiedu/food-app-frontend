@@ -37,7 +37,7 @@ const AdminDashboard = () => {
     getTodayOrder();
   }, []);
 
-  let greeting = `Welcome ${userName} ,`;
+  let greeting = `Welcome , ${userName}`;
   let todaysdate = today.toDateString();
 
   return (

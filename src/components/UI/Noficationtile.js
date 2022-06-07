@@ -1,10 +1,13 @@
 import React from "react";
 
-const Notificationtile = ({value}) => {
-
+const Notificationtile = (props) => {
   return (
-    <div className=" w-[31px] h-[26px] ml-3 bg-notification rounded-full text-primary flex justify-center align-center">
-      <span className=" ">{value || 0}</span>
+    <div
+      className={`${
+        props.status
+      } ${" w-[24px] h-[24px] ml-3 bg-notification rounded-full text-primary flex justify-center items-center"}`}
+    >
+      <span className="text-white text-xs ">{props.value || 0}</span>
     </div>
   );
 };
