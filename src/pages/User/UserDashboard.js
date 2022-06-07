@@ -8,47 +8,95 @@ import { getMenu, } from "../../redux/userSlice";
 import { formatDateToDateString } from "../../utils/util-functions";
 
 const UserDashboard = () => {
-  const dispatch = useDispatch()
   const userName = useSelector((state) => state.user.user.name);
   let greeting = `Welcome, ${userName}`;
+  const dispatch = useDispatch()
+  const [menuQueryDate, setMenuQueryDate] = useState("");
+
   const [userOrder, setUserOrder] = useState();
   const [error, setError] = useState();
 
 
-  const checkUserOrder = async(menuDate) =>{
-    console.log('menu date from dashboard: ', menuDate)
-    const response = await dispatch(getMenu(menuDate)).unwrap()
-    if(response.status===200){
-      setUserOrder(response.data.user_order[0])
-    }else{
-      // this should handle both no order and no menu
-      // setError(response)
+
+  
+
+  useEffect(() => {
+    // now lets get menu for today
+    const getTodayMenu = async() => {
+
+      const dateNow = new Date();
+    // console.log(dateNow.getHours())
+    let queryDate = ''
+    if (dateNow.getHours() < 14) {
+      queryDate = dateNow.toISOString().split("T")[0]
+      setMenuQueryDate(queryDate);
+      console.log(
+        "current time before 02:00PM.... so we are getting today's menu ie. ",
+        queryDate
+      );
+
+      const response = await dispatch(getMenu(queryDate)).unwrap()
       console.log(response)
-    }
-  }
+      if(response.status===401){
+        console.log('eerorr hrr')
+        setError(`No menu found for ${formatDateToDateString(queryDate)}`)
+      }else if(response.status===200){
+        // there is menu, so we then chceck for orders
+        if(response.data.user_order.length > 0){
+          setUserOrder(response.data.user_order[0])
+        }else {
+          setError(`You have not placed order for ${formatDateToDateString(queryDate)}'s lunch `)
+        }
+      }
 
-  // check if user has ordered or not
-  useEffect(()=>{
 
-    const dateNow = new Date();
-    if(dateNow.getHours() < 14 ){
-      checkUserOrder(dateNow.toISOString().split("T")[0])
-    }else {
+
+
+    } else {
       let tomorrow = new Date();
       tomorrow.setDate(dateNow.getDate() + 1);
-      checkUserOrder(tomorrow.toISOString().split("T")[0])
+      queryDate = tomorrow.toISOString().split("T")[0]
+      setMenuQueryDate(queryDate);
+      // console.log(tomorrow.toISOString().split('T')[0])
+      console.log(
+        "Current time after 02:00PM .... so we are getting tommorow's menu ie. ",
+        queryDate
+      );
+
+      const response = await dispatch(getMenu('2022-06-08')).unwrap()
+      console.log(response)
+      if(response.status===401){
+        console.log('eerorr hrr')
+        setError(`No menu found for ${formatDateToDateString(queryDate)}`)
+      }else if(response.status===200){
+        // there is menu, so we then chceck for orders
+        if(response.data.user_order.length > 0){
+          setUserOrder(response.data.user_order[0])
+        }else {
+          setError(`You have not placed order for ${formatDateToDateString(queryDate)}'s lunch `)
+        }
+      }
     }
+
+     
+    }
+  
+    
+
 
     
 
-    checkUserOrder()
-  }, [])
+    
+    getTodayMenu()
+  }, []);
+
  
 
-  // console.log(userOrder)
-  console.log(Boolean(userOrder));
-  console.log(Boolean(error))
+
+  // console.log(Boolean(userOrder));
+  // console.log(Boolean(error))
   console.log(userOrder)
+  console.log(error)
 
 
   return (

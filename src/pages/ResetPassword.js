@@ -2,6 +2,7 @@ import React from "react";
 import ResetPasswordForm from "../components/ResetPassowrdForm/ResetPasswordForm";
 import BSLlogo from "../assets/logo-stack-dark 1 1.png";
 const ResetPassword = () => {
+
   return (
     <React.Fragment>
       <div className="px-6 md:px-24 lmd:px-40  ">
@@ -13,7 +14,7 @@ const ResetPassword = () => {
             </span>
           </div>
         </div>
-        <ResetPasswordForm></ResetPasswordForm>
+        <ResetPasswordForm />
       </div>
     </React.Fragment>
   );
