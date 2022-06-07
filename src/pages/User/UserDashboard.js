@@ -1,13 +1,55 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import Profile from "../../components/UI/Profile";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import UserSideBarNav from "../../components/UserSideBarNav";
 import UserTitlebar from "../../components/Usertitle bar/Usertitlebar";
 import { Link } from "react-router-dom";
 
+import { getMenu, } from "../../redux/userSlice";
+import { formatDateToDateString } from "../../utils/util-functions";
+
 const UserDashboard = () => {
+  const dispatch = useDispatch()
   const userName = useSelector((state) => state.user.user.name);
-  let greeting = `Welcome ${userName} ,`;
+  let greeting = `Welcome, ${userName}`;
+  const [userOrder, setUserOrder] = useState();
+  const [error, setError] = useState();
+
+
+  const checkUserOrder = async(menuDate) =>{
+    console.log('menu date from dashboard: ', menuDate)
+    const response = await dispatch(getMenu(menuDate)).unwrap()
+    if(response.status===200){
+      setUserOrder(response.data.user_order[0])
+    }else{
+      // this should handle both no order and no menu
+      // setError(response)
+      console.log(response)
+    }
+  }
+
+  // check if user has ordered or not
+  useEffect(()=>{
+
+    const dateNow = new Date();
+    if(dateNow.getHours() < 14 ){
+      checkUserOrder(dateNow.toISOString().split("T")[0])
+    }else {
+      let tomorrow = new Date();
+      tomorrow.setDate(dateNow.getDate() + 1);
+      checkUserOrder(tomorrow.toISOString().split("T")[0])
+    }
+
+    
+
+    checkUserOrder()
+  }, [])
+ 
+
+  // console.log(userOrder)
+  console.log(Boolean(userOrder));
+  console.log(Boolean(error))
+  console.log(userOrder)
+
 
   return (
     <React.Fragment>
@@ -20,7 +62,9 @@ const UserDashboard = () => {
           </h1>
           <UserTitlebar title={greeting}></UserTitlebar>
           <div className="text-center px-12 mt-[100px] lg:mt-[153px] text-primary font-medium text-xl lg:w-[700px] lg:mx-auto  ">
-            Looks like you have not placed an order for today .
+            {userOrder ? 
+            `You have ordered for ${userOrder.food_name}  ${userOrder.drink_name && `and ${userOrder.drink_name}` } for  ${formatDateToDateString(userOrder.menu_date)} ` 
+            : "Looks like you have not placed an order for today" }
           </div>
           <div className="mt-[100px] lg:px-[100px] md:px-[50px] flex lg:flex lg:mx-auto justify-between">
             <Link
@@ -38,7 +82,7 @@ const UserDashboard = () => {
                 <path d="M54.2818 70H59.5636C62.2364 70 64.4318 67.9318 64.75 65.3227L70 12.8864H54.0909V0H47.8227V12.8864H32.0091L32.9636 20.3318C38.4045 21.8273 43.4955 24.5318 46.55 27.5227C51.1318 32.0409 54.2818 36.7182 54.2818 44.3545V70ZM0 66.8182V63.6364H47.8227V66.8182C47.8227 68.5364 46.3909 70 44.5455 70H3.18182C1.43182 70 0 68.5364 0 66.8182ZM47.8227 44.5455C47.8227 19.0909 0 19.0909 0 44.5455H47.8227ZM0 50.9091H47.7273V57.2727H0V50.9091Z" />
               </svg>
               <h1 className="mt-[62px] font-semibold text-base text-primary hover:text-white opacity-80 group-hover:text-white">
-                Order Food
+                {userOrder ? 'View Order' : 'Order Food'}
               </h1>
             </Link>
             <Link
