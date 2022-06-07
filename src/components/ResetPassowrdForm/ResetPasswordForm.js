@@ -1,10 +1,33 @@
-import React from "react";
+import React, {useState} from "react";
 import Input from "../UI/Input";
 import { Link } from "react-router-dom";
 
+import API from '../../network/api';
+
 const ResetPasswordForm = () => {
+  const [phone_number, setPhone_number] = useState();
+  const [result, setResult] = useState('')
+
+  const onSubmitHandler = async(e) => {
+    e.preventDefault()
+    console.log(phone_number)
+
+    API.post('/forgot-password', {phone_number: phone_number})
+    .then(result=>{
+      console.log(result)
+      setResult(result.data.message)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+
+
+
+  }
+
+
   return (
-    <form className="  flex flex-col mt-[22px] singup-form-shadow text-primary px-[22px] md:px-12   lg:mx-auto lg:w-[516px]  ">
+    <form onSubmit={onSubmitHandler} className="  flex flex-col mt-[22px] singup-form-shadow text-primary px-[22px] md:px-12   lg:mx-auto lg:w-[516px]  ">
       <h1 className=" text-2xl font-semibold text-center mt-[40px] mb-6">
         Reset Your Password
       </h1>
@@ -22,9 +45,16 @@ const ResetPasswordForm = () => {
         title="Enter a valid phone number starting with 0 and of length 10"
         pattern="[0]{1}[0-9]{9}"
         name="phone_number"
-      />
+        onChange={(e)=>setPhone_number(e.target.value)}
+        value={phone_number}
+        required='required'
+        
 
-      <button className="bg-primary h-[63px] w-full mt-6 text-white font-bold rounded-lg ">
+      />
+      <p className="text-notification font-normal text-center mt-8 ">
+          {result}
+        </p>
+      <button  type='submit' className="bg-primary h-[63px] w-full mt-6 text-white font-bold rounded-lg ">
         Reset Password
       </button>
       <div className=" w-full border border-black/10 h-[0px] mt-10"></div>

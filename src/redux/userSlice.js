@@ -69,7 +69,7 @@ export const getMyOrders = createAsyncThunk("user/getOrders", async () => {
 
 export const getMenu = createAsyncThunk("user/getmenu", async (menuDate) => {
   console.log('menu date from useSlice: ', menuDate);
-  const queryString = menuDate ?  `/menu?menu_date=${menuDate}` : '/menu'
+  const queryString = menuDate !== undefined ?  `/menu?menu_date=${menuDate}` : '/menu'
   try {
     const response = await API.get(queryString);
     const data = { status: response.status, data: response.data.data };
