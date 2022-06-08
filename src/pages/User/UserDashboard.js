@@ -4,99 +4,51 @@ import UserSideBarNav from "../../components/UserSideBarNav";
 import UserTitlebar from "../../components/Usertitle bar/Usertitlebar";
 import { Link } from "react-router-dom";
 
-import { getMenu, } from "../../redux/userSlice";
+import { getCurrentMenu, getMenu, } from "../../redux/userSlice";
 import { formatDateToDateString } from "../../utils/util-functions";
 
 const UserDashboard = () => {
+  const dispatch = useDispatch()
   const userName = useSelector((state) => state.user.user.name);
   let greeting = `Welcome, ${userName}`;
-  const dispatch = useDispatch()
-  const [menuQueryDate, setMenuQueryDate] = useState("");
-
-  const [userOrder, setUserOrder] = useState();
-  const [error, setError] = useState();
-
-
-
   
+  const [displayMessage, setDisplayMessage] = useState('Welcome to BSL Lunch app');
+  // const [currentMenu, setCurrentUser] =useState();
 
-  useEffect(() => {
-    // now lets get menu for today
-    const getTodayMenu = async() => {
 
-      const dateNow = new Date();
-    // console.log(dateNow.getHours())
-    let queryDate = ''
-    if (dateNow.getHours() < 14) {
-      queryDate = dateNow.toISOString().split("T")[0]
-      setMenuQueryDate(queryDate);
-      console.log(
-        "current time before 02:00PM.... so we are getting today's menu ie. ",
-        queryDate
-      );
-
-      const response = await dispatch(getMenu(queryDate)).unwrap()
-      console.log(response)
+  const [ordered, setOrdered] = useState(false)
+  
+  useEffect(()=>{
+    const checkUserOrderStatus = async()=> {
+      const response = await dispatch(getCurrentMenu()).unwrap();
+      // now lets handler all conditions here
       if(response.status===401){
-        console.log('eerorr hrr')
-        setError(`No menu found for ${formatDateToDateString(queryDate)}`)
-      }else if(response.status===200){
-        // there is menu, so we then chceck for orders
-        if(response.data.user_order.length > 0){
-          setUserOrder(response.data.user_order[0])
+        setDisplayMessage(`No menu added for ${formatDateToDateString(response.date)}, please check back after 10 minutes`)
+        setOrdered(false)
+      }else if(response.status === 200){
+        // console.log(response.data.user_order.length)
+        if(response.data.user_order.length === 0 ){
+          setDisplayMessage(`You have not placed an order for ${formatDateToDateString(response.data.menu_date)}'s lunch yet.`)
+          setOrdered(false)
         }else {
-          setError(`You have not placed order for ${formatDateToDateString(queryDate)}'s lunch `)
+          // nigga has ordered.
+          setDisplayMessage(
+            `You have ordered ${response.data.user_order[0].food_name} ${response.data.user_order[0].drink_name &&  `and  ${response.data.user_order[0].drink_name}` } for ${formatDateToDateString(response.data.menu_date)}`
+            )
+          setOrdered(true)
         }
       }
+      // console.log(response)
+    };
 
 
+    checkUserOrderStatus()
+
+  }, [])
 
 
-    } else {
-      let tomorrow = new Date();
-      tomorrow.setDate(dateNow.getDate() + 1);
-      queryDate = tomorrow.toISOString().split("T")[0]
-      setMenuQueryDate(queryDate);
-      // console.log(tomorrow.toISOString().split('T')[0])
-      console.log(
-        "Current time after 02:00PM .... so we are getting tommorow's menu ie. ",
-        queryDate
-      );
+  console.log(Boolean(ordered))
 
-      const response = await dispatch(getMenu('2022-06-08')).unwrap()
-      console.log(response)
-      if(response.status===401){
-        console.log('eerorr hrr')
-        setError(`No menu found for ${formatDateToDateString(queryDate)}`)
-      }else if(response.status===200){
-        // there is menu, so we then chceck for orders
-        if(response.data.user_order.length > 0){
-          setUserOrder(response.data.user_order[0])
-        }else {
-          setError(`You have not placed order for ${formatDateToDateString(queryDate)}'s lunch `)
-        }
-      }
-    }
-
-     
-    }
-  
-    
-
-
-    
-
-    
-    getTodayMenu()
-  }, []);
-
- 
-
-
-  // console.log(Boolean(userOrder));
-  // console.log(Boolean(error))
-  console.log(userOrder)
-  console.log(error)
 
 
   return (
@@ -108,11 +60,12 @@ const UserDashboard = () => {
           <h1 className=" lg:mt-0 sm:hidden font-semibold text-xl text-primary ">
             {greeting}
           </h1>
-          <UserTitlebar title={greeting}></UserTitlebar>
+          <UserTitlebar title={greeting} />
           <div className="text-center px-12 mt-[100px] lg:mt-[153px] text-primary font-medium text-xl lg:w-[700px] lg:mx-auto  ">
-            {userOrder ? 
-            `You have ordered for ${userOrder.food_name}  ${userOrder.drink_name && `and ${userOrder.drink_name}` } for  ${formatDateToDateString(userOrder.menu_date)} ` 
-            : "Looks like you have not placed an order for today" }
+            {displayMessage}
+            {/* {userOrder ? 
+            `You have ordered for ${userOrder.food_name}  ${userOrder.drink_name && `and ${userOrder.drink_name}` } for  ${formatDateToDateString(currentMenu.menu_date)} ` 
+            : `Looks like you have not placed an order for ${formatDateToDateString(currentMenu.menu_date)}'s lunch` } */}
           </div>
           <div className="mt-[100px] lg:px-[100px] md:px-[50px] flex lg:flex lg:mx-auto justify-between">
             <Link
@@ -130,7 +83,7 @@ const UserDashboard = () => {
                 <path d="M54.2818 70H59.5636C62.2364 70 64.4318 67.9318 64.75 65.3227L70 12.8864H54.0909V0H47.8227V12.8864H32.0091L32.9636 20.3318C38.4045 21.8273 43.4955 24.5318 46.55 27.5227C51.1318 32.0409 54.2818 36.7182 54.2818 44.3545V70ZM0 66.8182V63.6364H47.8227V66.8182C47.8227 68.5364 46.3909 70 44.5455 70H3.18182C1.43182 70 0 68.5364 0 66.8182ZM47.8227 44.5455C47.8227 19.0909 0 19.0909 0 44.5455H47.8227ZM0 50.9091H47.7273V57.2727H0V50.9091Z" />
               </svg>
               <h1 className="mt-[62px] font-semibold text-base text-primary hover:text-white opacity-80 group-hover:text-white">
-                {userOrder ? 'View Order' : 'Order Food'}
+                {ordered   ? 'View Order' : 'Order Food'}
               </h1>
             </Link>
             <Link

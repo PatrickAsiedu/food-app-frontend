@@ -26,7 +26,7 @@ import AdminUserManagement from "./pages/Admin/AdminUserManagement";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import store from "./redux/store";
-import { getMenu, setCurrentUser } from "./redux/userSlice";
+import { getCurrentMenu, getMenu, setCurrentUser } from "./redux/userSlice";
 import jwtDecode from "jwt-decode";
 import { getDrinks, getFoods } from "./redux/chefSlice.js";
 import { getAllUsers, getDrinksAdmin, getFoodsAdmin } from "./redux/adminSlice";
@@ -53,6 +53,7 @@ if (token) {
     // store.dispatch(getOrders());
   }
   if (userType === "user") {
+    // store.dispatch(getCurrentMenu());
     // store.dispatch(getMenu());
     // store.dispatch(getMyOrders())
   }

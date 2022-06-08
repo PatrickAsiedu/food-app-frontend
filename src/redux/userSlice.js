@@ -86,6 +86,16 @@ export const getMenu = createAsyncThunk("user/getmenu", async (menuDate) => {
   }
 });
 
+export const getCurrentMenu = createAsyncThunk("users/getCurrentMenu", async() => {
+  try{
+    const response = await API.get('/menu');
+    // console.log(response)
+    return {status: response.status, data: response.data.data}
+  }catch (error){
+    console.log(error.response)
+  }
+})
+
 export const orderLunch = createAsyncThunk("user/order", async (orderData) => {
   try {
     const response = await API.post("/order", orderData);
@@ -177,6 +187,16 @@ const userSlice = createSlice({
     builder.addCase(getMenu.rejected, (state, action) => {
       console.log(action.payload);
     });
+
+    builder.addCase(getCurrentMenu.fulfilled, (state, action) => {
+      // console.log(action.payload)
+      if(action.payload.status === 200){
+        state.currentMenu = action.payload.data;
+        state.currentOrder = action.payload.user_order
+        console.log(action.payload.user_order)
+      }
+    })
+
   },
 });
 
