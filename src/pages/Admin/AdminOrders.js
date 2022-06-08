@@ -4,6 +4,12 @@ import AdminSideBarNav from "../../components/AdminSideBarNav";
 import DrinkCard from "../../components/Cards/DrinkCard";
 import FoodCard from "../../components/Cards/FoodCard";
 import { getMenu, getOrders } from "../../redux/adminSlice";
+import OrdersCard from "../../components/Cards/OrdersCard";
+
+import {
+  formatDateToDateString,
+  formatDateToDateAndTimeString,
+} from "../../utils/util-functions";
 
 const AdminOrders = () => {
   const dispatch = useDispatch();
@@ -75,7 +81,7 @@ const AdminOrders = () => {
           </div>
 
           <h1 className=" ml-3 mt-[40px] font-semibold mb-3">Foods</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9">
             {foodSummary ? (
               foodSummary.map((food) => (
                 <FoodCard
@@ -89,7 +95,7 @@ const AdminOrders = () => {
             )}
           </div>
           <h1 className=" ml-3 mt-[50px] font-semibold mb-3">Drinks</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9 ">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9 ">
             {drinkSummary ? (
               drinkSummary.map((drink) => (
                 <DrinkCard
@@ -103,31 +109,56 @@ const AdminOrders = () => {
             )}
           </div>
 
-          <div className="w-full  box-outer-shadow mt-12 rounded-3xl px-9 h-[400px] ">
-            <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-5  ">
-              <h1>Name</h1>
-              <h1>Food choice</h1>
-              <h1>Drink Choice</h1>
-              <h1>Comments</h1>
-              <h1>Ordered on</h1>
+          <h1 className=" sm:hidden ml-3 mt-[40px] font-semibold mb-3">
+            Orders
+          </h1>
+          {orders?.map((order) => (
+            <OrdersCard
+              key={order.id}
+              name={order.name}
+              foodname={order.food_name}
+              drinkname={order.drink_name}
+              comment={order.comment || "no comment"}
+              date={formatDateToDateString(order.created_at)}
+            ></OrdersCard>
+          ))}
+
+          <div className=" hidden sm:flex sm:flex-col  w-full  box-outer-shadow mt-12 rounded-3xl px-9  ">
+            <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-5 gap-3 mb-6  ">
+              <h1 className="font-semibold pl-3">Name</h1>
+              <h1 className="font-semibold ">Food choice</h1>
+              <h1 className="font-semibold ">Drink Choice</h1>
+              <h1 className="font-semibold ">Comments</h1>
+              <h1 className="font-semibold ">Ordered on</h1>
             </div>
             {orders ? (
               orders.map((order) => (
                 <div
                   key={order.id}
-                  className="w-full mt-6 bg-primary/10  grid grid-cols-5 text-sm "
+                  className="w-full mb-6 bg-tablehighligh/50 grid grid-cols-5 text-sm gap-3 "
                 >
-                  <h1 className="">{order.name}</h1>
-                  <h1>{order.food_name}</h1>
-                  <h1>{order.drink_name}</h1>
-                  <h1>{order.comment}</h1>
-                  <h1>{order.created_at.split("T")[0]}</h1>
+                  <h1 className="py-4 font-medium break-words pl-3">
+                    {order.name}
+                  </h1>
+                  <h1 className="py-4 font-medium break-words   ">
+                    {order.food_name}
+                  </h1>
+                  <h1 className="py-4 font-medium break-words   ">
+                    {order.drink_name}
+                  </h1>
+                  <h1 className="py-4 font-medium break-words   ">
+                    {order.comment}
+                  </h1>
+                  <h1 className="py-4 font-medium break-words   ">
+                    {order.created_at.split("T")[0]}
+                  </h1>
                 </div>
               ))
             ) : (
               <div className="mt-5">--- No orders found ---</div>
             )}
           </div>
+          <div className=" pt-[120px]"></div>
         </main>
       </div>
     </React.Fragment>

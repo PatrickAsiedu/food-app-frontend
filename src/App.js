@@ -9,6 +9,7 @@ import ResetPassword from "./pages/ResetPassword";
 import UserDashboard from "./pages/User/UserDashboard";
 import UserOrderFood from "./pages/User/UserOrderFood";
 import UserHistories from "./pages/User/UserHistories";
+import UserEditOrder from "./pages/User/UserEditOrder";
 
 import ChefDashboard from "./pages/Chef/ChefDashboard";
 import ChefAddMenu from "./pages/Chef/ChefAddMenu";
@@ -84,6 +85,14 @@ function App() {
             path="/me/order"
             element={
               <ProtectedRoute Component={UserOrderFood} Permission="user" />
+            }
+          />
+
+          <Route
+            exact
+            path="/me/editorder"
+            element={
+              <ProtectedRoute Component={UserEditOrder} Permission="user" />
             }
           />
           <Route

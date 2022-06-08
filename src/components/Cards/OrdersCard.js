@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const OrderHistoryCard = (props) => {
+const OrdersCard = (props) => {
   return (
-    <div className="sm:hidden w-full  box-outer-shadow rounded-3xl px-6 flex-col pt-6 text-primary mb-4 ">
+    <div className="sm:hidden lg:hidden w-full  box-outer-shadow rounded-3xl px-6 flex-col pt-6 text-primary mb-4  ">
+      <h1 className="font-medium text-base text-primary break-words mb-2 ">
+        {props.name} ,
+        <span className=" ml-4 text-sm font-normal text-primary/30 ">Name</span>
+      </h1>
       <h1 className="font-medium text-base text-primary break-words ">
         {props.foodname} ,
         <span className=" ml-4 text-sm font-normal text-primary/30 ">Food</span>
@@ -23,4 +27,4 @@ const OrderHistoryCard = (props) => {
   );
 };
 
-export default OrderHistoryCard;
+export default OrdersCard;
