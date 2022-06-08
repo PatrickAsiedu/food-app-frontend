@@ -71,7 +71,7 @@ const OrderLunchForm = (props) => {
           You have ordered for {formatDateToDateString(menu.menu_date)} 's lunch
           already
         </h1>
-        <h1>Food: {menu.user_order[0].food_name} </h1>
+        <h1>Food: {menu.user_order[0]?.food_name} </h1>
         <h1>Drink: {menu.user_order[0].drink_name}</h1>
         <h1>Comment: {menu.user_order[0].comment || "---"}</h1>
         <h1>
@@ -115,7 +115,7 @@ const OrderLunchForm = (props) => {
     <React.Fragment>
       {/* {orderedAlreadyModal && <AlreadyOrderedModal /> } */}
       {menu ? (
-        !menu.user_order ? (
+        ((menu.user_order === undefined || menu.user_order.length === 0)) ? (
           <form
             onSubmit={onFormSubmitHandler}
             className={`${
@@ -123,7 +123,7 @@ const OrderLunchForm = (props) => {
             }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12 md:px-14    lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
           >
             <h1 className="  mt-10 lg:mt-14 text-center font-bold text-primary text-xl lg:text-2xl">
-              Menu for {props.menuDate}
+              {formatDateToDateString(props.menuDate)}'s Lunch Menu
             </h1>
 
             <fieldset className="mt-[27px] ">
