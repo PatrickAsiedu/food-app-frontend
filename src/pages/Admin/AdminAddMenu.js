@@ -108,7 +108,7 @@ const AdminAddMenu = () => {
             />
           </div>
 
-          <div className=" mt-12 w-full box-outer-shadow h-screen px-6 rounded-3xl lg:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary">
+          <div className=" mt-12 w-full box-outer-shadow px-6 rounded-3xl lg:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary">
             <h1 className="font-semibold text-2xl text-center">Menu</h1>
             <h1 className="mt-7 lg:mt-10 mb-4">Food</h1>
             <div className="grid grid-cols-1 gap-3">

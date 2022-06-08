@@ -7,6 +7,12 @@ import ChefSideBarNav from "../../components/ChefSideBarNav";
 import { useDispatch, useSelector } from "react-redux";
 import OrdersTable from "../../components/Cards/OrdersTable";
 import { getOrders } from "../../redux/chefSlice";
+import AdminTitleBar from "../../components/AdminTitlebar/AdminTitlebar";
+import {
+  formatDateToDateString,
+  formatDateToDateAndTimeString,
+} from "../../utils/util-functions";
+import OrdersCard from "../../components/Cards/OrdersCard";
 
 const ChefDashboard = () => {
   const dispatch = useDispatch();
@@ -38,23 +44,36 @@ const ChefDashboard = () => {
   }, []);
 
   console.log(orders);
+
+  let greeting = `Welcome , ${chefName}`;
+  let todaysdate = today.toDateString();
+
   return (
     <React.Fragment>
-      <div className=" px-8 lg:px-0 lg:flex h-screen  ">
+      <div className="px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen  ">
         <ChefSideBarNav orderTotal={orders?.length} />
 
-        <main className=" lg:flex lg:flex-col   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%]   lg:px-[90px] text-base text-primary ">
-          <h1 className="mt-[5%] text-primary font-bold text-base">
-            WELCOME: {chefName}
-          </h1>
-          <h1 className="text-primary font-bold text-base text-right">
-            Today: {today.toDateString()}{" "}
-          </h1>
-          <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[50px] lg:gap-9 ">
+        <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8  lg:px-[90px] text-base text-primary ">
+          <AdminTitleBar title={greeting} date={todaysdate}></AdminTitleBar>
+
+          <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:mt-[50px] lg:gap-9 ">
             <TotalFoodOrders value={totalFood} />
             <TotalDrinkOrders value={totalDrink} />
             <TotalComments value={totalComments} />
           </div>
+          <h1 className=" sm:hidden ml-3 mt-[40px] font-semibold mb-3">
+            Orders
+          </h1>
+          {orders?.map((order) => (
+            <OrdersCard
+              key={order.id}
+              name={order.name}
+              foodname={order.food_name}
+              drinkname={order.drink_name}
+              comment={order.comment || "no comment"}
+              date={formatDateToDateString(order.created_at)}
+            ></OrdersCard>
+          ))}
 
           {orders ? (
             <OrdersTable orders={orders} />

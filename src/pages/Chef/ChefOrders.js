@@ -4,6 +4,13 @@ import DrinkCard from "../../components/Cards/DrinkCard";
 import FoodCard from "../../components/Cards/FoodCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getMenu, getOrders } from "../../redux/chefSlice";
+import OrdersTable from "../../components/Cards/OrdersTable";
+import OrdersCard from "../../components/Cards/OrdersCard";
+
+import {
+  formatDateToDateString,
+  formatDateToDateAndTimeString,
+} from "../../utils/util-functions";
 
 const ChefOrders = () => {
   const dispatch = useDispatch();
@@ -69,10 +76,10 @@ const ChefOrders = () => {
 
   return (
     <React.Fragment>
-      <div className=" px-8 lg:px-0 lg:flex h-screen ">
+      <div className=" px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen ">
         <ChefSideBarNav />
 
-        <main className=" lg:flex flex-col lg:ml-[30%] 2xl:ml-[20%]  w-[70%]  2xl:w-[80%] px-8  lg:px-[90px] text-base text-primary  ">
+        <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8  lg:px-[90px] text-base text-primary  ">
           <div className=" mt-[40px] text-right">
             <form>
               <label className="text-primary font-bold text-base">
@@ -83,30 +90,57 @@ const ChefOrders = () => {
           </div>
 
           <h1 className=" ml-3 mt-[40px] font-semibold mb-3">Foods</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9">
-            {foodSummary ?
+          <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9">
+            {foodSummary ? (
               foodSummary.map((food) => (
                 <FoodCard
                   key={food.food_id}
                   foodName={food.food_name}
                   total={food.count}
                 />
-              )): (<div className="mt-3">--- No Foods found ---</div>)}
+              ))
+            ) : (
+              <div className="mt-3">--- No Foods found ---</div>
+            )}
           </div>
 
           <h1 className=" ml-3 mt-[50px] font-semibold mb-3">Drinks</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9 ">
-            {drinkSummary ?
+          <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9 ">
+            {drinkSummary ? (
               drinkSummary.map((drink) => (
                 <DrinkCard
                   key={drink.drink_id}
                   drinkName={drink.drink_name}
                   total={drink.count}
                 />
-              )) : (<div className="mt-3">--- No Drinks found ---</div>)}
+              ))
+            ) : (
+              <div className="mt-3">--- No Drinks found ---</div>
+            )}
           </div>
+          <h1 className=" sm:hidden ml-3 mt-[40px] font-semibold mb-3">
+            Orders
+          </h1>
+          {orders?.map((order) => (
+            <OrdersCard
+              key={order.id}
+              name={order.name}
+              foodname={order.food_name}
+              drinkname={order.drink_name}
+              comment={order.comment || "no comment"}
+              date={formatDateToDateString(order.created_at)}
+            ></OrdersCard>
+          ))}
 
-          <div className="w-full  box-outer-shadow mt-12 rounded-3xl px-9 h-[400px] ">
+          {orders ? (
+            <OrdersTable orders={orders} />
+          ) : (
+            <h1 className="text-primary text-base text-center mt-[50px]">
+              No orders placed yet
+            </h1>
+          )}
+
+          {/* <div className="w-full  box-outer-shadow mt-12 rounded-3xl px-9 h-[400px] ">
             <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-5  ">
               <h1>Name</h1>
               <h1>Food choice</h1>
@@ -130,7 +164,7 @@ const ChefOrders = () => {
             ) : (
               <div className="mt-5">--- No orders found ---</div>
             )}
-          </div>
+          </div> */}
           <div className=" pt-[120px]"></div>
         </main>
       </div>

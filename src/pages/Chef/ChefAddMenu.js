@@ -68,11 +68,11 @@ const ChefAddMenu = () => {
 
   return (
     <React.Fragment>
-      <div className=" px-8 lg:px-0 lg:flex h-screen mb-5">
+      <div className=" px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen">
         <ChefSideBarNav />
 
-        <main className=" lg:flex flex-col lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] px-8  lg:px-[90px] 2xl:px-[300px] text-base text-primary ">
-          <div className="w-full  box-outer-shadow mt-[5%] px-6 rounded-3xl 2xl:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary mb-5">
+        <main className="lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8  2xl:px-[300px] text-base text-primary ">
+          <div className="w-full  box-outer-shadow mt-[5%] px-6 rounded-3xl 2xl:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary mb-5 pb-8">
             {/* <AddFoodForm /> */}
             {/* date picker */}
             <AddDateForm setMenuDate={setMenuDate} />
@@ -94,7 +94,7 @@ const ChefAddMenu = () => {
             {/* <AddDrinkForm /> */}
           </div>
 
-          <div className="mt-12 w-full box-outer-shadow h-screen px-6 rounded-3xl lg:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary">
+          <div className="mt-12 w-full box-outer-shadow  px-6 rounded-3xl lg:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary">
             <h1 className="font-semibold text-2xl text-center">Menu</h1>
 
             <h1 className="mt-7 lg:mt-10 mb-4">Food</h1>

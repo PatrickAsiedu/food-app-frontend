@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ResetPassword from "./pages/ResetPassword";
+import ErrorPage from "./pages/ErrorPage";
 
 import UserDashboard from "./pages/User/UserDashboard";
 import UserOrderFood from "./pages/User/UserOrderFood";
@@ -68,6 +69,7 @@ function App() {
     <React.Fragment>
       <BrowserRouter>
         <Routes>
+          {/* <Route index exact element={<ErrorPage />} /> */}
           <Route index exact element={<Login />} />
           <Route exact path="/register" element={<Signup />} />
           <Route exact path="/resetpassword" element={<ResetPassword />} />

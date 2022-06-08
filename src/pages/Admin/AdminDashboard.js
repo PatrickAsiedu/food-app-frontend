@@ -7,6 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import OrdersTable from "../../components/Cards/OrdersTable";
 import { getOrders } from "../../redux/adminSlice";
 import AdminTitleBar from "../../components/AdminTitlebar/AdminTitlebar";
+import OrdersCard from "../../components/Cards/OrdersCard";
+import {
+  formatDateToDateString,
+  formatDateToDateAndTimeString,
+} from "../../utils/util-functions";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
@@ -58,6 +63,21 @@ const AdminDashboard = () => {
             <TotalDrinkOrders value={totalDrink} />
             <TotalComments value={totalComments} />
           </div>
+
+          <h1 className=" sm:hidden ml-3 mt-[40px] font-semibold mb-3">
+            Orders
+          </h1>
+          {orders?.map((order) => (
+            <OrdersCard
+              key={order.id}
+              name={order.name}
+              foodname={order.food_name}
+              drinkname={order.drink_name}
+              comment={order.comment || "no comment"}
+              date={formatDateToDateString(order.created_at)}
+            ></OrdersCard>
+          ))}
+
           {orders ? (
             <OrdersTable orders={orders} />
           ) : (
