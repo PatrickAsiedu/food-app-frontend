@@ -21,8 +21,8 @@ const UserOrderHistoryTable = () => {
       //  console.log(response)
       if (response.status === 200) {
         setOrders(response.data.data);
-        const data = [ ...response.data.data]
-        setOrders(sortByDate(data))
+        const data = [...response.data.data];
+        setOrders(sortByDate(data));
       } else {
         setError("No orders found");
         setOrders("");
@@ -31,13 +31,8 @@ const UserOrderHistoryTable = () => {
 
     getOrders();
   }, []);
- 
-  console.log(orders)
 
- 
-
-
-  
+  console.log(orders);
 
   if (error) {
     return (

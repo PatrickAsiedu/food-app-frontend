@@ -29,6 +29,10 @@ const UserSideBarNav = () => {
     dispatch(toggleHamburger());
   };
 
+  const onEditOrderHandler = () => {
+    dispatch(toggleHamburger());
+  };
+
   // const onBlurHamburgerHandler = () => {
   //   setonblur(true);
   // };
@@ -107,6 +111,29 @@ const UserSideBarNav = () => {
               Order Food
             </span>
           </NavLink>
+
+          <NavLink
+            onClick={onEditOrderHandler}
+            to="/me/editorder"
+            className="flex items-center py-6 pl-6 sm:pl-4  lg:pl-6 hover:bg-primary group"
+          >
+            <span>
+              <svg
+                className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
+                width="28"
+                height="28"
+                viewBox="0 0 16 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M8.00002 0C3.58902 0 2.04095e-05 3.589 2.04095e-05 7.995C-0.0289796 14.44 7.69602 19.784 8.00002 20C8.00002 20 16.029 14.44 16 8C16 3.589 12.411 0 8.00002 0ZM5.79902 12.987H4.00002V11.188L8.97702 6.218L10.776 8.017L5.79902 12.987V12.987ZM11.623 7.17L9.82402 5.371L11.196 4L12.995 5.799L11.623 7.17V7.17Z" />
+              </svg>
+            </span>
+            <span className=" ml-5 font-semibold text-white sm:text-primary  opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium sm:hidden lg:flex">
+              Edit Order
+            </span>
+          </NavLink>
+
           <NavLink
             onClick={onHistoryLinkClickHandler}
             to="/me/history"
