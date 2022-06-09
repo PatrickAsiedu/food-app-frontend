@@ -26,7 +26,7 @@ import AdminUserManagement from "./pages/Admin/AdminUserManagement";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import store from "./redux/store";
-import { getCurrentMenu, getMenu, setCurrentUser } from "./redux/userSlice";
+import { setCurrentUser } from "./redux/userSlice";
 import jwtDecode from "jwt-decode";
 import { getDrinks, getFoods } from "./redux/chefSlice.js";
 import { getAllUsers, getDrinksAdmin, getFoodsAdmin } from "./redux/adminSlice";
@@ -162,6 +162,9 @@ function App() {
               />
             }
           />
+
+        <Route exact path="*" element={<ErrorPage />} />
+
         </Routes>
       </BrowserRouter>
     </React.Fragment>

@@ -112,7 +112,7 @@ const UserSideBarNav = () => {
             </span>
           </NavLink>
 
-          <NavLink
+          {/* <NavLink
             onClick={onEditOrderHandler}
             to="/me/editorder"
             className="flex items-center py-6 pl-6 sm:pl-4  lg:pl-6 hover:bg-primary group"
@@ -132,7 +132,7 @@ const UserSideBarNav = () => {
             <span className=" ml-5 font-semibold text-white sm:text-primary  opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium sm:hidden lg:flex">
               Edit Order
             </span>
-          </NavLink>
+          </NavLink> */}
 
           <NavLink
             onClick={onHistoryLinkClickHandler}

@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import BSLlogo from "../assets/logo-stack-dark 1 1.png";
-import ToggleSwitch from "./UI/ToggleSwitch";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutCurrentUser } from "../redux/userSlice";
 import Header from "./Layout/Header";

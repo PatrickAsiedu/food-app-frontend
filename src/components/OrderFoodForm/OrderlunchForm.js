@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { getMenu, orderLunch } from "../../redux/userSlice";
 // import AlreadyOrderedModal from "../UI/Modals/AlreadyOrderedModal";
+import Swal from "sweetalert2";
 
 import {
   formatDateToDateAndTimeString,
@@ -22,24 +24,26 @@ const OrderLunchForm = (props) => {
   const [ordering, setOrdering] = useState(false);
 
   // async funtion to dispatch the get menu aciton
-  const getMenuRequest = async (menuDate) => {
-    const response = await dispatch(getMenu(menuDate)).unwrap();
-    // console.log(response)
-    if (response.status === 200) {
-      setMenu(response.data);
-    } else if (response.status === 401) {
-      setError(response.errorMessage);
-      const dd = new Date(response.date);
-
-      setNoMenuFoundDate(dd.toDateString());
-    }
-  };
+  
 
   useEffect(() => {
+    const getMenuRequest = async (menuDate) => {
+      const response = await dispatch(getMenu(menuDate)).unwrap();
+      // console.log(response)
+      if (response.status === 200) {
+        setMenu(response.data);
+      } else if (response.status === 401) {
+        setError(response.errorMessage);
+        const dd = new Date(response.date);
+  
+        setNoMenuFoundDate(dd.toDateString());
+      }
+    };
+    
     if (props.menuDate) {
       getMenuRequest(props.menuDate);
     }
-  }, [props.menuDate]);
+  }, [dispatch, props.menuDate]);
 
   // const RenderLoadingOrder = () => (
   //   <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
@@ -68,8 +72,7 @@ const OrderLunchForm = (props) => {
     return (
       <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
         <h1 className=" mt-8 mb-8 lg:mt-20 text-center font-semibold text-primary text-xl">
-          You have ordered for {formatDateToDateString(menu.menu_date)} 's lunch
-          already
+          Your {formatDateToDateString(menu.menu_date)} 's lunch order
         </h1>
         <h1>Food: {menu.user_order[0]?.food_name} </h1>
         <h1>Drink: {menu.user_order[0].drink_name}</h1>
@@ -78,6 +81,15 @@ const OrderLunchForm = (props) => {
           Ordered at:{" "}
           {formatDateToDateAndTimeString(menu.user_order[0].created_at)}
         </h1>
+
+        {/* TODO: LINK to edit order if time is allowable */}
+        {(new Date(menu.user_order[0].expires_at).getTime() > Date.now()) ? 
+        (<p className="mt-5 text-center">Order closed</p>)
+        : 
+        (<Link to="/me/editorder" state={menu} > <p className="mt-5 text-center">Click to edit this order</p> </Link>)
+        }
+        
+
       </div>
     );
   };
@@ -93,7 +105,16 @@ const OrderLunchForm = (props) => {
 
     if (order.menu_id && !order.food_id) {
       setOrdering(false);
-      return alert("Please select at least  one food (_^_)");
+      Swal.fire({
+        title: 'Error',
+        text: "Dude, select at least one food",
+        icon: 'error',
+        confirmButtonText: 'Okay'
+      }).then(result=>{
+        // console.log(result)
+        if(result.isConfirmed){
+        }
+      })
     }
 
     console.log(order);
@@ -101,13 +122,43 @@ const OrderLunchForm = (props) => {
     console.log(response);
     if (response.status === 400) {
       setOrdering(false);
-      return alert(response.errorMessage);
+      Swal.fire({
+        title: 'Error',
+        text: response.errorMessage,
+        icon: 'error',
+        confirmButtonText: 'Okay'
+      }).then(result=>{
+        // console.log(result)
+        if(result.isConfirmed){
+          window.location.href ='/me'
+        }
+      })
     } else if (response.status === 401) {
       setOrdering(false);
-      return alert(response.errorMessage);
+      Swal.fire({
+        title: 'Error',
+        text: response.errorMessage,
+        icon: 'error',
+        confirmButtonText: 'Okay'
+      }).then(result=>{
+        // console.log(result)
+        if(result.isConfirmed){
+          window.location.href ='/me'
+        }
+      })
     } else {
       setOrdering(false);
-      alert("order placed successfully");
+      Swal.fire({
+        title: 'Successful',
+        text: 'You Order have  placed successfully',
+        icon: 'success',
+        confirmButtonText: 'Okay'
+      }).then(result=>{
+        // console.log(result)
+        if(result.isConfirmed){
+          window.location.href ='/me'
+        }
+      })
     }
   };
 

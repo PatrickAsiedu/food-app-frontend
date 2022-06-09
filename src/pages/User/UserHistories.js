@@ -12,7 +12,6 @@ import { sortByDate } from "../../utils/util-functions";
 
 import {
   formatDateToDateString,
-  formatDateToDateAndTimeString,
 } from "../../utils/util-functions";
 
 const UserHistories = () => {
@@ -35,9 +34,10 @@ const UserHistories = () => {
     };
 
     getOrders();
-  }, []);
+  }, [dispatch]);
 
   console.log(orders);
+  console.log(error)
   return (
     <React.Fragment>
       <div className=" px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen ">
@@ -53,7 +53,7 @@ const UserHistories = () => {
               drinkname={order.drink_name}
               comment={order.comment || "no comment"}
               date={formatDateToDateString(order.created_at).slice(0, -4)}
-            ></OrderHistoryCard>
+            />
           ))}
 
           <UserOrderHistoryTable />

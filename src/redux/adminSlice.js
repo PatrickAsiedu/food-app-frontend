@@ -9,6 +9,7 @@ const initialState = {
   allMenus: [],
   allUsers: [],
   showChangePasswordModal: false,
+  changePasswordModalUser: null,
 };
 
 export const getFoodsAdmin = createAsyncThunk(
@@ -155,12 +156,27 @@ export const denyUser = createAsyncThunk("admin/denyuser", async (userID) => {
   }
 });
 
+
+export const resetPassword = createAsyncThunk('admin/resetPassword', async(user) => {
+  try {
+    const response = await API.post('/reset-password', user);
+    console.log(response)
+    return { stats: response.status, data: response.data.message}
+  } catch (error) {
+    console.log(error.response)
+    return {status: error.response.status}
+  }
+});
+
+
+
 const adminSlice = createSlice({
   name: "admin",
   initialState,
   reducers: {
-    showChangePasswordModal: (state, action) => {
-      state.showChangePasswordModal = action.payload;
+    changePasswordModal: (state, action) => {
+      state.showChangePasswordModal = action.payload.state;
+      state.changePasswordModalUser = action.payload.user
     },
   },
   extraReducers: (builder) => {
@@ -176,6 +192,6 @@ const adminSlice = createSlice({
   },
 });
 
-export const { showChangePasswordModal } = adminSlice.actions;
+export const { changePasswordModal } = adminSlice.actions;
 
 export default adminSlice.reducer;

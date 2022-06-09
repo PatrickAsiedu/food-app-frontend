@@ -14,11 +14,11 @@ const UserOrderFood = () => {
   useEffect(() => {
     const dateNow = new Date();
     // console.log(dateNow.getHours())
-    if (dateNow.getHours() < 7) {
+    if (dateNow.getHours() < 14) {
       setMenuQueryDate(dateNow.toISOString().split("T")[0]);
       // console.log(dateNow.toISOString().split('T')[0])
       console.log(
-        "current time before 07:00AM.... so we are getting today's menu ie. ",
+        "current time before 02:00PM.... so we are getting today's menu ie. ",
         menuQueryDate
       );
     } else {
@@ -27,7 +27,7 @@ const UserOrderFood = () => {
       setMenuQueryDate(tomorrow.toISOString().split("T")[0]);
       // console.log(tomorrow.toISOString().split('T')[0])
       console.log(
-        "Current time after 07:00AM .... so we are getting tommorow's menu ie. ",
+        "Current time after 02:00PM .... so we are getting tommorow's menu ie. ",
         menuQueryDate
       );
     }

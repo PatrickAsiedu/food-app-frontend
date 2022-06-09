@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import ChefSideBarNav from "../../components/ChefSideBarNav";
 import DrinkCard from "../../components/Cards/DrinkCard";
 import FoodCard from "../../components/Cards/FoodCard";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getMenu, getOrders } from "../../redux/chefSlice";
 import OrdersTable from "../../components/Cards/OrdersTable";
 import OrdersCard from "../../components/Cards/OrdersCard";
 
 import {
   formatDateToDateString,
-  formatDateToDateAndTimeString,
 } from "../../utils/util-functions";
 
 const ChefOrders = () => {
@@ -64,7 +63,7 @@ const ChefOrders = () => {
       }
     };
     getSelectedOrder();
-  }, [selectedDate]);
+  }, [dispatch, selectedDate]);
 
   console.log(foodSummary);
   console.log(drinkSummary);

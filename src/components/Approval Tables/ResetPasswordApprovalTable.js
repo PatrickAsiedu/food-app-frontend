@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { denyUser } from "../../redux/adminSlice";
-import { showChangePasswordModal } from "../../redux/adminSlice";
-import EnterNewPasswordModalForm from "../Modals/EnterNewPasswordModal";
+import { changePasswordModal } from "../../redux/adminSlice";
 
 const ResetPasswordApprovalTable = () => {
   // const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
@@ -23,8 +22,9 @@ const ResetPasswordApprovalTable = () => {
     window.location.reload();
   };
 
-  const onApprobeButtonHandler = () => {
-    dispatch(showChangePasswordModal(true));
+  const onApprobeButtonHandler = (user) => {
+    dispatch(changePasswordModal({state:true, user}));
+    
   };
 
   return (
@@ -43,7 +43,7 @@ const ResetPasswordApprovalTable = () => {
         </div>
 
         <div className="mt-6 pb-24">
-          {userList &&
+          {userList & userList.length !==0 ?
             userList.map((user) => (
               <div
                 key={user.id}
@@ -63,7 +63,7 @@ const ResetPasswordApprovalTable = () => {
                   {user.created_at.slice(0, -5).replace("T", " ")}
                 </h1>
                 <div className="flex ">
-                  <button onClick={onApprobeButtonHandler}>
+                  <button onClick={()=>onApprobeButtonHandler(user)}>
                     <svg
                       className="fill-checkbox"
                       width="25"
@@ -95,7 +95,7 @@ const ResetPasswordApprovalTable = () => {
                   </button>
                 </div>
               </div>
-            ))}
+            )) : <p className="text-center mt-5">----List empty----</p> }
         </div>
       </div>
     </React.Fragment>
