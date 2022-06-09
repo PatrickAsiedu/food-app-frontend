@@ -8,7 +8,6 @@ import OrdersCard from "../../components/Cards/OrdersCard";
 
 import {
   formatDateToDateString,
-  formatDateToDateAndTimeString,
 } from "../../utils/util-functions";
 
 const AdminOrders = () => {
@@ -25,7 +24,7 @@ const AdminOrders = () => {
   useEffect(() => {
     const getSelectedOrder = async () => {
       const response = await dispatch(getOrders(selectedDate)).unwrap();
-      //  console.log(response)
+       console.log(response)
       if (response.status === 200) {
         setOrders(response.data);
         const getMenuRequest = await dispatch(getMenu(selectedDate)).unwrap();
@@ -50,9 +49,10 @@ const AdminOrders = () => {
         // console.log(tempDrinks)
         setDrinkSummary(tempDrinks);
       } else if (response.status === 400) {
+        console.log('errrorrro hehhehe')
         // handle error on no order found here
         // first clear all states set by the if block above
-        setOrders("");
+        setOrders(null);
         setFoodSummary("");
         setDrinkSummary("");
         setError(response.errorMessage);

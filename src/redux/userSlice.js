@@ -69,9 +69,9 @@ export const getMyOrders = createAsyncThunk("user/getOrders", async () => {
 
 export const getMenu = createAsyncThunk("user/getmenu", async (menuDate) => {
   console.log('menu date from useSlice: ', menuDate);
-  const queryString = menuDate !== undefined ?  `/menu?menu_date=${menuDate}` : '/menu'
+  // const queryString = menuDate !== undefined ?  `/menu?menu_date=${menuDate}` : '/menu'
   try {
-    const response = await API.get(queryString);
+    const response = await API.get(`/menu?menu_date=${menuDate}`);
     const data = { status: response.status, data: response.data.data };
     return data;
   } catch (error) {
@@ -93,6 +93,14 @@ export const getCurrentMenu = createAsyncThunk("users/getCurrentMenu", async() =
     return {status: response.status, data: response.data.data}
   }catch (error){
     console.log(error.response)
+    const data = {
+      status: error.response.status,
+      errorMessage:
+        error.response.data.message || error.response.data.error[0].message,
+      date: error.response.data.date,
+    };
+    return data;
+    
   }
 })
 
@@ -112,6 +120,17 @@ export const orderLunch = createAsyncThunk("user/order", async (orderData) => {
     return data;
   }
 });
+
+export const updateLunch = createAsyncThunk('user/updateLunch', async(orderData)=>{
+  try {
+    const response = await API.put("/order", orderData);
+    // console.log(response)
+    return {status: response.status, data: response.data}
+  } catch (error) {
+    // console.log(error.response)
+    return { status: error.response.status,  data: error.response.data }
+  }
+})
 
 const userSlice = createSlice({
   name: "user",
@@ -174,8 +193,8 @@ const userSlice = createSlice({
     builder.addCase(getMenu.fulfilled, (state, action) => {
       // console.log(action.payload.status);
       if (action.payload.status === 200) {
-        // state.currentMenu = action.payload;
-        // state.currentOrder = action.payload.data.user_order[0]
+        state.currentMenu = action.payload.data;
+        state.currentOrder = action.payload.user_order
       } else {
         // state.currentMenu = action.payload
         // console.log(action.payload);
@@ -189,7 +208,7 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getCurrentMenu.fulfilled, (state, action) => {
-      // console.log(action.payload)
+      console.log(action.payload)
       if(action.payload.status === 200){
         state.currentMenu = action.payload.data;
         state.currentOrder = action.payload.user_order

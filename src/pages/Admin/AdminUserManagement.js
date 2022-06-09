@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Notificationtile from "../../components/UI/Noficationtile";
 
 import AdminSideBarNav from "../../components/AdminSideBarNav";
 import AddUserForm from "../../components/AddUserForm/AddUserForm";
@@ -11,7 +10,7 @@ import ShowAllUsersTable from "../../components/AllusersTable/ShowAllUsers";
 import SignupApprovalTable from "../../components/Approval Tables/SignupApprovalTable";
 import ResetPasswordApprovalTable from "../../components/Approval Tables/ResetPasswordApprovalTable";
 import EnterNewPasswordModalForm from "../../components/Modals/EnterNewPasswordModal";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const AdminUserManagement = () => {
   const [currentTab, setCurrentTab] = useState(4);

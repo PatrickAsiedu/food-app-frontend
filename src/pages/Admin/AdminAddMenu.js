@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AddDateForm from "../../components/AddFoodForm/AddDateForm";
 import CustomInput from "../../components/AddFoodForm/CustomInput";
 import { addMenu } from "../../redux/adminSlice";
+import Swal from "sweetalert2";
 
 const AdminAddMenu = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,15 @@ const AdminAddMenu = () => {
     setSelectedDrinks(selectedDrinks.filter((drink) => drink.id !== drinkID));
   };
 
+  const displayError = (errorMessage) => {
+    Swal.fire({
+      title: 'Success',
+      text: errorMessage,
+      icon: 'success',
+      confirmButtonText: 'Okay'
+    })
+  }
+
   const onFormSubmitHandler = async (e) => {
     e.preventDefault();
     const menu = {};
@@ -49,15 +59,15 @@ const AdminAddMenu = () => {
     console.log(menu);
 
     if (!menu.menu_date) {
-      return alert("Please select a menu date");
+      return displayError("Please select a menu date");
     }
 
     if (!menu.foods_id) {
-      return alert("You are creating a menun without foods..");
+      return displayError("You are creating a menun without foods..");
     }
 
     if (!menu.drinks_id) {
-      return alert("You are creating a menun without foods..");
+      return displayError("You are creating a menun without foods..");
     }
 
     const response = await dispatch(addMenu(menu)).unwrap();
@@ -66,7 +76,17 @@ const AdminAddMenu = () => {
       return alert(response.errorMessage);
     }
     if (response.status === 201) {
-      return alert(response.message);
+      Swal.fire({
+        title: 'Success',
+        text: response.message,
+        icon: 'success',
+        confirmButtonText: 'Okay'
+      }).then(result=>{
+        // console.log(result)
+        if(result.isConfirmed){
+        }
+      })
+      // return alert(response.message);
     }
   };
 

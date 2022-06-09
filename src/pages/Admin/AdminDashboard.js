@@ -10,13 +10,12 @@ import AdminTitleBar from "../../components/AdminTitlebar/AdminTitlebar";
 import OrdersCard from "../../components/Cards/OrdersCard";
 import {
   formatDateToDateString,
-  formatDateToDateAndTimeString,
 } from "../../utils/util-functions";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.user.user.name);
-  const today = new Date();
+  
 
   const [totalFood, setTotalFood] = useState(0);
   const [totalDrink, setTotalDrink] = useState(0);
@@ -24,6 +23,7 @@ const AdminDashboard = () => {
   const [orders, setOrders] = useState();
 
   useEffect(() => {
+    const today = new Date();
     const getTodayOrder = async () => {
       const menuDate = today.toISOString().split("T")[0];
       const response = await dispatch(getOrders(menuDate)).unwrap();
@@ -40,10 +40,11 @@ const AdminDashboard = () => {
       }
     };
     getTodayOrder();
-  }, []);
+  }, [dispatch]);
 
+  const todayy = new Date();
   let greeting = `Welcome , ${userName}`;
-  let todaysdate = today.toDateString();
+  let todaysdate = todayy.toDateString();
 
   return (
     <React.Fragment>

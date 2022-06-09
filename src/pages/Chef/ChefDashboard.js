@@ -10,7 +10,6 @@ import { getOrders } from "../../redux/chefSlice";
 import AdminTitleBar from "../../components/AdminTitlebar/AdminTitlebar";
 import {
   formatDateToDateString,
-  formatDateToDateAndTimeString,
 } from "../../utils/util-functions";
 import OrdersCard from "../../components/Cards/OrdersCard";
 
@@ -22,9 +21,10 @@ const ChefDashboard = () => {
   const [totalComments, setTotalComments] = useState(0);
   const [orders, setOrders] = useState();
 
-  const today = new Date();
+  
 
   useEffect(() => {
+    const today = new Date();
     const getTodayOrder = async () => {
       const menuDate = today.toISOString().split("T")[0];
       const response = await dispatch(getOrders(menuDate)).unwrap();
@@ -41,10 +41,11 @@ const ChefDashboard = () => {
       }
     };
     getTodayOrder();
-  }, []);
+  }, [dispatch]);
 
   console.log(orders);
 
+  const today = new Date();
   let greeting = `Welcome , ${chefName}`;
   let todaysdate = today.toDateString();
 
