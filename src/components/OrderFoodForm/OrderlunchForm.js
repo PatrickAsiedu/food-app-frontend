@@ -83,7 +83,7 @@ const OrderLunchForm = (props) => {
         </h1>
 
         {/* TODO: LINK to edit order if time is allowable */}
-        {(new Date(menu.user_order[0].expires_at).getTime() > Date.now()) ? 
+        {(new Date(menu.user_order[0].expires_at).getTime() < Date.now()) ? 
         (<p className="mt-5 text-center">Order closed</p>)
         : 
         (<Link to="/me/editorder" state={menu} > <p className="mt-5 text-center">Click to edit this order</p> </Link>)

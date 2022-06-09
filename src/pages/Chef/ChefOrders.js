@@ -56,7 +56,7 @@ const ChefOrders = () => {
       } else if (response.status === 400) {
         // handle error on no order found here
         // first clear all states set by the if block above
-        setOrders("");
+        setOrders(null);
         setFoodSummary("");
         setDrinkSummary("");
         setError(response.errorMessage);
