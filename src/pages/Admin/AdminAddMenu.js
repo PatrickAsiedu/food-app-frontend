@@ -7,14 +7,16 @@ import AddDateForm from "../../components/AddFoodForm/AddDateForm";
 import CustomInput from "../../components/AddFoodForm/CustomInput";
 import { addMenu } from "../../redux/adminSlice";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AdminAddMenu = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [selectedFoods, setSelectedFoods] = useState([]);
   const [selectedDrinks, setSelectedDrinks] = useState([]);
   const [menuDate, setMenuDate] = useState();
-  const [chefName, setChefName] = useState();
+  const [chefName, setChefName] = useState(null)
 
   const foodList = useSelector((state) => state.admin.foodList);
   const drinkList = useSelector((state) => state.admin.drinkList);
@@ -23,6 +25,7 @@ const AdminAddMenu = () => {
   );
 
   console.log(chefList);
+  console.log(chefList)
 
   // food here is an object with id and name
   const addToSelectedFoods = (food) => {
@@ -43,9 +46,9 @@ const AdminAddMenu = () => {
 
   const displayError = (errorMessage) => {
     Swal.fire({
-      title: 'Success',
+      title: 'No way!',
       text: errorMessage,
-      icon: 'success',
+      icon: 'error',
       confirmButtonText: 'Okay'
     })
   }
@@ -56,24 +59,30 @@ const AdminAddMenu = () => {
     menu.menu_date = menuDate;
     menu.foods_id = selectedFoods.map((food) => food.id);
     menu.drinks_id = selectedDrinks.map((drink) => drink.id);
+    menu.chef_id = chefName;
     console.log(menu);
 
     if (!menu.menu_date) {
       return displayError("Please select a menu date");
     }
 
-    if (!menu.foods_id) {
-      return displayError("You are creating a menun without foods..");
+    if(chefName === null || chefName === 'no chef selected'){
+      return displayError('Please select a chef')
+    }
+
+    if (menu.foods_id.length===0) {
+      return displayError("You can't create a menu without foods..");
     }
 
     if (!menu.drinks_id) {
       return displayError("You are creating a menun without foods..");
     }
+    
 
     const response = await dispatch(addMenu(menu)).unwrap();
     console.log(response);
     if (response.status === 400) {
-      return alert(response.errorMessage);
+      return displayError(response.errorMessage);
     }
     if (response.status === 201) {
       Swal.fire({
@@ -84,10 +93,12 @@ const AdminAddMenu = () => {
       }).then(result=>{
         // console.log(result)
         if(result.isConfirmed){
+          navigate('/admin', {replace: true})
         }
       })
       // return alert(response.message);
     }
+
   };
 
   return (
@@ -99,19 +110,15 @@ const AdminAddMenu = () => {
           <div className="w-full  box-outer-shadow mt-[5%] px-6 rounded-3xl 2xl:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary pb-8">
             <AddDateForm setMenuDate={setMenuDate} />
             {/* this should be drop down rather with nmames of all chef */}
-            <input
-              type="text"
-              name="chefName"
-              required
-              value={chefName}
-              placeholder="Enter chef name"
-              onChange={(e) => setChefName(e.target.value)}
-            />
-            <CustomInput
-              label="Select Chef"
-              itemList={chefList}
-              styling={{ zIndex: 7 }}
-            />
+            <label>Select Chef</label>
+            <select name="chefs" onChange={(e)=>setChefName(e.target.value)} className='w-full border-b h-12 outline-0 mb-8'>
+              <option>no chef selected</option>
+              {chefList.map(chef=>(
+                <option key={chef.id} value={chef.name} id={chef.id}>{chef.name}</option>
+              ))}
+            </select>
+
+            
 
             <CustomInput
               label="Add Food"
@@ -162,7 +169,9 @@ const AdminAddMenu = () => {
               ))}
             </div>
 
+            <p>Chef: </p>{chefName}
             <div className="mt-8 pb-10 flex justify-center">
+              
               <button
                 onClick={onFormSubmitHandler}
                 type="submit"

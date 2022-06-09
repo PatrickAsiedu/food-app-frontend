@@ -43,7 +43,7 @@ const ResetPasswordApprovalTable = () => {
         </div>
 
         <div className="mt-6 pb-24">
-          {userList & userList.length !==0 ?
+          {userList  ?
             userList.map((user) => (
               <div
                 key={user.id}

@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changePasswordModal, resetPassword } from "../../redux/adminSlice";
+import { displaySuccess } from "../../utils/util-functions";
+
+
 
 const EnterNewPasswordModalForm = () => {
   const user = useSelector(state=>state.admin.changePasswordModalUser);
   const [password, setPassword] = useState('');
+  const [resettingPass, setResettingPass] = useState(false)
 
   const {name, phone_number } = user
   
@@ -17,12 +21,14 @@ const EnterNewPasswordModalForm = () => {
 
   const onFormSubmitHandler = async(e)=> {
     e.preventDefault()
+    setResettingPass(true)
     const response =  await dispatch(resetPassword({name, phone_number, password})).unwrap()
 
     if(response) {
-      alert('Password reset Successfully')
+      displaySuccess('Password reset Successfully')
     }
 
+    setResettingPass(false)
   }
 
   
@@ -87,7 +93,7 @@ const EnterNewPasswordModalForm = () => {
               type="submit"
               className="bg-primary h-[63px] w-[238px] mt-4 mb-12 text-white font-bold rounded-lg "
             >
-              Confirm Password
+              {resettingPass ? 'Resetting Password...' : 'Reset Password'}
             </button>
           </div>
         </form>

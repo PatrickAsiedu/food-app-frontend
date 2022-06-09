@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 export const formatDateToDateString = (date) => {
     const dateObject = new Date(date);
     return dateObject.toDateString()
@@ -18,3 +20,30 @@ export const sortByDate = (array) => {
     // console.log(array)
     return array
   }
+
+export const displaySuccess = (successMessage) => {
+  Swal.fire({
+    title: 'Success!',
+    text: successMessage,
+    icon: 'success',
+    confirmButtonText: 'Okay'
+  }).then(result=>{
+    if(result.isConfirmed){
+      window.location.reload();
+    }
+  })
+};
+
+
+export const displayError = (errorMessage) => {
+  Swal.fire({
+    title: 'No way!',
+    text: errorMessage,
+    icon: 'error',
+    confirmButtonText: 'Okay'
+  }).then(result=>{
+    if(result.isConfirmed){
+      window.location.reload();
+    }
+  })
+}

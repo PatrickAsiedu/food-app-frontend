@@ -1,36 +1,64 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { approveUser, denyUser } from "../../redux/adminSlice";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const SignupApprovalTable = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const userList = useSelector((state) => state.admin.allUsers.filter(user=>user.status==='PENDING'));
+  console.log(userList)
+
+  const displayError = (errorMessage) => {
+    Swal.fire({
+      title: 'No way!',
+      text: errorMessage,
+      icon: 'error',
+      confirmButtonText: 'Okay'
+    }).then(result=>{
+      if(result.isConfirmed){
+        window.location.reload();
+      }
+    })
+  }
 
 
+  const displaySuccess = (successMessage) => {
+    Swal.fire({
+      title: 'Success!',
+      text: successMessage,
+      icon: 'success',
+      confirmButtonText: 'Okay'
+    }).then(result=>{
+      if(result.isConfirmed){
+        window.location.reload();
+      }
+    })
+  }
 
   const approveUserFunc = async(id) => {
     console.log('approve user with id: ', id);
     const response = await dispatch(approveUser({user_id: id})).unwrap()
     if(response.status===200){
-      alert('User approved succesfully')
+      displaySuccess('User approved succesfully')
     }else if(response.status===400){
-      alert('User cannot be approved')
+      displayError('User cannot be approved')
     }
-    window.location.reload();
+    // window.location.reload();
 
-    
   }
 
   const rejectUserFunc = async(id) => {
     console.log('reject user with id: ', id)
     const response = await dispatch(denyUser({user_id: id})).unwrap()
     if(response.status===200){
-      alert('User rejected succesfully')
+      displaySuccess('User rejected succesfully')
     }else if(response.status===400){
-      alert('User cannot be denied')
+      displayError('User cannot be denied')
     }
-    window.location.reload();
+    // window.location.reload();
     
   }
 
@@ -48,7 +76,7 @@ const SignupApprovalTable = () => {
       </div>
 
       <div className="mt-6 pb-24">
-        {userList & userList.length !==0  ?
+        {userList   ?
           userList.map((user) => (
             <div
               key={user.id}

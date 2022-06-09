@@ -106,8 +106,10 @@ const UserEditOrder = () => {
                       type="radio"
                       key={food.food_id}
                       id={food.food_id}
-                      defaultChecked
                       name="radio buttons"
+                      value={food.food_id}
+                      defaultChecked = {food.food_id === foodID && 'checked'}
+                      onChange={(e)=>setFoodID(e.target.id)}
                       onClick={(e) => setFoodID(e.target.id)}
                     />
                     <label className="ml-[14px] " htmlFor="hey">
@@ -128,7 +130,9 @@ const UserEditOrder = () => {
                       key={drink.drink_id}
                       id={drink.drink_id}
                       name="radio buttons drink"
-                      defaultChecked
+                      defaultChecked={drink.drink_id === drinkID && 'checked'}
+                      onChange={(e)=>setDrinkID(e.target.id)}
+                      value={drink.drink_id}
                       onClick={(e) => setDrinkID(e.target.id)}
                     />
                     <label className="ml-[14px]  " htmlFor="hey">
