@@ -1,7 +1,6 @@
 import React from "react";
 import AdminSideBarNav from "../../components/AdminSideBarNav";
 import AddUserForm from "../../components/AddUserForm/AddUserForm";
-import { Link } from "react-router-dom";
 import AdminTopNavBar from "../../components/AdminTopNavBar";
 
 const AdminAddUser = () => {
