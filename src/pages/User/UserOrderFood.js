@@ -14,7 +14,7 @@ const UserOrderFood = () => {
   useEffect(() => {
     const dateNow = new Date();
     // console.log(dateNow.getHours())
-    if (dateNow.getHours() < 14) {
+    if (dateNow.getHours() < 12) {
       setMenuQueryDate(dateNow.toISOString().split("T")[0]);
       // console.log(dateNow.toISOString().split('T')[0])
       console.log(
