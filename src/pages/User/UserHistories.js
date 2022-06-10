@@ -10,9 +10,7 @@ import OrderHistoryCard from "../../components/Cards/OrderHistoryCard";
 import { getMyOrders } from "../../redux/userSlice";
 import { sortByDate } from "../../utils/util-functions";
 
-import {
-  formatDateToDateString,
-} from "../../utils/util-functions";
+import { formatDateToDateString } from "../../utils/util-functions";
 
 const UserHistories = () => {
   const dispatch = useDispatch();
@@ -37,7 +35,7 @@ const UserHistories = () => {
   }, [dispatch]);
 
   console.log(orders);
-  console.log(error)
+  console.log(error);
   return (
     <React.Fragment>
       <div className=" px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen ">
@@ -46,6 +44,7 @@ const UserHistories = () => {
         <main className="lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]  lg:px-0 lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8 ">
           <UserTitlebar title="Your Order History"></UserTitlebar>
 
+          <UserOrderHistoryTable />
           {orders?.map((order) => (
             <OrderHistoryCard
               key={order.id}
@@ -55,8 +54,6 @@ const UserHistories = () => {
               date={formatDateToDateString(order.created_at).slice(0, -4)}
             />
           ))}
-
-          <UserOrderHistoryTable />
 
           <div className=" pt-[120px]"></div>
         </main>
