@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../redux/adminSlice";
+import { displayError, displaySuccess } from "../../utils/util-functions";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
 
@@ -30,10 +31,11 @@ const AddUserForm = () => {
     console.log(response);
     if (response.status === 422) {
       setError(response.errorMessage);
+      displayError(response.errorMessage);
       setAddingUser(false);
     } else if (response.status === 201) {
       setError("");
-      alert("User Added successfully");
+      displaySuccess("User Added successfully");
       setAddingUser(false);
     }
 

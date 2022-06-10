@@ -20,13 +20,27 @@ const ChefDashboard = () => {
   const [totalDrink, setTotalDrink] = useState(0);
   const [totalComments, setTotalComments] = useState(0);
   const [orders, setOrders] = useState();
+  const [date, setDate] = useState()
 
   
 
   useEffect(() => {
     const today = new Date();
     const getTodayOrder = async () => {
-      const menuDate = today.toISOString().split("T")[0];
+      // const menuDate = today.toISOString().split("T")[0];
+
+      let queryDate = '';
+      // Chef can see this until 2pm where he gets to see orders for the following day
+      if(today.getHours() < 14){
+        // see today's orders
+        queryDate = new Date()
+        setDate(queryDate)
+      }else{
+        // see tommorrow.s orders
+        queryDate = new Date(Date.now() + (3600*1000*24))
+        setDate(queryDate)
+      }
+      const menuDate = queryDate.toISOString().split('T')[0];
       const response = await dispatch(getOrders(menuDate)).unwrap();
       // console.log(response);
       if (response.status === 200) {
@@ -45,9 +59,9 @@ const ChefDashboard = () => {
 
   console.log(orders);
 
-  const today = new Date();
+  // const tod  ay = new Date();
   let greeting = `Welcome , ${chefName}`;
-  let todaysdate = today.toDateString();
+  // let todaysdate = today.toDateString();
 
   return (
     <React.Fragment>
@@ -55,7 +69,7 @@ const ChefDashboard = () => {
         <ChefSideBarNav orderTotal={orders?.length} />
 
         <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8  lg:px-[90px] text-base text-primary ">
-          <AdminTitleBar title={greeting} date={todaysdate}></AdminTitleBar>
+          <AdminTitleBar title={greeting} date={formatDateToDateString(date)}></AdminTitleBar>
 
           <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:mt-[50px] lg:gap-9 ">
             <TotalFoodOrders value={totalFood} />
