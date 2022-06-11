@@ -24,7 +24,7 @@ const UserOrderHistoryTable = () => {
         const data = [...response.data.data];
         setOrders(sortByDate(data));
       } else {
-        setError("No orders found");
+        setError("You haven't order anything yet, please order something and check again");
         setOrders("");
       }
     };
@@ -46,7 +46,7 @@ const UserOrderHistoryTable = () => {
 
   return (
     <React.Fragment>
-      {orders ? (
+      {orders ? ( 
         <div className=" hidden sm:flex lg:flex lg:px-[90px] 2xl:px-[200px] text-primary">
           <div className=" w-full  box-outer-shadow mt-12 rounded-3xl px-5 ">
             <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-5 gap-3   ">

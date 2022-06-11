@@ -60,7 +60,7 @@ export const getMyOrders = createAsyncThunk("user/getOrders", async () => {
     const data = {
       status: error.response.status,
       errorMessage:
-        error.response.data.error.message ||
+        error.response.data.message ||
         error.response.data.error[0].message,
     };
     return data;
@@ -186,7 +186,13 @@ const userSlice = createSlice({
 
     // order
     builder.addCase(getMyOrders.fulfilled, (state, action) => {
-      state.myOrders = action.payload.data.data;
+      console.log(action.payload)
+      if(action.payload.status === 200){
+        state.myOrders = action.payload.data.data;
+      }else {
+        state.myOrders = null
+      }
+      
     });
 
     // menu this is redundant

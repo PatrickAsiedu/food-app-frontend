@@ -27,7 +27,7 @@ const UserHistories = () => {
         setOrders(sortByDate(data));
       } else {
         setError("No orders found");
-        setOrders("");
+        setOrders(null);
       }
     };
 
@@ -45,7 +45,7 @@ const UserHistories = () => {
           <UserTitlebar title="Your Order History"></UserTitlebar>
 
           <UserOrderHistoryTable />
-          {orders?.map((order) => (
+          {orders && orders.map((order) => (
             <OrderHistoryCard
               key={order.id}
               foodname={order.food_name}
