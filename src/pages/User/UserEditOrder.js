@@ -64,7 +64,8 @@ const UserEditOrder = () => {
       }).then((result) => {
         // console.log(result)
         if (result.isConfirmed) {
-          // window.location.href ='/me'
+          window.location.href ='/me'
+
         }
       });
     }
