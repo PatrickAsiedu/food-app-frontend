@@ -8,6 +8,7 @@ import CustomInput from "../../components/AddFoodForm/CustomInput";
 import AddDateForm from "../../components/AddFoodForm/AddDateForm";
 import { addMenu } from "../../redux/chefSlice";
 import AddFoodForm from "../../components/AddFoodForm/AddFoodForm";
+import { displayError, displaySuccess } from "../../utils/util-functions";
 
 const ChefAddMenu = () => {
   const dispatch = useDispatch();
@@ -46,24 +47,24 @@ const ChefAddMenu = () => {
     console.log(menu);
 
     if (!menu.menu_date) {
-      return alert("Please select a menu date");
+      return displayError("Please select a menu date");
     }
 
     if (!menu.foods_id) {
-      return alert("You are creating a menun without foods..");
+      return displayError("You are creating a menun without foods..");
     }
 
     if (!menu.drinks_id) {
-      return alert("You are creating a menun without foods..");
+      return displayError("You are creating a menun without foods..");
     }
 
     const response = await dispatch(addMenu(menu)).unwrap();
     console.log(response);
     if (response.status === 400) {
-      return alert(response.errorMessage);
+      return displayError(response.errorMessage);
     }
     if (response.status === 201) {
-      return alert(response.message);
+      return displaySuccess(response.message);
     }
   };
 
