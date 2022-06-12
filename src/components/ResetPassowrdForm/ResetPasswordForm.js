@@ -16,6 +16,10 @@ const ResetPasswordForm = () => {
     .then(result=>{
       console.log(result)
       setResult(result.data.message)
+      setTimeout(()=>{
+        alert('Redirecting you to login page..')
+        window.location.href = '/'
+      }, 5000)
     })
     .catch(error=>{
       console.log(error)

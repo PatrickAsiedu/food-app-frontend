@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { denyUser } from "../../redux/adminSlice";
 import { changePasswordModal } from "../../redux/adminSlice";
+import { displayError, displaySuccess } from "../../utils/util-functions";
 
 const ResetPasswordApprovalTable = () => {
   // const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
@@ -15,9 +16,9 @@ const ResetPasswordApprovalTable = () => {
     console.log("reject user with id: ", id);
     const response = await dispatch(denyUser({ user_id: id })).unwrap();
     if (response.status === 200) {
-      alert("User rejected succesfully");
+      displaySuccess("User rejected succesfully");
     } else if (response.status === 400) {
-      alert("User cannot be denied");
+      displayError("User cannot be denied");
     }
     window.location.reload();
   };

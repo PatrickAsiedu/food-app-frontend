@@ -6,6 +6,7 @@ import { getMenu } from "../../redux/userSlice";
 import {
   formatDateToDateAndTimeString,
   formatDateToDateString,
+  formatDateToStringNoYear,
 } from "../../utils/util-functions";
 
 const UserDashboardItems = ({ menuDate }) => {
@@ -28,7 +29,7 @@ const UserDashboardItems = ({ menuDate }) => {
       console.log(response);
       if (response.status === 401) {
         setDisplayMessage(
-          `No menu added for ${formatDateToDateString(
+          `No menu added for ${formatDateToStringNoYear(
             response.date
           )} yet, please check back after 10 minutes`
         );
@@ -39,12 +40,19 @@ const UserDashboardItems = ({ menuDate }) => {
         // console.log(response.data.user_order.length)
         if (response.data.user_order.length === 0) {
           setDisplayMessage(
-            `You have not placed an order for ${formatDateToDateString(
+            `You have not placed an order for 
+            ${
+              response.data.menu_date.split("T")[0] ===
+              today.toISOString().split("T")[0]
+                ? "today,"
+                : ""
+            } 
+            ${formatDateToStringNoYear(
               response.data.menu_date
             )}'s lunch yet.`
           );
           setOrdersCloseAtMessage(
-            `Note that orders for this menu closes at ${formatDateToDateAndTimeString(
+            `Note that orders for this menu close at ${formatDateToDateAndTimeString(
               response.data.expires_at
             )}`
           );
@@ -60,7 +68,7 @@ const UserDashboardItems = ({ menuDate }) => {
               today.toISOString().split("T")[0]
                 ? "today"
                 : ""
-            } ${formatDateToDateString(response.data.menu_date)}`
+            } ${formatDateToStringNoYear(response.data.menu_date)}`
           );
           // setOrdersCloseAtMessage(`Note; You can edit this menu until at ${formatDateToDateAndTimeString(response.data.expires_at)}`)
           setOrdersCloseAtMessage("");
