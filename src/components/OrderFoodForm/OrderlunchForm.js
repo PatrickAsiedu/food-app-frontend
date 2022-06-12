@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import {
   formatDateToDateAndTimeString,
   formatDateToDateString,
+  formatDateToStringNoYear,
 } from "../../utils/util-functions";
 
 import RenderLoading from "../UI/RenderLoading";
@@ -77,7 +78,7 @@ const OrderLunchForm = (props) => {
     return (
       <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
         <h1 className=" mt-8 mb-8 lg:mt-20 text-center font-semibold text-primary text-xl">
-          Your {formatDateToDateString(menu.menu_date)} 's lunch order
+          Your {formatDateToStringNoYear(menu.menu_date)} 's lunch order
         </h1>
         <h1 className=" font-normal text-primary/30">
           Food :
@@ -131,7 +132,7 @@ const OrderLunchForm = (props) => {
 
     if (order.menu_id && !order.food_id) {
       setOrdering(false);
-      Swal.fire({
+      return Swal.fire({
         title: "Error",
         text: "Dude, select at least one food",
         icon: "error",
@@ -200,7 +201,7 @@ const OrderLunchForm = (props) => {
             }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12 md:px-14    lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
           >
             <h1 className="  mt-10 lg:mt-14 text-center font-bold text-primary text-xl lg:text-2xl">
-              {formatDateToDateString(props.menuDate)}'s Lunch Menu
+              {formatDateToStringNoYear(props.menuDate)}'s Lunch Menu
             </h1>
 
             <fieldset className="mt-[27px] ">

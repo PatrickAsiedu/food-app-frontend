@@ -5,6 +5,11 @@ export const formatDateToDateString = (date) => {
     return dateObject.toDateString()
 };
 
+export const formatDateToStringNoYear = (date) => {
+  const dateObject = new Date(date);
+  return dateObject.toLocaleString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
+}
+
 
 export const formatDateToDateAndTimeString = (date) => {
     const dateObject = new Date(date);
