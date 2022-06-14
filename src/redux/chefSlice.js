@@ -1,108 +1,116 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import API from '../network/api';
-
+import API from "../network/api";
 
 const initialState = {
-    orders: {},
-    foodList: [],
-    drinkList: [],
-    allOrders: [],
-    allMenus: [],
+  orders: {},
+  foodList: [],
+  drinkList: [],
+  allOrders: [],
+  allMenus: [],
+};
 
-}
-
-export const getFoods = createAsyncThunk('chef/fetchAllFoods', async()=>{
-    try {
-        const response = await API.get('/food');
-        return response.data.foods
-    } catch (error) {
-        console.log(error.response)
-    }
+export const getFoods = createAsyncThunk("chef/fetchAllFoods", async () => {
+  try {
+    const response = await API.get("/food");
+    return response.data.foods;
+  } catch (error) {
+    console.log(error.response);
+  }
 });
 
-export const getDrinks = createAsyncThunk('chef/fetchAllDrinks', async()=>{
-    try {
-        const response = await API.get('/drink');
-        return response.data.drinks
-    } catch (error) {
-        console.log(error.response)
-    }
+export const getDrinks = createAsyncThunk("chef/fetchAllDrinks", async () => {
+  try {
+    const response = await API.get("/drink");
+    return response.data.drinks;
+  } catch (error) {
+    console.log(error.response);
+  }
 });
 
-export const getAllOrders = createAsyncThunk('chef/getAllOrder', async()=>{
-    try {
-        const response = await API.get('/menu/all');
-        return response
-    } catch (error) {
-        return error.response
-    }
-})
-
-export const getOrders = createAsyncThunk('chef/getOders', async(orderDate)=>{
-    try {
-        let query = '';
-        orderDate ? query = `/order/daily?menu_date=${orderDate}` : query = "/order/daily" 
-        const response = await API.get(query);
-        // console.log(response)
-        const data = {status: response.status, data:response.data.data}
-        return data
-    } catch (error) {
-        console.log(error.response);
-        const data = {status:error.response.status, errorMessage:error.response.data.message || error.response.data?.error[0].message}
-        return data
-    }
+export const getAllOrders = createAsyncThunk("chef/getAllOrder", async () => {
+  try {
+    const response = await API.get("/menu/all");
+    return response;
+  } catch (error) {
+    return error.response;
+  }
 });
 
-
-export const addMenu = createAsyncThunk('chef/add/Menu', async(menuData)=>{
+export const getOrders = createAsyncThunk(
+  "chef/getOders",
+  async (orderDate) => {
     try {
-        const response = await API.post('/menu', menuData);
-        console.log(response)
-        return {status: response.status, message: response.data.message}
+      let query = "";
+      orderDate
+        ? (query = `/order/daily?menu_date=${orderDate}`)
+        : (query = "/order/daily");
+      const response = await API.get(query);
+      // console.log(response)
+      const data = { status: response.status, data: response.data.data };
+      return data;
     } catch (error) {
-        console.log(error.response)
-        return { status: error.response.status, errorMessage: error.response.data.message}
-        
+      console.log(error.response);
+      const data = {
+        status: error.response.status,
+        errorMessage:
+          error.response.data.message || error.response.data?.error[0].message,
+      };
+      return data;
     }
-})
+  }
+);
 
-export const getMenu = createAsyncThunk('chef/getmenu', async(menuDate)=>{
-    console.log(menuDate)
-    try {
-        const response = await API.get(`/menu?menu_date=${menuDate}`);
-        const data = {status: response.status, data: response.data.data}
-        return data
-    } catch (error) {
-        console.log(error.response);
-        const data = {status: error.response.status, errorMessage:error.response.data.message ||error.response.data.error[0].message, date:error.response.data.date}
-        return data
-    }
-})
+export const addMenu = createAsyncThunk("chef/add/Menu", async (menuData) => {
+  try {
+    const response = await API.post("/menu", menuData);
+    console.log(response);
+    return { status: response.status, message: response.data.message };
+  } catch (error) {
+    console.log(error.response);
+    return {
+      status: error.response.status,
+      errorMessage: error.response.data.message,
+    };
+  }
+});
+
+export const getMenu = createAsyncThunk("chef/getmenu", async (menuDate) => {
+  console.log(menuDate);
+  try {
+    const response = await API.get(`/menu?menu_date=${menuDate}`);
+    const data = { status: response.status, data: response.data.data };
+    return data;
+  } catch (error) {
+    console.log(error.response);
+    const data = {
+      status: error.response.status,
+      errorMessage:
+        error.response.data.message || error.response.data.error[0].message,
+      date: error.response.data.date,
+    };
+    return data;
+  }
+});
 
 const chefSlice = createSlice({
-    name: 'admin',
-    initialState,
-    reducers: {},
-    extraReducers: builder =>{
-        builder.addCase(getFoods.fulfilled, (state, action) => {
-            state.foodList = action.payload
-        })
-        builder.addCase(getDrinks.fulfilled, (state, action)=> {
-            state.drinkList = action.payload
-        })
-        
-        builder.addCase(getOrders.fulfilled, (state, action)=>{
-            // console.log(action.payload)
-            // if(action.payload.status === 200){
-            //     state.todayOrders = action.payload.data
-            // }
-            
-        })
+  name: "admin",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getFoods.fulfilled, (state, action) => {
+      state.foodList = action.payload;
+    });
+    builder.addCase(getDrinks.fulfilled, (state, action) => {
+      state.drinkList = action.payload;
+    });
 
-       
-
-    }
+    builder.addCase(getOrders.fulfilled, (state, action) => {
+      // console.log(action.payload)
+      // if(action.payload.status === 200){
+      //     state.todayOrders = action.payload.data
+      // }
+    });
+  },
 });
-
 
 export default chefSlice.reducer;

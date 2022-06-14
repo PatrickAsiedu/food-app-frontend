@@ -13,8 +13,10 @@ import UserHistories from "./pages/User/UserHistories";
 import UserEditOrder from "./pages/User/UserEditOrder";
 
 import ChefDashboard from "./pages/Chef/ChefDashboard";
-import ChefAddMenu from "./pages/Chef/ChefAddMenu";
+import ChefMenu from "./pages/Chef/ChefMenu";
 import ChefOrders from "./pages/Chef/ChefOrders";
+import ChefFood from "./pages/Chef/ChefFood";
+import ChefDrinks from "./pages/Chef/ChefDrinks";
 
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminAddMenu from "./pages/Admin/AdminAddMenu";
@@ -117,9 +119,19 @@ function App() {
           />
           <Route
             exact
-            path="/chef/addmenu"
+            path="/chef/menu"
+            element={<ProtectedRoute Component={ChefMenu} Permission="chef" />}
+          />
+          <Route
+            exact
+            path="/chef/food"
+            element={<ProtectedRoute Component={ChefFood} Permission="chef" />}
+          />
+          <Route
+            exact
+            path="/chef/drinks"
             element={
-              <ProtectedRoute Component={ChefAddMenu} Permission="chef" />
+              <ProtectedRoute Component={ChefDrinks} Permission="chef" />
             }
           />
           <Route
@@ -163,8 +175,7 @@ function App() {
             }
           />
 
-        <Route exact path="*" element={<ErrorPage />} />
-
+          <Route exact path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>
