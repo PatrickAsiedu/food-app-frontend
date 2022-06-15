@@ -24,7 +24,16 @@ export const sortByDate = (array) => {
     array.sort(sorter);
     // console.log(array)
     return array
+}
+
+export const sortByMenuDate = (array) => {
+  const sorter = (a, b) => {
+    return new Date(b.menu_date).getTime() - new Date(a.menu_date).getTime();
   }
+  array.sort(sorter);
+  // console.log(array)
+  return array
+}
 
 export const displaySuccess = (successMessage) => {
   Swal.fire({
