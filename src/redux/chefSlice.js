@@ -18,12 +18,70 @@ export const getFoods = createAsyncThunk("chef/fetchAllFoods", async () => {
   }
 });
 
+export const addFood = createAsyncThunk('chef/addFood', async(foodName) => {
+  try {
+    const response = await API.post('/food', foodName);
+    console.log(response)
+    return response.data.message
+  } catch (error) {
+    console.log(error.response.message)
+  }
+})
+
+export const deleteFood = createAsyncThunk('chef/deletefood', async(FoodID) => {
+  try {
+    const response = await API.put('/deletefood', FoodID);
+    return {status: response.status, message: response.data.message}
+  } catch (error) {
+    console.log(error.response)
+  }
+})
+
+export const editFood = createAsyncThunk('chef/editFood', async(foodObject)=>{
+  try {
+    const response = await API.put('/food', foodObject)
+    return {status: response.status, message: response.data.message}
+  } catch (error) {
+    console.log(error.response)
+    return { status: error.response.status, message: 'Error here'}
+  }
+});
+
+export const addDrink = createAsyncThunk('chef/addDrink', async(DrinkName) => {
+  try {
+    const response = await API.post('/drink', DrinkName);
+    console.log(response)
+    return response.data.message
+  } catch (error) {
+    console.log(error.response.message)
+  }
+})
+
 export const getDrinks = createAsyncThunk("chef/fetchAllDrinks", async () => {
   try {
     const response = await API.get("/drink");
     return response.data.drinks;
   } catch (error) {
     console.log(error.response);
+  }
+});
+
+export const deleteDrink = createAsyncThunk('chef/deleteDrink', async(DrinkID) => {
+  try {
+    const response = await API.put('deletedrink', DrinkID);
+    return {status: response.status, message: response.data.message}
+  } catch (error) {
+    console.log(error.response)
+  }
+});
+
+export const editDrink = createAsyncThunk('chef/editdrink', async(drinkObject)=>{
+  try {
+    const response = await API.put('/drink', drinkObject)
+    return {status: response.status, message: response.data.message}
+  } catch (error) {
+    console.log(error.response)
+    return { status: error.response.status, message: 'Error here'}
   }
 });
 
@@ -91,6 +149,18 @@ export const getMenu = createAsyncThunk("chef/getmenu", async (menuDate) => {
     return data;
   }
 });
+
+
+export const getAllMenu = createAsyncThunk('chef/getAllMenu', async()=>{
+  try {
+    const response = await API.get('/menu/all');
+    // console.log(response)
+    return {status: response.status, data: response.data.data}
+  } catch (error) {
+    console.log(error.response)
+    return {status: error.response.status}
+  }
+})
 
 const chefSlice = createSlice({
   name: "admin",
