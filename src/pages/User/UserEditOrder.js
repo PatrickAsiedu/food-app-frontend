@@ -8,6 +8,7 @@ import UserTitlebar from "../../components/Usertitle bar/Usertitlebar";
 import { updateLunch } from "../../redux/userSlice";
 import { formatDateToDateString } from "../../utils/util-functions";
 import Swal from "sweetalert2";
+import CustomRadioBox from "../../components/UI/CustomRadioBox";
 
 const UserEditOrder = () => {
   const location = useLocation();
@@ -58,20 +59,22 @@ const UserEditOrder = () => {
     } else if (response.status === 200) {
       Swal.fire({
         title: "Order updated successfully!",
-        text: `Your order has been updated successfully}`,
+        text: `Your order has been updated successfully`,
         icon: "success",
         confirmButtonText: "Okay",
       }).then((result) => {
         // console.log(result)
         if (result.isConfirmed) {
-          window.location.href ='/me'
-
+          window.location.href = "/me";
         }
       });
     }
 
     setUpdatingOrder(false);
   };
+
+  console.log(foodID);
+  console.log(drinkID);
 
   return (
     <React.Fragment>
@@ -93,7 +96,23 @@ const UserEditOrder = () => {
 
             <fieldset className="mt-[27px] ">
               <legend className="font-semibold">Choose Food</legend>
-              {menu.foods.map((food) => (
+              {menu.foods.map((foods) => {
+                return (
+                  <CustomRadioBox
+                    key={foods.food_id}
+                    id={foods.food_id}
+                    passfunc={setFoodID}
+                    name={foods.food_name}
+                    selected={foods.food_id === foodID}
+                    fieldset={"food"}
+                    value={foods.food_id}
+                  >
+                    {foods.food_name}
+                  </CustomRadioBox>
+                );
+              })}
+
+              {/* {menu.foods.map((food) => (
                 <div
                   key={food.food_id}
                   className="relative  mt-[18px] flex  items-center  py-[18px]  rounded-lg pl-5 "
@@ -113,30 +132,24 @@ const UserEditOrder = () => {
                     {food.food_name}
                   </label>
                 </div>
-              ))}
+              ))} */}
 
               <legend className="mt-6 font-semibold">Choose Drink</legend>
-              {menu.drinks.map((drink) => (
-                <div
-                  key={drink.drink_id}
-                  className="relative  mt-[18px] flex  items-center  py-[18px]  rounded-lg pl-5 "
-                >
-                  <input
-                    className="check_me peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
-                    type="radio"
-                    key={drink.drink_id}
-                    id={drink.drink_id}
-                    name="radio buttons drink"
-                    defaultChecked={drink.drink_id === drinkID && "checked"}
-                    onChange={(e) => setDrinkID(e.target.id)}
-                    value={drink.drink_id}
-                    onClick={(e) => setDrinkID(e.target.id)}
-                  />
-                  <label className="ml-[14px]  " htmlFor="hey">
-                    {drink.drink_name}
-                  </label>
-                </div>
-              ))}
+              {menu.drinks.map((drinks) => {
+                return (
+                  <CustomRadioBox
+                    key={drinks.drink_id}
+                    id={drinks.drink_id}
+                    passfunc={setDrinkID}
+                    name={drinks.drink_name}
+                    selected={drinks.drink_id === drinkID}
+                    fieldset={"drink"}
+                    value={drinks.drink_id}
+                  >
+                    {drinks.drink_name}
+                  </CustomRadioBox>
+                );
+              })}
             </fieldset>
 
             <label className="mt-10 font-semibold" htmlFor="">

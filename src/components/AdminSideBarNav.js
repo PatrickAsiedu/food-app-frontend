@@ -81,9 +81,7 @@ const AdminSideBarNav = (props) => {
             >
               <span>
                 <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                  width="31"
-                  height="31"
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px]"
                   viewBox="0 0 31 31"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -102,9 +100,7 @@ const AdminSideBarNav = (props) => {
             >
               <span>
                 <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                  width="32"
-                  height="32"
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px]"
                   viewBox="0 0 32 32"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -125,9 +121,7 @@ const AdminSideBarNav = (props) => {
             >
               <span>
                 <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                  width="16"
-                  height="26"
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px]"
                   viewBox="0 0 16 26"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -146,9 +140,7 @@ const AdminSideBarNav = (props) => {
             >
               <span>
                 <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                  width="21"
-                  height="29"
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px]"
                   viewBox="0 0 21 29"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -167,9 +159,7 @@ const AdminSideBarNav = (props) => {
             >
               <span>
                 <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                  width="31"
-                  height="31"
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px]"
                   viewBox="0 0 31 31"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -192,10 +182,8 @@ const AdminSideBarNav = (props) => {
             >
               <span>
                 <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 20 20"
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px]"
+                  viewBox="0 0 22 22"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
