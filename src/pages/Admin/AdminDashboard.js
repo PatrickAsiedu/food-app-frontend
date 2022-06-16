@@ -8,14 +8,11 @@ import OrdersTable from "../../components/Cards/OrdersTable";
 import { getOrders } from "../../redux/adminSlice";
 import AdminTitleBar from "../../components/AdminTitlebar/AdminTitlebar";
 import OrdersCard from "../../components/Cards/OrdersCard";
-import {
-  formatDateToDateString,
-} from "../../utils/util-functions";
+import { formatDateToDateString } from "../../utils/util-functions";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.user.user.name);
-  
 
   const [totalFood, setTotalFood] = useState(0);
   const [totalDrink, setTotalDrink] = useState(0);
@@ -28,18 +25,18 @@ const AdminDashboard = () => {
     const getTodayOrder = async () => {
       // const menuDate = today.toISOString().split("T")[0];
 
-      let queryDate = '';
+      let queryDate = "";
       // Chef can see this until 2pm where he gets to see orders for the following day
-      if(today.getHours() < 14){
+      if (today.getHours() < 14) {
         // see today's orders
-        queryDate = new Date()
-        setDate(queryDate)
-      }else{
+        queryDate = new Date();
+        setDate(queryDate);
+      } else {
         // see tommorrow.s orders
-        queryDate = new Date(Date.now() + (3600*1000*24))
-        setDate(queryDate)
+        queryDate = new Date(Date.now() + 3600 * 1000 * 24);
+        setDate(queryDate);
       }
-      const menuDate = queryDate.toISOString().split('T')[0];
+      const menuDate = queryDate.toISOString().split("T")[0];
       const response = await dispatch(getOrders(menuDate)).unwrap();
       // console.log(response);
       if (response.status === 200) {
@@ -65,8 +62,11 @@ const AdminDashboard = () => {
       <div className=" px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen">
         <AdminSideBarNav ordersCount={orders?.length} />
 
-        <main className="lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8    lg:px-[90px] text-base text-primary ">
-          <AdminTitleBar title={greeting} date={formatDateToDateString(date)}></AdminTitleBar>
+        <main className="lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8    lg:px-12 2xl:px-[90px]  text-base text-primary ">
+          <AdminTitleBar
+            title={greeting}
+            date={formatDateToDateString(date)}
+          ></AdminTitleBar>
           {/* <h1 className="mt-[5%] text-primary font-bold text-base">
             WELCOME: {userName}
           </h1>

@@ -7,8 +7,7 @@ import AddDateForm from "../../components/AddFoodForm/AddDateForm";
 import { addMenu } from "../../redux/chefSlice";
 // import AddFoodForm from "../../components/AddFoodForm/AddFoodForm";
 import { displayError, displaySuccess } from "../../utils/util-functions";
-
-const AddMenuForm = () => {
+const CheffEditMenuForm = () => {
   const dispatch = useDispatch();
   // const foodInitialState = {id: 60, name: 'Curried Rice'};
   // const drinkInitialState = { id: 1, name: 'Sobolo'};
@@ -140,4 +139,4 @@ const AddMenuForm = () => {
   );
 };
 
-export default AddMenuForm;
+export default CheffEditMenuForm;

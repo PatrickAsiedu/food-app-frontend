@@ -6,9 +6,7 @@ import FoodCard from "../../components/Cards/FoodCard";
 import { getMenu, getOrders } from "../../redux/adminSlice";
 import OrdersCard from "../../components/Cards/OrdersCard";
 
-import {
-  formatDateToDateString,
-} from "../../utils/util-functions";
+import { formatDateToDateString } from "../../utils/util-functions";
 
 const AdminOrders = () => {
   const dispatch = useDispatch();
@@ -24,7 +22,7 @@ const AdminOrders = () => {
   useEffect(() => {
     const getSelectedOrder = async () => {
       const response = await dispatch(getOrders(selectedDate)).unwrap();
-       console.log(response)
+      console.log(response);
       if (response.status === 200) {
         setOrders(response.data);
         const getMenuRequest = await dispatch(getMenu(selectedDate)).unwrap();
@@ -49,7 +47,7 @@ const AdminOrders = () => {
         // console.log(tempDrinks)
         setDrinkSummary(tempDrinks);
       } else if (response.status === 400) {
-        console.log('errrorrro hehhehe')
+        console.log("errrorrro hehhehe");
         // handle error on no order found here
         // first clear all states set by the if block above
         setOrders(null);
@@ -66,7 +64,7 @@ const AdminOrders = () => {
       <div className=" px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen  ">
         <AdminSideBarNav />
 
-        <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8 lg:px-[90px] text-base text-primary  ">
+        <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8 lg:px-12 2xl:px-[90px] text-base text-primary  ">
           <div className=" mt-[40px] text-right">
             <form>
               <label className="text-primary font-bold text-base">
