@@ -24,7 +24,9 @@ const UserOrderHistoryTable = () => {
         const data = [...response.data.data];
         setOrders(sortByDate(data));
       } else {
-        setError("You haven't order anything yet, please order something and check again");
+        setError(
+          "You haven't order anything yet, please order something and check again"
+        );
         setOrders("");
       }
     };
@@ -36,7 +38,7 @@ const UserOrderHistoryTable = () => {
 
   if (error) {
     return (
-      <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
+      <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[650px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-12 ">
         <h1 className=" mt-10 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
           {error}
         </h1>
@@ -46,8 +48,8 @@ const UserOrderHistoryTable = () => {
 
   return (
     <React.Fragment>
-      {orders ? ( 
-        <div className=" hidden sm:flex lg:flex lg:px-[90px] 2xl:px-[200px] text-primary">
+      {orders ? (
+        <div className=" hidden sm:flex lg:flex lg:px-12 xl:px-[70px] 2xl:px-[200px] text-primary">
           <div className=" w-full  box-outer-shadow mt-12 rounded-3xl px-5 ">
             <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-5 gap-3   ">
               <h1 className="font-semibold pl-3">Food Choice</h1>

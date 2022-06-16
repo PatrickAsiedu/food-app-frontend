@@ -38,7 +38,7 @@ const UserDashboard = () => {
       <div className="px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen ">
         <UserSideBarNav />
 
-        <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]  lg:px-0 lg:ml-[30%]  2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8 ">
+        <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]  lg:px-0 lg:ml-[30%]  2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8  ">
           <h1 className=" lg:mt-0 sm:hidden font-semibold text-xl text-primary ">
             {greeting}
           </h1>
