@@ -5,7 +5,11 @@ import { displayError, displaySuccess, formatDateToDateString } from "../../util
 
 const AllDrinksTable = ({ onEditDrink, setEditDrinkID }) => {
   const dispatch = useDispatch()
-  const drinkList = useSelector(state=>state.chef.drinkList);
+  
+  // since we are using same componentt, we have to check who is logged in so we can ...
+  const chefdrinkList =  useSelector(state=>state.chef.drinkList);
+  const admindrinkList =  useSelector(state=>state.admin.drinkList);
+  const drinkList = chefdrinkList.length !==0 ? chefdrinkList : admindrinkList
   console.log(drinkList)
 
   const deleteDrinkWithID= async(id) => {

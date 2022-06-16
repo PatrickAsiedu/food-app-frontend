@@ -24,6 +24,35 @@ export const getFoodsAdmin = createAsyncThunk(
   }
 );
 
+export const addFoodAdmin = createAsyncThunk('chef/addFood', async(foodName) => {
+  try {
+    const response = await API.post('/food', foodName);
+    console.log(response)
+    return response.data.message
+  } catch (error) {
+    console.log(error.response.message)
+  }
+})
+
+export const deleteFoodAdmin = createAsyncThunk('chef/deletefood', async(FoodID) => {
+  try {
+    const response = await API.put('/deletefood', FoodID);
+    return {status: response.status, message: response.data.message}
+  } catch (error) {
+    console.log(error.response)
+  }
+})
+
+export const editFoodAdmin = createAsyncThunk('chef/editFood', async(foodObject)=>{
+  try {
+    const response = await API.put('/food', foodObject)
+    return {status: response.status, message: response.data.message}
+  } catch (error) {
+    console.log(error.response)
+    return { status: error.response.status, message: 'Error here'}
+  }
+});
+
 export const getDrinksAdmin = createAsyncThunk(
   "admin/fetchAllDrinks",
   async () => {
@@ -35,6 +64,36 @@ export const getDrinksAdmin = createAsyncThunk(
     }
   }
 );
+
+export const addDrinkAdmin = createAsyncThunk('chef/addDrink', async(DrinkName) => {
+  try {
+    const response = await API.post('/drink', DrinkName);
+    console.log(response)
+    return response.data.message
+  } catch (error) {
+    console.log(error.response.message)
+  }
+})
+
+export const deleteDrinkAdmin = createAsyncThunk('chef/deleteDrink', async(DrinkID) => {
+  try {
+    const response = await API.put('deletedrink', DrinkID);
+    return {status: response.status, message: response.data.message}
+  } catch (error) {
+    console.log(error.response)
+  }
+});
+
+export const editDrinkAdmin = createAsyncThunk('chef/editdrink', async(drinkObject)=>{
+  try {
+    const response = await API.put('/drink', drinkObject)
+    return {status: response.status, message: response.data.message}
+  } catch (error) {
+    console.log(error.response)
+    return { status: error.response.status, message: 'Error here'}
+  }
+});
+
 
 export const getAllOrders = createAsyncThunk("admin/getAllOrder", async () => {
   try {
@@ -167,6 +226,17 @@ export const resetPassword = createAsyncThunk('admin/resetPassword', async(user)
     return {status: error.response.status}
   }
 });
+
+export const getAllMenu = createAsyncThunk('chef/getAllMenu', async()=>{
+  try {
+    const response = await API.get('/menu/all');
+    // console.log(response)
+    return {status: response.status, data: response.data.data}
+  } catch (error) {
+    console.log(error.response)
+    return {status: error.response.status}
+  }
+})
 
 
 

@@ -19,6 +19,7 @@ const AddNewFoodForm = () => {
         displaySuccess('Food addded successfully')
       }
     }
+    setAddingFood(false)
   }
 
 
@@ -36,7 +37,7 @@ const AddNewFoodForm = () => {
         required
       />
       <button type="submit" className="mt-8 bg-primary text-white font-bold h-11 w-40 lg:w-[186px]  lg:h-[50px] rounded-lg  mb-12">
-        Add to Food List
+        {addingFood ? 'Adding food...' :'Add to Food List'}
       </button>
     </form>
   );
