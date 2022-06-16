@@ -33,7 +33,8 @@ const AllMenuTable = () => {
   
   const deleteMenuItem = async(id) => {
     console.log(id)
-    const response = await dispatch(deleteMenu({menu_id: id}) ).unwrap();
+    const response = await dispatch(deleteMenu(id)).unwrap();
+    console.log(response)
     if(response.status===200){
       displaySuccess('Menu deleted successfully')
     } else {
