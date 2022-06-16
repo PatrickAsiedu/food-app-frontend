@@ -64,7 +64,7 @@ const ChefDashboard = () => {
       <div className="px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen  ">
         <ChefSideBarNav orderTotal={orders?.length} />
 
-        <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8  lg:px-[90px] text-base text-primary ">
+        <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8 lg:12  2xl:px-[90px]  text-base text-primary ">
           <AdminTitleBar
             title={greeting}
             date={formatDateToDateString(date)}

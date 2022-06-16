@@ -5,10 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import CustomInput from "../../components/AddFoodForm/CustomInput";
 import AddDateForm from "../../components/AddFoodForm/AddDateForm";
 import { addMenu } from "../../redux/chefSlice";
-// import AddFoodForm from "../../components/AddFoodForm/AddFoodForm";
 import { displayError, displaySuccess } from "../../utils/util-functions";
 
-const AddMenuForm = () => {
+const AdminEditMenuForm = () => {
   const dispatch = useDispatch();
   // const foodInitialState = {id: 60, name: 'Curried Rice'};
   // const drinkInitialState = { id: 1, name: 'Sobolo'};
@@ -16,9 +15,13 @@ const AddMenuForm = () => {
   const [selectedFoods, setSelectedFoods] = useState([]);
   const [selectedDrinks, setSelectedDrinks] = useState([]);
   const [menuDate, setMenuDate] = useState();
+  const [chefName, setChefName] = useState(null);
 
-  const foodList = useSelector((state) => state.chef.foodList);
-  const drinkList = useSelector((state) => state.chef.drinkList);
+  const foodList = useSelector((state) => state.admin.foodList);
+  const drinkList = useSelector((state) => state.admin.drinkList);
+  const chefList = useSelector((state) =>
+    state.admin.allUsers.filter((user) => user.type === "chef")
+  );
 
   // food here is an object with id and name
   const addToSelectedFoods = (food) => {
@@ -42,13 +45,16 @@ const AddMenuForm = () => {
     menu.menu_date = menuDate;
     menu.foods_id = selectedFoods.map((food) => food.id);
     menu.drinks_id = selectedDrinks.map((drink) => drink.id);
+    menu.chef_id = chefName;
     console.log(menu);
 
     if (!menu.menu_date) {
       return displayError("Please select a menu date");
     }
-
-    if (!menu.foods_id) {
+    if (chefName === null || chefName === "no chef selected") {
+      return displayError("Please select a chef");
+    }
+    if (menu.foods_id.length === 0) {
       return displayError("You are creating a menun without foods..");
     }
 
@@ -68,10 +74,25 @@ const AddMenuForm = () => {
   return (
     <React.Fragment>
       <div className="lg:grid lg:grid-cols-2 gap-4 mt-[5%]">
-        <div className="w-full  box-outer-shadow  px-6 rounded-3xl 2xl:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary mb-5 pb-8">
+        <div className="w-full  box-outer-shadow  px-6 rounded-3xl 2xl:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary mb-5 pb-8 ">
           {/* <AddFoodForm /> */}
           {/* date picker */}
           <AddDateForm setMenuDate={setMenuDate} />
+
+          {/* this should be drop down rather with nmames of all chef */}
+          <label>Select Chef</label>
+          <select
+            name="chefs"
+            onChange={(e) => setChefName(e.target.value)}
+            className="w-full border-b h-12 outline-0 mb-8"
+          >
+            <option>no chef selected</option>
+            {chefList.map((chef) => (
+              <option key={chef.id} value={chef.name} id={chef.id}>
+                {chef.name}
+              </option>
+            ))}
+          </select>
 
           <CustomInput
             label="Add Food"
@@ -90,7 +111,7 @@ const AddMenuForm = () => {
           {/* <AddDrinkForm /> */}
         </div>
 
-        <div className=" w-full box-outer-shadow  px-6 rounded-3xl  pt-9 lg:pt-16 text-base font-medium text-primary">
+        <div className=" w-full box-outer-shadow  px-6 rounded-3xl lg:px-6 pt-9 lg:pt-16 text-base font-medium text-primary">
           <h1 className="font-semibold text-2xl text-center">Menu</h1>
 
           <h1 className="mt-7 lg:mt-10 mb-4">Food</h1>
@@ -125,6 +146,8 @@ const AddMenuForm = () => {
             ))}
           </div>
 
+          <p>Chef: </p>
+          {chefName}
           <div className="mt-8 pb-10 flex justify-center">
             <button
               onClick={onFormSubmitHandler}
@@ -140,4 +163,4 @@ const AddMenuForm = () => {
   );
 };
 
-export default AddMenuForm;
+export default AdminEditMenuForm;

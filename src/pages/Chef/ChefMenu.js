@@ -4,6 +4,7 @@ import ChefSideBarNav from "../../components/ChefSideBarNav";
 import ChefMenuTopNavBar from "../../components/ChefMenuTopNavBar";
 import AddMenuForm from "../../components/Add Menu Form/AddMenuForm";
 import AllMenuTable from "../../components/AllMenusTable/AllMenuTable";
+import CheffEditMenuForm from "../../components/CheffEditMenuForm/CheffEditMenuForm";
 
 const ChefAddMenu = () => {
   const [currentTab, setCurrentTab] = useState(1);
@@ -16,6 +17,7 @@ const ChefAddMenu = () => {
           <ChefMenuTopNavBar setCurrentTab={setCurrentTab}></ChefMenuTopNavBar>
           {currentTab === 1 && <AddMenuForm></AddMenuForm>}
           {currentTab === 2 && <AllMenuTable></AllMenuTable>}
+          {currentTab === 3 && <CheffEditMenuForm></CheffEditMenuForm>}
 
           <div className=" pt-[120px]"></div>
         </main>

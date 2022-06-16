@@ -26,7 +26,7 @@ const AdminTopNavBar = ({ setCurrentTab }) => {
             fill="white"
           />
         </svg>
-        <span className="ml-2 sm:hidden lg:flex">Add User</span>
+        <span className="ml-2 sm:hidden lg:flex lg:text-xs">Add User</span>
       </button>
 
       <button className="flex" onClick={() => setCurrentTab(2)}>
@@ -43,7 +43,9 @@ const AdminTopNavBar = ({ setCurrentTab }) => {
           />
         </svg>
 
-        <span className="ml-2 sm:hidden lg:flex">Signup Approval</span>
+        <span className="ml-2 sm:hidden lg:flex lg:text-xs">
+          Signup Approval
+        </span>
         <Notificationtile value={totalSignUps.length}></Notificationtile>
       </button>
 
@@ -60,7 +62,7 @@ const AdminTopNavBar = ({ setCurrentTab }) => {
             fill="white"
           />
         </svg>
-        <span className="ml-2 whitespace-nowrap sm:hidden lg:flex">
+        <span className="ml-2 whitespace-nowrap sm:hidden lg:flex lg:text-xs">
           Reset Password Approval
         </span>
         <Notificationtile value={totalResets.length}></Notificationtile>
@@ -80,7 +82,7 @@ const AdminTopNavBar = ({ setCurrentTab }) => {
           />
         </svg>
 
-        <span className="ml-2 whitespace-nowrap sm:hidden lg:flex">
+        <span className="ml-2 whitespace-nowrap sm:hidden lg:flex lg:text-xs">
           Show All Users
         </span>
         <Notificationtile value={totalUsers.length}></Notificationtile>
