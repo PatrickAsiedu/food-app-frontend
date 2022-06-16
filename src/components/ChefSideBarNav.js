@@ -71,11 +71,9 @@ const ChefSideBarNav = (props) => {
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary  "
               onClick={onDashboardLinkClickHandler}
             >
-              <span>
+              <span className="">
                 <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                  width="31"
-                  height="31"
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px]"
                   viewBox="0 0 31 31"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -92,12 +90,10 @@ const ChefSideBarNav = (props) => {
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary"
               onClick={onAddMenuLinkClickHandler}
             >
-              <span>
+              <span className=" ">
                 <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                  width="21"
-                  height="29"
-                  viewBox="0 0 21 29"
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px] pl-[2px]"
+                  viewBox="0 0 24 31"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -113,12 +109,10 @@ const ChefSideBarNav = (props) => {
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary"
               onClick={onFoodLinkClickHandler}
             >
-              <span>
+              <span className="">
                 <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px] pl-[2px]"
+                  viewBox="0 0 28 35"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -136,12 +130,10 @@ const ChefSideBarNav = (props) => {
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary"
               onClick={onDrinksLinkClickHandler}
             >
-              <span>
+              <span className=" ">
                 <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                  width="16"
-                  height="26"
-                  viewBox="0 0 16 26"
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px] pl-[4px]"
+                  viewBox="0 0 25 31"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -157,12 +149,10 @@ const ChefSideBarNav = (props) => {
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary  "
               onClick={onOrdersLinkClickHandler}
             >
-              <span>
+              <span className="">
                 <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                  width="31"
-                  height="31"
-                  viewBox="0 0 31 31"
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px]"
+                  viewBox="0 0 28 38"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
