@@ -6,7 +6,13 @@ import { displayError, displaySuccess } from "../../utils/util-functions";
 const EditFoodModal = ({ onEditFood,  editFoodID }) => {
   const dispatch = useDispatch()
   // console.log('hehehe ...', editFoodID)
-  const food = useSelector(state=>state.chef.foodList.find(food=>food.id === editFoodID));
+  const foodChef = useSelector(state=>state.chef.foodList.find(food=>food.id === editFoodID));
+  const foodAdmin = useSelector(state=>state.admin.foodList.find(food=>food.id === editFoodID));
+  const userType = useSelector(state=>state.user.user.type)
+  console.log(userType)
+  
+  const food = userType==='chef' ? foodChef : foodAdmin
+  
   console.log(food)
 
   const [name, setName] = useState(food.name);

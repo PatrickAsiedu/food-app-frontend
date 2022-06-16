@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteFood } from "../../redux/chefSlice";
+import { deleteFoodAdmin } from "../../redux/adminSlice";
 import { displayError, displaySuccess, formatDateToDateString } from "../../utils/util-functions";
 
 
 const AllFoodsTable = ({ onEditFood,setEditFoodID }) => {
   const dispatch = useDispatch();
 
-  const foodList = useSelector(state=>state.chef.foodList);
+  // since we are using same componentt, we have to check who is logged in so we can ...
+  const chefFoodList =  useSelector(state=>state.chef.foodList);
+  const adminFoodList =  useSelector(state=>state.admin.foodList);
+  const foodList = chefFoodList.length !==0 ? chefFoodList : adminFoodList
   // console.log(foodList)
+
+  console.log(foodList)
 
   const deleteFoodWithID= async(id) => {
     console.log('deleting.. ', id)
-    const response = await dispatch(deleteFood({food_id: id})).unwrap()
+    const response = await dispatch(deleteFoodAdmin({food_id: id})).unwrap()
 
     if(response.status === 200){
       displaySuccess('Food deleted successfully')
