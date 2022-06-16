@@ -45,15 +45,16 @@ const UserHistories = () => {
           <UserTitlebar title="Your Order History"></UserTitlebar>
 
           <UserOrderHistoryTable />
-          {orders && orders.map((order) => (
-            <OrderHistoryCard
-              key={order.id}
-              foodname={order.food_name}
-              drinkname={order.drink_name}
-              comment={order.comment || "no comment"}
-              date={formatDateToDateString(order.created_at).slice(0, -4)}
-            />
-          ))}
+          {orders &&
+            orders.map((order) => (
+              <OrderHistoryCard
+                key={order.id}
+                foodname={order.food_name}
+                drinkname={order.drink_name}
+                comment={order.comment || "no comment"}
+                date={formatDateToDateString(order.created_at).slice(0, -4)}
+              />
+            ))}
 
           <div className=" pt-[120px]"></div>
         </main>

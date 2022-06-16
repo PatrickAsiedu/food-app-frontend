@@ -47,9 +47,7 @@ const UserDashboardItems = ({ menuDate }) => {
                 ? "today,"
                 : ""
             } 
-            ${formatDateToStringNoYear(
-              response.data.menu_date
-            )}'s lunch yet.`
+            ${formatDateToStringNoYear(response.data.menu_date)}'s lunch yet.`
           );
           setOrdersCloseAtMessage(
             `Note that orders for this menu close at ${formatDateToDateAndTimeString(
@@ -96,7 +94,7 @@ const UserDashboardItems = ({ menuDate }) => {
             `You have ordered for ${userOrder.food_name}  ${userOrder.drink_name && `and ${userOrder.drink_name}` } for  ${formatDateToDateString(currentMenu.menu_date)} ` 
             : `Looks like you have not placed an order for ${formatDateToDateString(currentMenu.menu_date)}'s lunch` } */}
       </div>
-      <div className="mt-[100px] lg:px-[100px] md:px-[50px] flex lg:flex lg:mx-auto justify-between">
+      <div className="mt-[100px]  md:px-[50px] flex lg:flex lg:mx-auto justify-between">
         <Link
           to="/me/order"
           className="w-[150px] h-[237px] sm:w-[200px] sm:h-[300px] lg:h-[362px] lg:w-[258px] flex flex-col bg-tablehighligh rounded-[20px] justify-center items-center hover:bg-primary/80 group active:bg-primary"

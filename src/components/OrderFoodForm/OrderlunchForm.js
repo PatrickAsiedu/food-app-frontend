@@ -65,7 +65,7 @@ const OrderLunchForm = (props) => {
 
   if (error) {
     return (
-      <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
+      <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5 lg:w-[650px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-12 ">
         <h1 className=" mt-10 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
           {error.replace("specified date", noMenuFoundDate)}
         </h1>
@@ -76,7 +76,7 @@ const OrderLunchForm = (props) => {
   const RenderOrderAlready = () => {
     console.log(menu.user_order);
     return (
-      <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
+      <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5 lg:w-[650px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-12">
         <h1 className=" mt-8 mb-8 lg:mt-20 text-center font-semibold text-primary text-xl">
           Your {formatDateToStringNoYear(menu.menu_date)} 's lunch order
         </h1>
@@ -198,7 +198,7 @@ const OrderLunchForm = (props) => {
             onSubmit={onFormSubmitHandler}
             className={`${
               props.devicestatus
-            }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12 md:px-14    lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
+            }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12 md:px-14    lg:w-[650px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-12 "}`}
           >
             <h1 className="  mt-10 lg:mt-14 text-center font-bold text-primary text-xl lg:text-2xl">
               {formatDateToStringNoYear(props.menuDate)}'s Lunch Menu
