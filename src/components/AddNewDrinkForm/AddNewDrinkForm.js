@@ -17,9 +17,9 @@ const AddNewDrinkForm = () => {
       const response = await dispatch(addDrink({drinks: [drink]})).unwrap()
       if(response){
         displaySuccess('Food addded successfully')
-        addingDrink(false)
       }
     }
+    setAddingDrink(false)
   }
 
 
@@ -37,7 +37,7 @@ const AddNewDrinkForm = () => {
         required
       />
       <button className="mt-8 bg-primary text-white font-bold h-11 w-40 lg:w-[186px]  lg:h-[50px] rounded-lg  mb-12">
-        Add to Drinks List
+        {addingDrink ? 'Adding new drink...' :'Add to Drinks List'}
       </button>
     </form>
   );

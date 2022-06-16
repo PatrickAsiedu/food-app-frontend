@@ -5,10 +5,15 @@ import { displayError, displaySuccess } from "../../utils/util-functions";
 
 
 const EditDrinkModal = ({ onEditDrink, editDrinkID }) => {
-  const drink = useSelector(state=>state.chef.drinkList.find(drink=>drink.id === editDrinkID));
-  console.log(drink)
-
   const dispatch = useDispatch()
+  const drinkChef = useSelector(state=>state.chef.drinkList.find(drink=>drink.id === editDrinkID));
+  const drinkAdmin = useSelector(state=>state.admin.drinkList.find(drink=>drink.id === editDrinkID));
+  const userType = useSelector(state=>state.user.user.type)
+  console.log(userType)
+  
+  const drink = userType==='chef' ? drinkChef : drinkAdmin
+  
+  console.log(drink)
 
   const [name, setName] = useState(drink.name);
   const [isEditting, setIsEditting] = useState(false)

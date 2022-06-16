@@ -160,6 +160,16 @@ export const getAllMenu = createAsyncThunk('chef/getAllMenu', async()=>{
     console.log(error.response)
     return {status: error.response.status}
   }
+});
+
+export const deleteMenu = createAsyncThunk('chef/deleteMeu', async(menuID) => {
+  try {
+    const response = await API.delete('/menu', menuID);
+    console.log(response)
+    return {status: response.status, message: response.data.message}
+  } catch (error) {
+    return {status: error.response.status}
+  }
 })
 
 const chefSlice = createSlice({

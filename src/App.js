@@ -21,6 +21,8 @@ import ChefDrinks from "./pages/Chef/ChefDrinks";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminAddMenu from "./pages/Admin/AdminAddMenu";
 import AdminOrders from "./pages/Admin/AdminOrders";
+import AdminFood from "./pages/Admin/AdminFood";
+import AdminDrink from "./pages/Admin/AdminDrink";
 // import AdminAddUser from "./pages/Admin/AdminAddUser";
 // import AdminSignupApproval from "./pages/Admin/AdminSignupApproval";
 import AdminUserManagement from "./pages/Admin/AdminUserManagement";
@@ -150,6 +152,17 @@ function App() {
               <ProtectedRoute Component={AdminDashboard} Permission="admin" />
             }
           />
+
+          <Route
+            exact
+            path="/admin/food"
+            element={<ProtectedRoute Component={AdminFood} Permission="admin" />} />
+
+          <Route
+            exact
+            path="/admin/drink"
+            element={<ProtectedRoute Component={AdminDrink} Permission="admin" />} />
+
           <Route
             exact
             path="/admin/addmenu"
