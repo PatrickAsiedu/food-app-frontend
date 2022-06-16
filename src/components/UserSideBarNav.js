@@ -76,9 +76,7 @@ const UserSideBarNav = () => {
           >
             <span>
               <svg
-                className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 "
-                width="31"
-                height="31"
+                className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px] "
                 viewBox="0 0 31 31"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,10 +95,8 @@ const UserSideBarNav = () => {
           >
             <span>
               <svg
-                className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80"
-                width="25"
-                height="26"
-                viewBox="0 0 25 26"
+                className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px]"
+                viewBox="0 0 25 30"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -141,9 +137,7 @@ const UserSideBarNav = () => {
           >
             <span>
               <svg
-                className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 "
-                width="31"
-                height="31"
+                className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px] "
                 viewBox="0 0 31 31"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
