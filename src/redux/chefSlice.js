@@ -164,7 +164,7 @@ export const getAllMenu = createAsyncThunk('chef/getAllMenu', async()=>{
 
 export const deleteMenu = createAsyncThunk('chef/deleteMeu', async(menuID) => {
   try {
-    const response = await API.delete('/menu', menuID);
+    const response = await API.delete(`/menu?menu_id=${menuID}`);
     console.log(response)
     return {status: response.status, message: response.data.message}
   } catch (error) {
