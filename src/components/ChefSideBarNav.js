@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import ToggleSwitch from "./UI/ToggleSwitch";
+// import ToggleSwitch from "./UI/ToggleSwitch";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutCurrentUser } from "../redux/userSlice";
 import Header from "./Layout/Header";
@@ -85,25 +85,7 @@ const ChefSideBarNav = (props) => {
                 Dashboard
               </span>
             </Link>
-            <Link
-              to="/chef/menu"
-              className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary"
-              onClick={onAddMenuLinkClickHandler}
-            >
-              <span className=" ">
-                <svg
-                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px] pl-[2px]"
-                  viewBox="0 0 24 31"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M19.1111 0.722168H1.88891C1.43215 0.722168 0.994093 0.903616 0.671114 1.2266C0.348135 1.54957 0.166687 1.98763 0.166687 2.44439V26.5555C0.166687 27.0123 0.348135 27.4503 0.671114 27.7733C0.994093 28.0963 1.43215 28.2777 1.88891 28.2777H19.1111C19.5679 28.2777 20.0059 28.0963 20.3289 27.7733C20.6519 27.4503 20.8334 27.0123 20.8334 26.5555V2.44439C20.8334 1.98763 20.6519 1.54957 20.3289 1.2266C20.0059 0.903616 19.5679 0.722168 19.1111 0.722168ZM6.19446 21.3888H4.47224V19.6666H6.19446V21.3888ZM6.19446 17.9444H4.47224V16.2222H6.19446V17.9444ZM6.19446 14.4999H4.47224V12.7777H6.19446V14.4999ZM6.19446 11.0555H4.47224V9.33328H6.19446V11.0555ZM6.19446 7.61106H4.47224V5.88883H6.19446V7.61106ZM16.5278 21.3888H7.91669V19.6666H16.5278V21.3888ZM16.5278 17.9444H7.91669V16.2222H16.5278V17.9444ZM16.5278 14.4999H7.91669V12.7777H16.5278V14.4999ZM16.5278 11.0555H7.91669V9.33328H16.5278V11.0555ZM16.5278 7.61106H7.91669V5.88883H16.5278V7.61106Z" />
-                </svg>
-              </span>
-              <span className="ml-5 font-semibold text-white sm:text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium  sm:hidden lg:flex">
-                Menu
-              </span>
-            </Link>
+            
             <Link
               to="/chef/food"
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary"
@@ -122,7 +104,7 @@ const ChefSideBarNav = (props) => {
                 </svg>
               </span>
               <span className="ml-5 font-semibold text-white sm:text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium  sm:hidden lg:flex">
-                Food
+                Foods
               </span>
             </Link>
             <Link
@@ -144,6 +126,28 @@ const ChefSideBarNav = (props) => {
                 Drinks
               </span>
             </Link>
+
+            <Link
+              to="/chef/menu"
+              className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary"
+              onClick={onAddMenuLinkClickHandler}
+            >
+              <span className=" ">
+                <svg
+                  className="group-hover:fill-white group-hover:opacity-100 fill-white sm:fill-primary opacity-80 w-[31px] h-[31px] pl-[2px]"
+                  viewBox="0 0 24 31"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M19.1111 0.722168H1.88891C1.43215 0.722168 0.994093 0.903616 0.671114 1.2266C0.348135 1.54957 0.166687 1.98763 0.166687 2.44439V26.5555C0.166687 27.0123 0.348135 27.4503 0.671114 27.7733C0.994093 28.0963 1.43215 28.2777 1.88891 28.2777H19.1111C19.5679 28.2777 20.0059 28.0963 20.3289 27.7733C20.6519 27.4503 20.8334 27.0123 20.8334 26.5555V2.44439C20.8334 1.98763 20.6519 1.54957 20.3289 1.2266C20.0059 0.903616 19.5679 0.722168 19.1111 0.722168ZM6.19446 21.3888H4.47224V19.6666H6.19446V21.3888ZM6.19446 17.9444H4.47224V16.2222H6.19446V17.9444ZM6.19446 14.4999H4.47224V12.7777H6.19446V14.4999ZM6.19446 11.0555H4.47224V9.33328H6.19446V11.0555ZM6.19446 7.61106H4.47224V5.88883H6.19446V7.61106ZM16.5278 21.3888H7.91669V19.6666H16.5278V21.3888ZM16.5278 17.9444H7.91669V16.2222H16.5278V17.9444ZM16.5278 14.4999H7.91669V12.7777H16.5278V14.4999ZM16.5278 11.0555H7.91669V9.33328H16.5278V11.0555ZM16.5278 7.61106H7.91669V5.88883H16.5278V7.61106Z" />
+                </svg>
+              </span>
+              <span className="ml-5 font-semibold text-white sm:text-primary opacity-80 group-hover:text-white group-hover:opacity-100 group-hover:font-medium  sm:hidden lg:flex">
+                Menus
+              </span>
+            </Link>
+
+
             <Link
               to="/chef/orders"
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary  "

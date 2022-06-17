@@ -38,7 +38,7 @@ const ChefMenuTopNavBar = ({ setCurrentTab }) => {
 
         <span className="ml-2 sm:hidden lg:flex">All Menu's</span>
       </button>
-      <button className="flex" onClick={() => setCurrentTab(3)}>
+      {/* <button className="flex" onClick={() => setCurrentTab(3)}>
         <svg
           className="fill-white"
           width="25"
@@ -52,7 +52,7 @@ const ChefMenuTopNavBar = ({ setCurrentTab }) => {
         </svg>
 
         <span className="ml-2 sm:hidden lg:flex ">Edit Menu</span>
-      </button>
+      </button> */}
     </nav>
   );
 };
