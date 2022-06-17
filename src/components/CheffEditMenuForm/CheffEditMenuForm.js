@@ -4,20 +4,27 @@ import DrinkItem from "../../components/DrinkItem/DrinkItem";
 import { useDispatch, useSelector } from "react-redux";
 import CustomInput from "../../components/AddFoodForm/CustomInput";
 import AddDateForm from "../../components/AddFoodForm/AddDateForm";
-import { addMenu } from "../../redux/chefSlice";
+import {  editMenu } from "../../redux/chefSlice";
 // import AddFoodForm from "../../components/AddFoodForm/AddFoodForm";
-import { displayError, displaySuccess } from "../../utils/util-functions";
-const CheffEditMenuForm = () => {
+import { displayError, displaySuccess, formatDateToDateString } from "../../utils/util-functions";
+
+
+const CheffEditMenuForm = ({currentEditableMenuRef}) => {
   const dispatch = useDispatch();
   // const foodInitialState = {id: 60, name: 'Curried Rice'};
   // const drinkInitialState = { id: 1, name: 'Sobolo'};
 
-  const [selectedFoods, setSelectedFoods] = useState([]);
-  const [selectedDrinks, setSelectedDrinks] = useState([]);
-  const [menuDate, setMenuDate] = useState();
+  console.log('currentEditableMenuRef....: ', currentEditableMenuRef)
+
+  const [selectedFoods, setSelectedFoods] = useState(currentEditableMenuRef.current.foods.map(food=> {return {id: food.food_id, name: food.food_name}}));
+  const [selectedDrinks, setSelectedDrinks] = useState(currentEditableMenuRef.current.drinks.map(drink=>{return {id:drink.drink_id, name: drink.drink_name}}));
+  const [menuDate, setMenuDate] = useState(currentEditableMenuRef.current.menu_date);
 
   const foodList = useSelector((state) => state.chef.foodList);
   const drinkList = useSelector((state) => state.chef.drinkList);
+
+  const [isUpdattingMenu, setIsUpdattingMenu] = useState(false);
+
 
   // food here is an object with id and name
   const addToSelectedFoods = (food) => {
@@ -37,10 +44,12 @@ const CheffEditMenuForm = () => {
   };
   const onFormSubmitHandler = async (e) => {
     e.preventDefault();
+    setIsUpdattingMenu(true)
     const menu = {};
     menu.menu_date = menuDate;
     menu.foods_id = selectedFoods.map((food) => food.id);
     menu.drinks_id = selectedDrinks.map((drink) => drink.id);
+    menu.menu_id = currentEditableMenuRef.current.menu_id
     console.log(menu);
 
     if (!menu.menu_date) {
@@ -55,12 +64,14 @@ const CheffEditMenuForm = () => {
       return displayError("You are creating a menun without foods..");
     }
 
-    const response = await dispatch(addMenu(menu)).unwrap();
+    console.log('looging what is just updated: ', menu)
+
+    const response = await dispatch(editMenu(menu)).unwrap();
     console.log(response);
     if (response.status === 400) {
       return displayError(response.errorMessage);
     }
-    if (response.status === 201) {
+    if (response.status === 200) {
       return displaySuccess(response.message);
     }
   };
@@ -90,9 +101,10 @@ const CheffEditMenuForm = () => {
         </div>
 
         <div className=" w-full box-outer-shadow  px-6 rounded-3xl  pt-9 lg:pt-16 text-base font-medium text-primary">
-          <h1 className="font-semibold text-2xl text-center">Menu</h1>
+          <h1 className="font-semibold text-2xl text-center">Update Menu</h1>
+          <h1 className="mt-5">Menu Date: {formatDateToDateString(menuDate)}</h1>
 
-          <h1 className="mt-7 lg:mt-10 mb-4">Food</h1>
+          <h1 className="mt-7 lg:mt-5 mb-4">Food</h1>
           <div className="grid grid-cols-1 gap-3">
             {/* message if not food is selected */}
             {selectedFoods.length === 0 && "----No Food selected----"}
@@ -130,7 +142,7 @@ const CheffEditMenuForm = () => {
               type="submit"
               className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold"
             >
-              Add Menu
+              {isUpdattingMenu ? 'Updating Menu...' : 'Update Menu'}
             </button>
           </div>
         </div>
