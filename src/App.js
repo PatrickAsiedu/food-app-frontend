@@ -165,7 +165,7 @@ function App() {
 
           <Route
             exact
-            path="/admin/addmenu"
+            path="/admin/menu"
             element={
               <ProtectedRoute Component={AdminAddMenu} Permission="admin" />
             }
