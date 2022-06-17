@@ -134,7 +134,7 @@ const AdminSideBarNav = (props) => {
               </span>
             </Link>
             <Link
-              to="/admin/addmenu"
+              to="/admin/menu"
               className="group flex items-center py-6 pl-6 sm:pl-4 lg:pl-6 hover:bg-primary"
               onClick={onAddMenuLinkClickHandler}
             >
