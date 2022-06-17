@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getMenu, orderLunch } from "../../redux/userSlice";
 // import AlreadyOrderedModal from "../UI/Modals/AlreadyOrderedModal";
 import Swal from "sweetalert2";
+import CustomRadioBox from "../UI/CustomRadioBox";
 
 import {
   formatDateToDateAndTimeString,
@@ -57,6 +58,8 @@ const OrderLunchForm = (props) => {
   // if(props.menuDate===undefined)
   //   return (<RenderLoadingOrder />)
   console.log(menu);
+  console.log(food);
+  console.log(drink);
 
   // const onFoodSelectHandler = (Foodid) => {
   //   setselected(menu.foods.filter((food) => food.food_id !== Foodid));
@@ -65,7 +68,7 @@ const OrderLunchForm = (props) => {
 
   if (error) {
     return (
-      <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
+      <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5 lg:w-[650px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-12 ">
         <h1 className=" mt-10 lg:mt-20 text-center font-semibold text-primary text-xl lg:text-2xl">
           {error.replace("specified date", noMenuFoundDate)}
         </h1>
@@ -76,7 +79,7 @@ const OrderLunchForm = (props) => {
   const RenderOrderAlready = () => {
     console.log(menu.user_order);
     return (
-      <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5  lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 ">
+      <div className="text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12  pb-5 lg:w-[650px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-12">
         <h1 className=" mt-8 mb-8 lg:mt-20 text-center font-semibold text-primary text-xl">
           Your {formatDateToStringNoYear(menu.menu_date)} 's lunch order
         </h1>
@@ -198,7 +201,7 @@ const OrderLunchForm = (props) => {
             onSubmit={onFormSubmitHandler}
             className={`${
               props.devicestatus
-            }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12 md:px-14    lg:w-[750px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-24 "}`}
+            }  ${"text-primary font-medium text-base  flex flex-col  mt-8 lg:mt-12 md:px-14    lg:w-[650px] box-outer-shadow rounded-3xl mx-auto px-5 lg:px-12 "}`}
           >
             <h1 className="  mt-10 lg:mt-14 text-center font-bold text-primary text-xl lg:text-2xl">
               {formatDateToStringNoYear(props.menuDate)}'s Lunch Menu
@@ -206,46 +209,36 @@ const OrderLunchForm = (props) => {
 
             <fieldset className="mt-[27px] ">
               <legend className="font-semibold">Choose Food</legend>
-              {menu.foods.map((food) => (
-                <div
-                  id={food.food_id}
-                  key={food.food_id}
-                  // onClick={onFoodSelectHandler(food.food_id)}
-                  className="relative  mt-[18px] flex  items-center  py-[18px]  rounded-lg pl-5 "
-                >
-                  <input
-                    className="check_me peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
-                    type="radio"
-                    key={food.food_id}
-                    id={food.food_id}
-                    name="radio buttons"
-                    onClick={(e) => setFood(e.target.id)}
-                  />
-                  <label className="ml-[14px] " htmlFor="hey">
-                    {food.food_name}
-                  </label>
-                </div>
-              ))}
+              {menu.foods.map((foods) => {
+                return (
+                  <CustomRadioBox
+                    key={foods.food_id}
+                    id={foods.food_id}
+                    passfunc={setFood}
+                    name={foods.food_name}
+                    selected={foods.food_id === food}
+                    fieldset={"food"}
+                  >
+                    {foods.food_name}
+                  </CustomRadioBox>
+                );
+              })}
 
               <legend className="mt-6 font-semibold">Choose Drink</legend>
-              {menu.drinks.map((drink) => (
-                <div
-                  key={drink.drink_id}
-                  className="relative  mt-[18px] flex  items-center  py-[18px]  rounded-lg pl-5 "
-                >
-                  <input
-                    className="check_me peer hover:cursor-pointer appearance-none h-5 w-5 rounded-full border  "
-                    type="radio"
-                    key={drink.drink_id}
-                    id={drink.drink_id}
-                    name="radio buttons drink"
-                    onClick={(e) => setDrink(e.target.id)}
-                  />
-                  <label className="ml-[14px]  " htmlFor="hey">
-                    {drink.drink_name}
-                  </label>
-                </div>
-              ))}
+              {menu.drinks.map((drinks) => {
+                return (
+                  <CustomRadioBox
+                    key={drinks.drink_id}
+                    id={drinks.drink_id}
+                    passfunc={setDrink}
+                    name={drinks.drink_name}
+                    selected={drinks.drink_id === drink}
+                    fieldset={"drink"}
+                  >
+                    {drinks.drink_name}
+                  </CustomRadioBox>
+                );
+              })}
             </fieldset>
 
             <label className="mt-10 font-semibold" htmlFor="">

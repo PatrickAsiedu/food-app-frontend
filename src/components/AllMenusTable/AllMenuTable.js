@@ -4,7 +4,7 @@ import { deleteMenu, getAllMenu } from "../../redux/chefSlice";
 import { displayError, displaySuccess, formatDateToDateString, sortByMenuDate } from "../../utils/util-functions";
 // import RenderLoading from "../UI/RenderLoading";
 
-const AllMenuTable = () => {
+const AllMenuTable = ({setCurrentTab, currentEditableMenuRef} ) => {
   const dispatch = useDispatch()
   const [menus, setMenus] = useState([]);
 
@@ -43,6 +43,15 @@ const AllMenuTable = () => {
   }
   
 // console.log( menus)
+
+const editMenuItem =(menu) =>{
+  // open the 3rd tab, ie edit menu
+  // send editable data to current tab
+  setCurrentTab(3)
+  currentEditableMenuRef.current = menu
+  
+}
+
   return (
     <>
     {menus &&
@@ -73,7 +82,7 @@ const AllMenuTable = () => {
         
         {canEdit(menu.menu_date) && (
           <div className="flex">
-            <button className="">
+            <button className="" onClick={()=>editMenuItem(menu)}>
             <svg
             className="fill-checkbox mx-auto"
             width="36"

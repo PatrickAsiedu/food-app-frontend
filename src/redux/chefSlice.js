@@ -132,6 +132,20 @@ export const addMenu = createAsyncThunk("chef/add/Menu", async (menuData) => {
   }
 });
 
+export const editMenu = createAsyncThunk("chef/add/Menu", async (menuData) => {
+  try {
+    const response = await API.put("/menu", menuData);
+    console.log(response);
+    return { status: response.status, message: response.data.message };
+  } catch (error) {
+    console.log(error.response);
+    return {
+      status: error.response.status,
+      errorMessage: error.response.data.message,
+    };
+  }
+});
+
 export const getMenu = createAsyncThunk("chef/getmenu", async (menuDate) => {
   console.log(menuDate);
   try {

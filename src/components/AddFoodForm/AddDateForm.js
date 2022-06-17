@@ -1,6 +1,7 @@
 import React from 'react'
 
-const AddDateForm = ({setMenuDate}) => {
+const AddDateForm = ({setMenuDate, menuDate}) => {
+  // console.log(menuDate.split('T')[0])
   return (
     <React.Fragment>
         <form action="" className='mb-8'>
@@ -8,7 +9,9 @@ const AddDateForm = ({setMenuDate}) => {
             <input 
                 className="w-full border-b h-12 outline-0 "
                 type="date" 
+                value={menuDate?.split('T')[0]}
                 onSelect={(e)=>setMenuDate(e.target.value)}
+                onChange={(e)=>setMenuDate(e.target.value)}
                 required
             />
 

@@ -7,9 +7,7 @@ import { getMenu, getOrders } from "../../redux/chefSlice";
 import OrdersTable from "../../components/Cards/OrdersTable";
 import OrdersCard from "../../components/Cards/OrdersCard";
 
-import {
-  formatDateToDateString,
-} from "../../utils/util-functions";
+import { formatDateToDateString } from "../../utils/util-functions";
 
 const ChefOrders = () => {
   const dispatch = useDispatch();
@@ -78,7 +76,7 @@ const ChefOrders = () => {
       <div className=" px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen ">
         <ChefSideBarNav />
 
-        <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8  lg:px-[90px] text-base text-primary  ">
+        <main className=" lg:flex lg:flex-col sm:w-[90%] sm:ml-[10%]   lg:ml-[30%] 2xl:ml-[20%]  lg:w-[70%]  2xl:w-[80%] sm:px-8 lg:12  2xl:px-[90px] text-base text-primary  ">
           <div className=" mt-[40px] text-right">
             <form>
               <label className="text-primary font-bold text-base">
