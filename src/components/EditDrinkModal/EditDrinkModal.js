@@ -3,38 +3,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { editDrink } from "../../redux/chefSlice";
 import { displayError, displaySuccess } from "../../utils/util-functions";
 
-
 const EditDrinkModal = ({ onEditDrink, editDrinkID }) => {
-  const dispatch = useDispatch()
-  const drinkChef = useSelector(state=>state.chef.drinkList.find(drink=>drink.id === editDrinkID));
-  const drinkAdmin = useSelector(state=>state.admin.drinkList.find(drink=>drink.id === editDrinkID));
-  const userType = useSelector(state=>state.user.user.type)
-  console.log(userType)
-  
-  const drink = userType==='chef' ? drinkChef : drinkAdmin
-  
-  console.log(drink)
+  const dispatch = useDispatch();
+  const drinkChef = useSelector((state) =>
+    state.chef.drinkList.find((drink) => drink.id === editDrinkID)
+  );
+  const drinkAdmin = useSelector((state) =>
+    state.admin.drinkList.find((drink) => drink.id === editDrinkID)
+  );
+  const userType = useSelector((state) => state.user.user.type);
+  console.log(userType);
+
+  const drink = userType === "chef" ? drinkChef : drinkAdmin;
+
+  console.log(drink);
 
   const [name, setName] = useState(drink.name);
-  const [isEditting, setIsEditting] = useState(false)
+  const [isEditting, setIsEditting] = useState(false);
 
-  const onFormSubmit = async(e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
-    setIsEditting(true)
-    if(name) {
-      const response = await dispatch(editDrink({
-        drink_name: name,
-        drink_id: editDrinkID
-      })).unwrap()
+    setIsEditting(true);
+    if (name) {
+      const response = await dispatch(
+        editDrink({
+          drink_name: name,
+          drink_id: editDrinkID,
+        })
+      ).unwrap();
 
-      if(response.status===200){
-        displaySuccess('Drink updated successfully');
-      }else {
-        displayError('Unable to update drink, please try again later')
+      if (response.status === 200) {
+        displaySuccess("Drink updated successfully");
+      } else {
+        displayError("Unable to update drink, please try again later");
       }
     }
-    setIsEditting(false)
-  }
+    setIsEditting(false);
+  };
 
   return (
     <React.Fragment>
@@ -42,7 +47,10 @@ const EditDrinkModal = ({ onEditDrink, editDrinkID }) => {
         className="fixed w-full h-screen bg-black/50 z-10"
         onClick={() => onEditDrink(false)}
       ></div>
-      <div className="lg:absolute lg:top-[12%] lg:left-[40%] bg-white  z-20 w-[600px]  box-outer-shadow px-12 rounded-3xl  text-primary">
+      <div
+        className="absolute top-[10%] left-[5%] w-[90%] lg:top-[12%]  lg:left-[20%] xl:left-[25%] bg-white z-20  sm:left-[15%] sm:w-[70%] lg:w-[60%] 
+      xl:w-[50%] 2xl:left-[30%] 2xl:w-[40%] box-outer-shadow px-6 lg:px-12 sm:px-12 rounded-3xl  text-primary"
+      >
         <button className="mt-8 float-right" onClick={() => onEditDrink(false)}>
           <svg
             className="fill-primary"
@@ -85,7 +93,7 @@ const EditDrinkModal = ({ onEditDrink, editDrinkID }) => {
               type="submit"
               className="bg-primary h-[63px] w-[238px] mt-4 mb-12 text-white font-bold rounded-lg "
             >
-              {isEditting ? 'Updating Drink...' :'Update Drink'}
+              {isEditting ? "Updating Drink..." : "Update Drink"}
             </button>
           </div>
         </form>

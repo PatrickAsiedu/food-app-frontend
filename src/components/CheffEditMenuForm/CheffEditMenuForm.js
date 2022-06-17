@@ -4,27 +4,39 @@ import DrinkItem from "../../components/DrinkItem/DrinkItem";
 import { useDispatch, useSelector } from "react-redux";
 import CustomInput from "../../components/AddFoodForm/CustomInput";
 import AddDateForm from "../../components/AddFoodForm/AddDateForm";
-import {  editMenu } from "../../redux/chefSlice";
+import { editMenu } from "../../redux/chefSlice";
 // import AddFoodForm from "../../components/AddFoodForm/AddFoodForm";
-import { displayError, displaySuccess, formatDateToDateString } from "../../utils/util-functions";
+import {
+  displayError,
+  displaySuccess,
+  formatDateToDateString,
+} from "../../utils/util-functions";
 
-
-const CheffEditMenuForm = ({currentEditableMenuRef}) => {
+const CheffEditMenuForm = ({ currentEditableMenuRef }) => {
   const dispatch = useDispatch();
   // const foodInitialState = {id: 60, name: 'Curried Rice'};
   // const drinkInitialState = { id: 1, name: 'Sobolo'};
 
-  console.log('currentEditableMenuRef....: ', currentEditableMenuRef)
+  console.log("currentEditableMenuRef....: ", currentEditableMenuRef);
 
-  const [selectedFoods, setSelectedFoods] = useState(currentEditableMenuRef.current.foods.map(food=> {return {id: food.food_id, name: food.food_name}}));
-  const [selectedDrinks, setSelectedDrinks] = useState(currentEditableMenuRef.current.drinks.map(drink=>{return {id:drink.drink_id, name: drink.drink_name}}));
-  const [menuDate, setMenuDate] = useState(currentEditableMenuRef.current.menu_date);
+  const [selectedFoods, setSelectedFoods] = useState(
+    currentEditableMenuRef.current.foods.map((food) => {
+      return { id: food.food_id, name: food.food_name };
+    })
+  );
+  const [selectedDrinks, setSelectedDrinks] = useState(
+    currentEditableMenuRef.current.drinks.map((drink) => {
+      return { id: drink.drink_id, name: drink.drink_name };
+    })
+  );
+  const [menuDate, setMenuDate] = useState(
+    currentEditableMenuRef.current.menu_date
+  );
 
   const foodList = useSelector((state) => state.chef.foodList);
   const drinkList = useSelector((state) => state.chef.drinkList);
 
   const [isUpdattingMenu, setIsUpdattingMenu] = useState(false);
-
 
   // food here is an object with id and name
   const addToSelectedFoods = (food) => {
@@ -44,12 +56,12 @@ const CheffEditMenuForm = ({currentEditableMenuRef}) => {
   };
   const onFormSubmitHandler = async (e) => {
     e.preventDefault();
-    setIsUpdattingMenu(true)
+    setIsUpdattingMenu(true);
     const menu = {};
     menu.menu_date = menuDate;
     menu.foods_id = selectedFoods.map((food) => food.id);
     menu.drinks_id = selectedDrinks.map((drink) => drink.id);
-    menu.menu_id = currentEditableMenuRef.current.menu_id
+    menu.menu_id = currentEditableMenuRef.current.menu_id;
     console.log(menu);
 
     if (!menu.menu_date) {
@@ -64,7 +76,7 @@ const CheffEditMenuForm = ({currentEditableMenuRef}) => {
       return displayError("You are creating a menun without foods..");
     }
 
-    console.log('looging what is just updated: ', menu)
+    console.log("looging what is just updated: ", menu);
 
     const response = await dispatch(editMenu(menu)).unwrap();
     console.log(response);
@@ -81,7 +93,7 @@ const CheffEditMenuForm = ({currentEditableMenuRef}) => {
         <div className="w-full  box-outer-shadow  px-6 rounded-3xl 2xl:px-[86px] pt-9 lg:pt-16 text-base font-medium text-primary mb-5 pb-8">
           {/* <AddFoodForm /> */}
           {/* date picker */}
-          <AddDateForm setMenuDate={setMenuDate} />
+          <AddDateForm setMenuDate={setMenuDate} menuDate={menuDate} />
 
           <CustomInput
             label="Add Food"
@@ -102,7 +114,9 @@ const CheffEditMenuForm = ({currentEditableMenuRef}) => {
 
         <div className=" w-full box-outer-shadow  px-6 rounded-3xl  pt-9 lg:pt-16 text-base font-medium text-primary">
           <h1 className="font-semibold text-2xl text-center">Update Menu</h1>
-          <h1 className="mt-5">Menu Date: {formatDateToDateString(menuDate)}</h1>
+          <h1 className="mt-5">
+            Menu Date: {formatDateToDateString(menuDate)}
+          </h1>
 
           <h1 className="mt-7 lg:mt-5 mb-4">Food</h1>
           <div className="grid grid-cols-1 gap-3">
@@ -142,7 +156,7 @@ const CheffEditMenuForm = ({currentEditableMenuRef}) => {
               type="submit"
               className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold"
             >
-              {isUpdattingMenu ? 'Updating Menu...' : 'Update Menu'}
+              {isUpdattingMenu ? "Updating Menu..." : "Update Menu"}
             </button>
           </div>
         </div>

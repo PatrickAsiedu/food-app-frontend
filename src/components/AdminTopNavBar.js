@@ -12,7 +12,7 @@ const AdminTopNavBar = ({ setCurrentTab }) => {
   const totalUsers = useSelector((state) => state.admin.allUsers);
 
   return (
-    <nav className=" w-full mx-auto py-3 bg-primary mt-6 flex justify-evenly  text-white px-8  rounded-2xl mb-14">
+    <nav className="hidden sm:flex w-full mx-auto py-3 bg-primary mt-6  justify-evenly  text-white px-8  rounded-2xl mb-14">
       <button className="flex  items-center" onClick={() => setCurrentTab(1)}>
         <svg
           width="20"
