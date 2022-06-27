@@ -24,8 +24,7 @@ const ResetPasswordApprovalTable = () => {
   };
 
   const onApprobeButtonHandler = (user) => {
-    dispatch(changePasswordModal({state:true, user}));
-    
+    dispatch(changePasswordModal({ state: true, user }));
   };
 
   return (
@@ -33,7 +32,7 @@ const ResetPasswordApprovalTable = () => {
       {/* {showChangePasswordModal && (
         <EnterNewPasswordModalForm></EnterNewPasswordModalForm>
       )} */}
-      <div className=" w-full  box-outer-shadow  rounded-3xl px-5 ">
+      <div className="hidden sm:grid w-full  box-outer-shadow  rounded-3xl px-5 ">
         <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-6 gap-3   ">
           <h1 className="font-semibold pl-3">Name</h1>
           <h1 className="font-semibold ">Number</h1>
@@ -44,7 +43,7 @@ const ResetPasswordApprovalTable = () => {
         </div>
 
         <div className="mt-6 pb-24">
-          {userList  ?
+          {userList ? (
             userList.map((user) => (
               <div
                 key={user.id}
@@ -64,7 +63,7 @@ const ResetPasswordApprovalTable = () => {
                   {user.created_at.slice(0, -5).replace("T", " ")}
                 </h1>
                 <div className="flex ">
-                  <button onClick={()=>onApprobeButtonHandler(user)}>
+                  <button onClick={() => onApprobeButtonHandler(user)}>
                     <svg
                       className="fill-checkbox"
                       width="25"
@@ -96,7 +95,10 @@ const ResetPasswordApprovalTable = () => {
                   </button>
                 </div>
               </div>
-            )) : <p className="text-center mt-5">----List empty----</p> }
+            ))
+          ) : (
+            <p className="text-center mt-5">----List empty----</p>
+          )}
         </div>
       </div>
     </React.Fragment>

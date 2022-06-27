@@ -45,7 +45,7 @@ const AddUserForm = () => {
 
   return (
     <form
-      className="w-full mx-auto box-outer-shadow px-6 sm:px-12 rounded-3xl sm:w-full lg:w-[728px]  text-primary pt-12"
+      className="w-full mx-auto box-outer-shadow px-6 sm:px-12 rounded-3xl sm:w-full xl:w-[728px]  text-primary pt-12"
       onSubmit={onFormSubmitHandler}
     >
       <h1 className=" font-semibold text-2xl text-center mb-8">

@@ -5,67 +5,66 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const SignupApprovalTable = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const userList = useSelector((state) => state.admin.allUsers.filter(user=>user.status==='PENDING'));
-  console.log(userList)
+  const userList = useSelector((state) =>
+    state.admin.allUsers.filter((user) => user.status === "PENDING")
+  );
+  console.log(userList);
 
   const displayError = (errorMessage) => {
     Swal.fire({
-      title: 'No way!',
+      title: "No way!",
       text: errorMessage,
-      icon: 'error',
-      confirmButtonText: 'Okay'
-    }).then(result=>{
-      if(result.isConfirmed){
+      icon: "error",
+      confirmButtonText: "Okay",
+    }).then((result) => {
+      if (result.isConfirmed) {
         window.location.reload();
       }
-    })
-  }
-
+    });
+  };
 
   const displaySuccess = (successMessage) => {
     Swal.fire({
-      title: 'Success!',
+      title: "Success!",
       text: successMessage,
-      icon: 'success',
-      confirmButtonText: 'Okay'
-    }).then(result=>{
-      if(result.isConfirmed){
+      icon: "success",
+      confirmButtonText: "Okay",
+    }).then((result) => {
+      if (result.isConfirmed) {
         window.location.reload();
       }
-    })
-  }
+    });
+  };
 
-  const approveUserFunc = async(id) => {
-    console.log('approve user with id: ', id);
-    const response = await dispatch(approveUser({user_id: id})).unwrap()
-    if(response.status===200){
-      displaySuccess('User approved succesfully')
-    }else if(response.status===400){
-      displayError('User cannot be approved')
+  const approveUserFunc = async (id) => {
+    console.log("approve user with id: ", id);
+    const response = await dispatch(approveUser({ user_id: id })).unwrap();
+    if (response.status === 200) {
+      displaySuccess("User approved succesfully");
+    } else if (response.status === 400) {
+      displayError("User cannot be approved");
     }
     // window.location.reload();
+  };
 
-  }
-
-  const rejectUserFunc = async(id) => {
-    console.log('reject user with id: ', id)
-    const response = await dispatch(denyUser({user_id: id})).unwrap()
-    if(response.status===200){
-      displaySuccess('User rejected succesfully')
-    }else if(response.status===400){
-      displayError('User cannot be denied')
+  const rejectUserFunc = async (id) => {
+    console.log("reject user with id: ", id);
+    const response = await dispatch(denyUser({ user_id: id })).unwrap();
+    if (response.status === 200) {
+      displaySuccess("User rejected succesfully");
+    } else if (response.status === 400) {
+      displayError("User cannot be denied");
     }
     // window.location.reload();
-    
-  }
+  };
 
- console.log(userList.length)
+  console.log(userList.length);
 
   return (
-    <div className=" w-full  box-outer-shadow  rounded-3xl px-5 ">
+    <div className="hidden sm:grid w-full  box-outer-shadow  rounded-3xl px-5 ">
       <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-6 gap-3   ">
         <h1 className="font-semibold pl-3">Name</h1>
         <h1 className="font-semibold ">Number</h1>
@@ -76,7 +75,7 @@ const SignupApprovalTable = () => {
       </div>
 
       <div className="mt-6 pb-24">
-        {userList   ?
+        {userList ? (
           userList.map((user) => (
             <div
               key={user.id}
@@ -90,11 +89,11 @@ const SignupApprovalTable = () => {
               </h1>
               <h1 className="py-4 font-medium break-words   ">{user.type}</h1>
               <h1 className="py-4 font-medium break-words   ">{user.status}</h1>
-              <h1 className="py-4 font-medium break-words   ">{user.created_at.slice(0, -5).replace('T', " ")}</h1>
+              <h1 className="py-4 font-medium break-words   ">
+                {user.created_at.slice(0, -5).replace("T", " ")}
+              </h1>
               <div className="flex ">
-                <button
-                  onClick={()=>approveUserFunc(user.id)}
-                >
+                <button onClick={() => approveUserFunc(user.id)}>
                   <svg
                     className="fill-checkbox"
                     width="25"
@@ -107,8 +106,9 @@ const SignupApprovalTable = () => {
                   </svg>
                 </button>
 
-                <button className="ml-8 "
-                onClick={()=>rejectUserFunc(user.id)}
+                <button
+                  className="ml-8 "
+                  onClick={() => rejectUserFunc(user.id)}
                 >
                   <svg
                     className="fill-red-500"
@@ -124,10 +124,12 @@ const SignupApprovalTable = () => {
                     />
                   </svg>
                 </button>
-
               </div>
             </div>
-          )) : <p className="text-center mt-5">----List empty----</p>}
+          ))
+        ) : (
+          <p className="text-center mt-5">----List empty----</p>
+        )}
       </div>
     </div>
   );
