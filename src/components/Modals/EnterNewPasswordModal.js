@@ -36,7 +36,10 @@ const EnterNewPasswordModalForm = () => {
         className="fixed w-full h-screen bg-black/50 z-10"
         onClick={dismissModalHandler}
       ></div>
-      <div className="lg:absolute lg:top-[12%] lg:left-[40%] bg-white  z-20 w-[600px]  box-outer-shadow px-12 rounded-3xl  text-primary">
+      <div
+        className=" absolute top-[10%] left-[5%] w-[90%] lg:top-[12%]  lg:left-[20%] xl:left-[25%] bg-white z-20  sm:left-[15%]
+       sm:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:left-[30%] 2xl:w-[40%]      box-outer-shadow px-8 sm:px-12 rounded-3xl  text-primary"
+      >
         <button onClick={dismissModalHandler} className="mt-4 float-right">
           <svg
             className="fill-primary"

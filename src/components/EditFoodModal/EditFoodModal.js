@@ -3,46 +3,55 @@ import { useDispatch, useSelector } from "react-redux";
 import { editFood } from "../../redux/chefSlice";
 import { displayError, displaySuccess } from "../../utils/util-functions";
 
-const EditFoodModal = ({ onEditFood,  editFoodID }) => {
-  const dispatch = useDispatch()
+const EditFoodModal = ({ onEditFood, editFoodID }) => {
+  const dispatch = useDispatch();
   // console.log('hehehe ...', editFoodID)
-  const foodChef = useSelector(state=>state.chef.foodList.find(food=>food.id === editFoodID));
-  const foodAdmin = useSelector(state=>state.admin.foodList.find(food=>food.id === editFoodID));
-  const userType = useSelector(state=>state.user.user.type)
-  console.log(userType)
-  
-  const food = userType==='chef' ? foodChef : foodAdmin
-  
-  console.log(food)
+  const foodChef = useSelector((state) =>
+    state.chef.foodList.find((food) => food.id === editFoodID)
+  );
+  const foodAdmin = useSelector((state) =>
+    state.admin.foodList.find((food) => food.id === editFoodID)
+  );
+  const userType = useSelector((state) => state.user.user.type);
+  console.log(userType);
+
+  const food = userType === "chef" ? foodChef : foodAdmin;
+
+  console.log(food);
 
   const [name, setName] = useState(food.name);
-  const [isEditting, setIsEditting] = useState(false)
+  const [isEditting, setIsEditting] = useState(false);
 
-  const onFormSubmit = async(e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
-    setIsEditting(true)
-    if(name) {
-      const response = await dispatch(editFood({
-        food_name: name,
-        food_id: editFoodID
-      })).unwrap()
+    setIsEditting(true);
+    if (name) {
+      const response = await dispatch(
+        editFood({
+          food_name: name,
+          food_id: editFoodID,
+        })
+      ).unwrap();
 
-      if(response.status===200){
-        displaySuccess('Food updated successfully');
-      }else {
-        displayError('Unable to update food, please try again later')
+      if (response.status === 200) {
+        displaySuccess("Food updated successfully");
+      } else {
+        displayError("Unable to update food, please try again later");
       }
     }
-    setIsEditting(false)
-  }
-  
+    setIsEditting(false);
+  };
+
   return (
     <React.Fragment>
       <div
         className="fixed w-full h-screen bg-black/50 z-10"
         onClick={() => onEditFood(false)}
       ></div>
-      <div className="lg:absolute lg:top-[12%] lg:left-[40%] bg-white  z-20 w-[600px]  box-outer-shadow px-12 rounded-3xl  text-primary">
+      <div
+        className="absolute top-[10%] left-[5%] w-[90%] lg:top-[12%]  lg:left-[20%] xl:left-[25%] bg-white z-20  sm:left-[15%]
+       sm:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:left-[30%] 2xl:w-[40%] box-outer-shadow px-6 lg:px-12 sm:px-12 rounded-3xl  text-primary"
+      >
         <button className="mt-8 float-right" onClick={() => onEditFood(false)}>
           <svg
             className="fill-primary"
@@ -85,7 +94,7 @@ const EditFoodModal = ({ onEditFood,  editFoodID }) => {
               type="submit"
               className="bg-primary h-[63px] w-[238px] mt-4 mb-12 text-white font-bold rounded-lg "
             >
-              {isEditting ? 'Updating Food...' :'Update Food'}
+              {isEditting ? "Updating Food..." : "Update Food"}
             </button>
           </div>
         </form>

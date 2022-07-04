@@ -31,7 +31,7 @@ const UserDashboardItems = ({ menuDate }) => {
         setDisplayMessage(
           `No menu added for ${formatDateToStringNoYear(
             response.date
-          )} yet, please check back after 10 minutes`
+          )} yet, please check back later`
         );
         // setOrdersCloseAtMessage(`Note; orders for this menu close at ${formatDateToDateAndTimeString(new Date(new Date(response.date).getTime() + (3600 * 1000 * 7)))}`)
         setOrdersCloseAtMessage("");
@@ -59,8 +59,8 @@ const UserDashboardItems = ({ menuDate }) => {
           // nigga has ordered.
           setDisplayMessage(
             `You have ordered ${response.data.user_order[0].food_name} ${
-              response.data.user_order[0].drink_name &&
-              `and  ${response.data.user_order[0].drink_name}`
+              (response.data.user_order[0].drink_name === null) ? '' : `and  ${response.data.user_order[0].drink_name}`
+              
             } for ${
               response.data.menu_date.split("T")[0] ===
               today.toISOString().split("T")[0]

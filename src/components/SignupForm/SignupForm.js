@@ -112,8 +112,8 @@ const SignupForm = () => {
           <p
             className={
               formhasError
-                ? "text-checkbox font-normal text-center mt-[40px] "
-                : ""
+                ? " "
+                : "text-checkbox font-normal text-center mt-[40px]"
             }
           >
             {successMessage}
