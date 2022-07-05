@@ -11,6 +11,7 @@ import {
   displayError,
   displaySuccess,
   formatDateToDateString,
+  sortByDate,
 } from "../../utils/util-functions";
 
 const AdminFood = () => {
@@ -23,7 +24,9 @@ const AdminFood = () => {
   // since we are using same componentt, we have to check who is logged in so we can ...
   const chefFoodList = useSelector((state) => state.chef.foodList);
   const adminFoodList = useSelector((state) => state.admin.foodList);
-  const foodList = chefFoodList.length !== 0 ? chefFoodList : adminFoodList;
+  const foodList = chefFoodList.length !== 0 ? sortByDate([...chefFoodList]) : sortByDate([...adminFoodList]);
+
+ console.log(foodList)
 
   return (
     <React.Fragment>

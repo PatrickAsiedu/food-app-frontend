@@ -7,6 +7,7 @@ import { getMenu, getOrders } from "../../redux/adminSlice";
 import OrdersCard from "../../components/Cards/OrdersCard";
 
 import { formatDateToDateString } from "../../utils/util-functions";
+import OrdersTable from "../../components/Cards/OrdersTable";
 
 const AdminOrders = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,9 @@ const AdminOrders = () => {
     getSelectedOrder();
   }, [selectedDate]);
 
+
+  console.log(drinkSummary)
+
   return (
     <React.Fragment>
       <div className=" px-4  sm:flex sm:pr-0 lg:px-0 lg:flex h-screen  ">
@@ -92,6 +96,10 @@ const AdminOrders = () => {
               <div className="mt-3">--- No Food found ---</div>
             )}
           </div>
+
+          { drinkSummary?.length === 0 & foodSummary?.length !==0 ? " "
+          : 
+          <>
           <h1 className=" ml-3 mt-[50px] font-semibold mb-3">Drinks</h1>
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9 ">
             {drinkSummary ? (
@@ -106,6 +114,8 @@ const AdminOrders = () => {
               <div className="mt-3">--- No Drink found ---</div>
             )}
           </div>
+          </>
+          }
 
           <h1 className=" sm:hidden ml-3 mt-[40px] font-semibold mb-3">
             Orders
@@ -121,7 +131,15 @@ const AdminOrders = () => {
             ></OrdersCard>
           ))}
 
-          <div className=" hidden sm:flex sm:flex-col  w-full  box-outer-shadow mt-12 rounded-3xl px-9  ">
+          {orders ? (
+            <OrdersTable orders={orders} />
+          ) : (
+            <h1 className="text-primary text-base text-center mt-[50px]">
+              No orders placed yet
+            </h1>
+          )}
+
+          {/* <div className=" hidden sm:flex sm:flex-col  w-full  box-outer-shadow mt-12 rounded-3xl px-9  ">
             <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-5 gap-3 mb-6  ">
               <h1 className="font-semibold pl-3">Name</h1>
               <h1 className="font-semibold ">Food choice</h1>
@@ -148,14 +166,15 @@ const AdminOrders = () => {
                     {order.comment}
                   </h1>
                   <h1 className="py-4 font-medium break-words   ">
-                    {order.created_at.split("T")[0]}
+                    {order.created_at.replace('T', ' ').slice(0, -5)}
                   </h1>
                 </div>
               ))
             ) : (
               <div className="mt-5">--- No orders found ---</div>
             )}
-          </div>
+          </div> */}
+
           <div className=" pt-[120px]"></div>
         </main>
       </div>
