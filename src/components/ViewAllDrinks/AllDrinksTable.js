@@ -5,6 +5,7 @@ import {
   displayError,
   displaySuccess,
   formatDateToDateString,
+  sortByDate,
 } from "../../utils/util-functions";
 
 const AllDrinksTable = ({ onEditDrink, setEditDrinkID }) => {
@@ -13,7 +14,8 @@ const AllDrinksTable = ({ onEditDrink, setEditDrinkID }) => {
   // since we are using same componentt, we have to check who is logged in so we can ...
   const chefdrinkList = useSelector((state) => state.chef.drinkList);
   const admindrinkList = useSelector((state) => state.admin.drinkList);
-  const drinkList = chefdrinkList.length !== 0 ? chefdrinkList : admindrinkList;
+  // const drinkList = chefdrinkList.length !== 0 ? chefdrinkList : admindrinkList;
+  const drinkList = chefdrinkList.length !== 0 ? sortByDate([...chefdrinkList]) : sortByDate([...admindrinkList]);
   console.log(drinkList);
 
   const deleteDrinkWithID = async (id) => {

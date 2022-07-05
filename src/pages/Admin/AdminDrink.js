@@ -12,6 +12,7 @@ import {
   displayError,
   displaySuccess,
   formatDateToDateString,
+  sortByDate,
 } from "../../utils/util-functions";
 
 const AdminDrink = () => {
@@ -21,7 +22,8 @@ const AdminDrink = () => {
 
   const chefdrinkList = useSelector((state) => state.chef.drinkList);
   const admindrinkList = useSelector((state) => state.admin.drinkList);
-  const drinkList = chefdrinkList.length !== 0 ? chefdrinkList : admindrinkList;
+  const drinkList = chefdrinkList.length !== 0 ? sortByDate([...chefdrinkList]) : sortByDate([...admindrinkList]);
+
   console.log(drinkList);
   return (
     <React.Fragment>

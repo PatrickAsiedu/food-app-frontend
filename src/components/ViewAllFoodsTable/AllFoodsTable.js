@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFoodAdmin } from "../../redux/adminSlice";
-import { displayError, displaySuccess, formatDateToDateString } from "../../utils/util-functions";
+import { displayError, displaySuccess, formatDateToDateString, sortByDate } from "../../utils/util-functions";
 
 
 const AllFoodsTable = ({ onEditFood,setEditFoodID }) => {
@@ -10,7 +10,8 @@ const AllFoodsTable = ({ onEditFood,setEditFoodID }) => {
   // since we are using same componentt, we have to check who is logged in so we can ...
   const chefFoodList =  useSelector(state=>state.chef.foodList);
   const adminFoodList =  useSelector(state=>state.admin.foodList);
-  const foodList = chefFoodList.length !==0 ? chefFoodList : adminFoodList
+  // const foodList = chefFoodList.length !==0 ? chefFoodList : adminFoodList
+  const foodList = chefFoodList.length !== 0 ? sortByDate([...chefFoodList]) : sortByDate([...adminFoodList]);
   // console.log(foodList)
 
   console.log(foodList)

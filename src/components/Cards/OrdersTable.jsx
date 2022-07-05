@@ -31,7 +31,7 @@ const OrdersTable = ({ orders }) => {
               {order?.comment}
             </h1>
             <h1 className="py-4 font-medium break-words   ">
-              {formatDateToDateString(order.created_at)}
+              {formatDateToDateAndTimeString(order.created_at)}
             </h1>
           </div>
         ))}
