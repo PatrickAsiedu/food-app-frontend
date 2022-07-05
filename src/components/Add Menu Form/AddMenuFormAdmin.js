@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import CustomInput from "../../components/AddFoodForm/CustomInput";
 import AddDateForm from "../../components/AddFoodForm/AddDateForm";
 import { addMenu } from "../../redux/chefSlice";
-import { displayError, displaySuccess, formatDateToDateString } from "../../utils/util-functions";
+import {
+  displayError,
+  displaySuccess,
+  formatDateToDateString,
+} from "../../utils/util-functions";
 
 const AddMenuForm = () => {
   const dispatch = useDispatch();
@@ -17,7 +21,7 @@ const AddMenuForm = () => {
   const [menuDate, setMenuDate] = useState();
   const [chefName, setChefName] = useState(null);
 
-  const [isAddingMenu, setIsAddingMenu] = useState(false)
+  const [isAddingMenu, setIsAddingMenu] = useState(false);
   const foodList = useSelector((state) => state.admin.foodList);
   const drinkList = useSelector((state) => state.admin.drinkList);
   const chefList = useSelector((state) =>
@@ -41,10 +45,10 @@ const AddMenuForm = () => {
     setSelectedDrinks(selectedDrinks.filter((drink) => drink.id !== drinkID));
   };
 
-  console.log(selectedFoods)
+  console.log(selectedFoods);
   const onFormSubmitHandler = async (e) => {
     e.preventDefault();
-    setIsAddingMenu(true)
+    setIsAddingMenu(true);
     const menu = {};
     menu.menu_date = menuDate;
     menu.foods_id = selectedFoods.map((food) => food.id);
@@ -117,7 +121,9 @@ const AddMenuForm = () => {
 
         <div className=" w-full box-outer-shadow  px-6 rounded-3xl lg:px-6 pt-9 lg:pt-16 text-base font-medium text-primary">
           <h1 className="font-semibold text-2xl text-center">New Menu</h1>
-          <h1 className="mt-5">Menu Date: {formatDateToDateString(menuDate)}</h1>
+          <h1 className="mt-5">
+            Menu Date: {formatDateToDateString(menuDate)}
+          </h1>
 
           <h1 className="mt-7 lg:mt-5 mb-4">Food</h1>
           <div className="grid grid-cols-1 gap-3">
@@ -159,7 +165,7 @@ const AddMenuForm = () => {
               type="submit"
               className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold"
             >
-              {isAddingMenu ? 'Adding Menu...' : 'Add Menu'}
+              {isAddingMenu ? "Adding Menu..." : "Add Menu"}
             </button>
           </div>
         </div>
