@@ -11,9 +11,7 @@
 
 }
 
-.activenavstyle{
-    @apply  flex items-center py-6 pl-6 bg-primary;
-}
+
 
 .check_me:checked{
     @apply bg-[url('/src/assets/Vector.svg')] border-0;
@@ -59,3 +57,8 @@
     height: calc(100% - 200px);
 
 }
+
+.active-link{
+    background-color: #002C59;
+}
+

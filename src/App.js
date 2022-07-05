@@ -156,12 +156,18 @@ function App() {
           <Route
             exact
             path="/admin/food"
-            element={<ProtectedRoute Component={AdminFood} Permission="admin" />} />
+            element={
+              <ProtectedRoute Component={AdminFood} Permission="admin" />
+            }
+          />
 
           <Route
             exact
             path="/admin/drink"
-            element={<ProtectedRoute Component={AdminDrink} Permission="admin" />} />
+            element={
+              <ProtectedRoute Component={AdminDrink} Permission="admin" />
+            }
+          />
 
           <Route
             exact
