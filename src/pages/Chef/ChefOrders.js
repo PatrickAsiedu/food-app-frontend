@@ -101,8 +101,11 @@ const ChefOrders = () => {
             )}
           </div>
 
+          { drinkSummary?.length === 0 & foodSummary?.length !==0 ? " "
+          : 
+          <>
           <h1 className=" ml-3 mt-[50px] font-semibold mb-3">Drinks</h1>
-          <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9 ">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9 ">
             {drinkSummary ? (
               drinkSummary.map((drink) => (
                 <DrinkCard
@@ -112,9 +115,13 @@ const ChefOrders = () => {
                 />
               ))
             ) : (
-              <div className="mt-3">--- No Drinks found ---</div>
+              <div className="mt-3">--- No Drink found ---</div>
             )}
           </div>
+          </>
+          }
+
+
           <h1 className=" sm:hidden ml-3 mt-[40px] font-semibold mb-3">
             Orders
           </h1>

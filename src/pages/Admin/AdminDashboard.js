@@ -8,7 +8,7 @@ import OrdersTable from "../../components/Cards/OrdersTable";
 import { getOrders } from "../../redux/adminSlice";
 import AdminTitleBar from "../../components/AdminTitlebar/AdminTitlebar";
 import OrdersCard from "../../components/Cards/OrdersCard";
-import { formatDateToDateString } from "../../utils/util-functions";
+import { formatDateToDateAndTimeString, formatDateToDateString } from "../../utils/util-functions";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
@@ -89,7 +89,7 @@ const AdminDashboard = () => {
               foodname={order.food_name}
               drinkname={order.drink_name}
               comment={order.comment || "no comment"}
-              date={formatDateToDateString(order.created_at)}
+              date={formatDateToDateAndTimeString(order.created_at)}
             ></OrdersCard>
           ))}
 

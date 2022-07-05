@@ -1,9 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { sortByDate } from "../../utils/util-functions";
 
 const ShowAllUsersTable = () => {
-  const userList = useSelector((state) => state.admin.allUsers);
-  console.log(userList);
+  const userListunSorted = useSelector((state) => state.admin.allUsers);
+  const userList = sortByDate([...userListunSorted])
+  // console.log(userList);
+
+
   return (
     <div className="hidden sm:grid w-full  box-outer-shadow  rounded-3xl px-5 ">
       <div className="w-full pt-9  h-[72px] py-7  grid grid-cols-5 gap-3   ">
