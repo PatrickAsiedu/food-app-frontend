@@ -1,9 +1,11 @@
 import React from "react"
+import { useState } from "react"
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 
 
 const CustomInput = ({label, itemList, addToSelectedItems, styling}) => {
+  const [itemSelected, setITemSelected] = useState(false)
 
     // const itemList = [
     //     { id: 1, name: 'item1' },
@@ -23,11 +25,13 @@ const CustomInput = ({label, itemList, addToSelectedItems, styling}) => {
       // console.log(result)
     }
   
-    // const handleOnSelect = (item) => {
-    //   // the item selected
-    //   console.log('selected item : ', item)
-    //   this.addToSelectedItems(item)
-    // }
+    const handleOnSelect = (item) => {
+      // the item selected
+      console.log('selected item : ', item)
+      addToSelectedItems(item)
+      //  now clear the input box
+      
+    }
   
     const handleOnFocus = () => {
       // console.log('Focused')
@@ -51,11 +55,12 @@ const CustomInput = ({label, itemList, addToSelectedItems, styling}) => {
             // styling={{className: 'w-full border-b h-12 outline-0 '}}
             onSearch={handleOnSearch}
             onHover={handleOnHover}
-            onSelect={(item)=>addToSelectedItems(item)}
+            onSelect={(item)=>handleOnSelect(item)}
             onFocus={handleOnFocus}
-            // autoFocus
+            // autoFocu
             formatResult={formatResult}
             styling={styling} 
+            showNoResults={'No result found'}
           />
         </form>
     )

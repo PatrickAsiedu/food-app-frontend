@@ -36,9 +36,6 @@ const UserSideBarNav = () => {
   // const onBlurHamburgerHandler = () => {
   //   setonblur(true);
   // };
-  let activeStyle = {
-    backgroundColor: "#002C59",
-  };
 
   return (
     <div className=" lg:pl-8 sm:h-full sm:border-r-2 sm:w-[10%]  lg:w-[30%] 2xl:w-[20%] sm:fixed  ">

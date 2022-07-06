@@ -73,7 +73,7 @@ const ChefDashboard = () => {
           <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:mt-[50px] lg:gap-9 ">
             <TotalFoodOrders value={totalFood} />
             <TotalDrinkOrders value={totalDrink} />
-            <TotalComments value={totalComments} />
+            {/* <TotalComments value={totalComments} /> */}
           </div>
           <h1 className=" sm:hidden ml-3 mt-[40px] font-semibold mb-3">
             Orders
