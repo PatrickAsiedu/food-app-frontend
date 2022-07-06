@@ -6,7 +6,11 @@ import FoodCard from "../../components/Cards/FoodCard";
 import { getMenu, getOrders } from "../../redux/adminSlice";
 import OrdersCard from "../../components/Cards/OrdersCard";
 
-import { formatDateToDateString, exportCSVFile, formatDateToDateAndTimeString } from "../../utils/util-functions";
+import {
+  formatDateToDateString,
+  exportCSVFile,
+  formatDateToDateAndTimeString,
+} from "../../utils/util-functions";
 import OrdersTable from "../../components/Cards/OrdersTable";
 
 const AdminOrders = () => {
@@ -60,9 +64,8 @@ const AdminOrders = () => {
     getSelectedOrder();
   }, [selectedDate]);
 
-
-  console.log(drinkSummary)
-  console.log(orders)
+  console.log(drinkSummary);
+  console.log(orders);
 
   return (
     <React.Fragment>
@@ -98,25 +101,26 @@ const AdminOrders = () => {
             )}
           </div>
 
-          { drinkSummary?.length === 0 & foodSummary?.length !==0 ? " "
-          : 
-          <>
-          <h1 className=" ml-3 mt-[50px] font-semibold mb-3">Drinks</h1>
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9 ">
-            {drinkSummary ? (
-              drinkSummary.map((drink) => (
-                <DrinkCard
-                  key={drink.drink_id}
-                  drinkName={drink.drink_name}
-                  total={drink.count}
-                />
-              ))
-            ) : (
-              <div className="mt-3">--- No Drink found ---</div>
-            )}
-          </div>
-          </>
-          }
+          {(drinkSummary?.length === 0) & (foodSummary?.length !== 0) ? (
+            " "
+          ) : (
+            <>
+              <h1 className=" ml-3 mt-[50px] font-semibold mb-3">Drinks</h1>
+              <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-9 ">
+                {drinkSummary ? (
+                  drinkSummary.map((drink) => (
+                    <DrinkCard
+                      key={drink.drink_id}
+                      drinkName={drink.drink_name}
+                      total={drink.count}
+                    />
+                  ))
+                ) : (
+                  <div className="mt-3">--- No Drink found ---</div>
+                )}
+              </div>
+            </>
+          )}
 
           <h1 className=" sm:hidden ml-3 mt-[40px] font-semibold mb-3">
             Orders
@@ -132,29 +136,49 @@ const AdminOrders = () => {
             ></OrdersCard>
           ))}
           {/* conditional rendenring of download button */}
-          {orders &&  <button className="text-right mt-5" onClick={()=> 
-            exportCSVFile(
-              [
-                {key:'name', name:'Name'}, 
-                {key:'food_choice', name:'Food Choice'}, 
-                {key:'drink_choice', name:'Drink Choice'}, 
-                {key:'comment', name:'Comment'},
-                {key:'date_ordered', name: "Date Ordered"}
-            ],
-            orders.map(order=> {
-              return {
-                name: order.name, 
-                food_choice: order.food_name, 
-                drink_choice: order.drink_name, 
-                comment: order.comment,
-                date_ordered: formatDateToDateAndTimeString(order.created_at)
+          {orders && (
+            <button
+              className="group mt-10 border rounded-xl w-[300px] py-4 text-primary font-semibold hover:bg-primary/80 hover:text-white flex  justify-center items-center"
+              onClick={() =>
+                exportCSVFile(
+                  [
+                    { key: "name", name: "Name" },
+                    { key: "food_choice", name: "Food Choice" },
+                    { key: "drink_choice", name: "Drink Choice" },
+                    { key: "comment", name: "Comment" },
+                    { key: "date_ordered", name: "Date Ordered" },
+                  ],
+                  orders.map((order) => {
+                    return {
+                      name: order.name,
+                      food_choice: order.food_name,
+                      drink_choice: order.drink_name,
+                      comment: order.comment,
+                      date_ordered: formatDateToDateAndTimeString(
+                        order.created_at
+                      ),
+                    };
+                  }),
+                  `${selectedDate}-orders`
+                )
               }
-            }),
-            `${selectedDate}-orders`
-
-          ) 
-          }>Download</button>}
-        
+            >
+              <span className="">
+                <svg
+                  className="group-hover:fill-white fill-primary mr-3"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 1024 1024"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M505.7 661C506.448 661.956 507.404 662.729 508.496 663.261C509.588 663.793 510.786 664.069 512 664.069C513.214 664.069 514.412 663.793 515.504 663.261C516.595 662.729 517.552 661.956 518.3 661L630.3 519.3C634.4 514.1 630.7 506.4 624 506.4H549.9V168C549.9 163.6 546.3 160 541.9 160H481.9C477.5 160 473.9 163.6 473.9 168V506.3H400C393.3 506.3 389.6 514 393.7 519.2L505.7 661ZM878 626H818C813.6 626 810 629.6 810 634V788H214V634C214 629.6 210.4 626 206 626H146C141.6 626 138 629.6 138 634V832C138 849.7 152.3 864 170 864H854C871.7 864 886 849.7 886 832V634C886 629.6 882.4 626 878 626Z" />
+                </svg>
+              </span>
+              <span></span>
+              Download Summary
+            </button>
+          )}
 
           {orders ? (
             <OrdersTable orders={orders} />
