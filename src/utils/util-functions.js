@@ -63,6 +63,15 @@ export const displayError = (errorMessage) => {
   })
 }
 
+export const displayErrorNoReload = (errorMessage) => {
+  Swal.fire({
+    title: 'No way!',
+    text: errorMessage,
+    icon: 'error',
+    confirmButtonText: 'Okay'
+  })
+}
+
 
 export const exportCSVFile = (headers, items, fileTitle) => {
 
