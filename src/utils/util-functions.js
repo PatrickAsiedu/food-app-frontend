@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import { unparse } from 'papaparse';
 
 export const formatDateToDateString = (date) => {
     const dateObject = new Date(date);
@@ -60,4 +61,41 @@ export const displayError = (errorMessage) => {
       window.location.reload();
     }
   })
+}
+
+
+export const exportCSVFile = (headers, items, fileTitle) => {
+
+  fileTitle = fileTitle ?? 'Exported';
+  
+  let csvHeader = unparse({
+    fields: [...headers.map(item => item.name)],
+    data: [],
+  })
+
+  let csvVal = unparse(items, {
+    header: false,
+    columns: [...headers.map(item => item.key)]
+  })
+
+  let csv = csvHeader + csvVal
+  
+  var exportedFilenmae = fileTitle + '.csv' || 'export.csv';
+
+  var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  if (navigator.msSaveBlob) { // IE 10+
+      navigator.msSaveBlob(blob, exportedFilenmae);
+  } else {
+    let link = document.createElement("a");
+    if (link.download !== undefined) { // feature detection
+        // Browsers that support HTML5 download attribute
+        var url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", exportedFilenmae);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+  }
 }
