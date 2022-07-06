@@ -7,6 +7,7 @@ import AddDateForm from "../../components/AddFoodForm/AddDateForm";
 import { addMenu } from "../../redux/chefSlice";
 import {
   displayError,
+  displayErrorNoReload,
   displaySuccess,
   formatDateToDateString,
 } from "../../utils/util-functions";
@@ -57,23 +58,28 @@ const AddMenuForm = () => {
     console.log(menu);
 
     if (!menu.menu_date) {
-      return displayError("Please select a menu date");
+      setIsAddingMenu(false);
+      return displayErrorNoReload("Please select a menu date");
     }
     if (chefName === null || chefName === "no chef selected") {
-      return displayError("Please select a chef");
+      setIsAddingMenu(false);
+      return displayErrorNoReload("Please select a chef");
     }
     if (menu.foods_id.length === 0) {
-      return displayError("You are creating a menun without foods..");
+      setIsAddingMenu(false);
+      return displayErrorNoReload("You cannot create a menu without foods.. Please select at least one food");
     }
 
-    if (!menu.drinks_id) {
-      return displayError("You are creating a menun without foods..");
-    }
+    // drinks arent compulsory
+    // if (!menu.drinks_id) {
+    //   return displayErrorNoReload("no drinks");
+    // }
 
     const response = await dispatch(addMenu(menu)).unwrap();
     console.log(response);
     if (response.status === 400) {
-      return displayError(response.errorMessage);
+      setIsAddingMenu(false);
+      return displayErrorNoReload(response.errorMessage);
     }
     if (response.status === 201) {
       return displaySuccess(response.message);

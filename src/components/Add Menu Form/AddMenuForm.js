@@ -6,7 +6,7 @@ import CustomInput from "../../components/AddFoodForm/CustomInput";
 import AddDateForm from "../../components/AddFoodForm/AddDateForm";
 import { addMenu } from "../../redux/chefSlice";
 // import AddFoodForm from "../../components/AddFoodForm/AddFoodForm";
-import { displayError, displaySuccess } from "../../utils/util-functions";
+import { displayError, displayErrorNoReload, displaySuccess } from "../../utils/util-functions";
 
 const AddMenuForm = () => {
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ const AddMenuForm = () => {
   const [selectedDrinks, setSelectedDrinks] = useState([]);
   const [menuDate, setMenuDate] = useState();
 
+  const [isAddingMenu, setIsAddingMenu] = useState(false);
   const foodList = useSelector((state) => state.chef.foodList);
   const drinkList = useSelector((state) => state.chef.drinkList);
 
@@ -38,6 +39,7 @@ const AddMenuForm = () => {
   };
   const onFormSubmitHandler = async (e) => {
     e.preventDefault();
+    setIsAddingMenu(true);
     const menu = {};
     menu.menu_date = menuDate;
     menu.foods_id = selectedFoods.map((food) => food.id);
@@ -45,21 +47,25 @@ const AddMenuForm = () => {
     console.log(menu);
 
     if (!menu.menu_date) {
-      return displayError("Please select a menu date");
+      setIsAddingMenu(false);
+      return displayErrorNoReload("Please select a menu date");
     }
 
     if (!menu.foods_id) {
-      return displayError("You are creating a menun without foods..");
+      setIsAddingMenu(false);
+      return displayErrorNoReload("You cannot create a menu without foods.. Please select at least one food");
     }
 
-    if (!menu.drinks_id) {
-      return displayError("You are creating a menun without foods..");
+    if (menu.foods_id.length === 0) {
+      setIsAddingMenu(false);
+      return displayErrorNoReload("You cannot create a menu without foods.. Please select at least one food");
     }
 
     const response = await dispatch(addMenu(menu)).unwrap();
     console.log(response);
     if (response.status === 400) {
-      return displayError(response.errorMessage);
+      setIsAddingMenu(false);
+      return displayErrorNoReload(response.errorMessage);
     }
     if (response.status === 201) {
       return displaySuccess(response.message);
@@ -131,7 +137,7 @@ const AddMenuForm = () => {
               type="submit"
               className=" bg-primary h-16 w-[240px] text-white rounded-lg font-bold"
             >
-              Add Menu
+              {isAddingMenu ? "Adding Menu..." : "Add Menu"}
             </button>
           </div>
         </div>
