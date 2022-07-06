@@ -6,7 +6,7 @@ import FoodCard from "../../components/Cards/FoodCard";
 import { getMenu, getOrders } from "../../redux/adminSlice";
 import OrdersCard from "../../components/Cards/OrdersCard";
 
-import { formatDateToDateString } from "../../utils/util-functions";
+import { formatDateToDateString, exportCSVFile, formatDateToDateAndTimeString } from "../../utils/util-functions";
 import OrdersTable from "../../components/Cards/OrdersTable";
 
 const AdminOrders = () => {
@@ -62,6 +62,7 @@ const AdminOrders = () => {
 
 
   console.log(drinkSummary)
+  console.log(orders)
 
   return (
     <React.Fragment>
@@ -130,6 +131,30 @@ const AdminOrders = () => {
               date={formatDateToDateString(order.created_at)}
             ></OrdersCard>
           ))}
+          {/* conditional rendenring of download button */}
+          {orders &&  <button className="text-right mt-5" onClick={()=> 
+            exportCSVFile(
+              [
+                {key:'name', name:'Name'}, 
+                {key:'food_choice', name:'Food Choice'}, 
+                {key:'drink_choice', name:'Drink Choice'}, 
+                {key:'comment', name:'Comment'},
+                {key:'date_ordered', name: "Date Ordered"}
+            ],
+            orders.map(order=> {
+              return {
+                name: order.name, 
+                food_choice: order.food_name, 
+                drink_choice: order.drink_name, 
+                comment: order.comment,
+                date_ordered: formatDateToDateAndTimeString(order.created_at)
+              }
+            }),
+            `${selectedDate}-orders`
+
+          ) 
+          }>Download</button>}
+        
 
           {orders ? (
             <OrdersTable orders={orders} />

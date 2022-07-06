@@ -224,7 +224,9 @@ const OrderLunchForm = (props) => {
                 );
               })}
 
-              <legend className="mt-6 font-semibold">Choose Drink</legend>
+              {drink.length !== 0 && (
+                <legend className="mt-6 font-semibold">Choose Drink</legend>
+              )}
               {menu.drinks.map((drinks) => {
                 return (
                   <CustomRadioBox

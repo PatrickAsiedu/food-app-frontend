@@ -134,7 +134,9 @@ const UserEditOrder = () => {
                 </div>
               ))} */}
 
-              <legend className="mt-6 font-semibold">Choose Drink</legend>
+              {menu.drinks.length !== 0 && (
+                <legend className="mt-6 font-semibold">Choose Drink</legend>
+              )}
               {menu.drinks.map((drinks) => {
                 return (
                   <CustomRadioBox

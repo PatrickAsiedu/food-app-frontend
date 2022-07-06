@@ -7,7 +7,7 @@ import { getMenu, getOrders } from "../../redux/chefSlice";
 import OrdersTable from "../../components/Cards/OrdersTable";
 import OrdersCard from "../../components/Cards/OrdersCard";
 
-import { formatDateToDateString } from "../../utils/util-functions";
+import { exportCSVFile, formatDateToDateAndTimeString, formatDateToDateString } from "../../utils/util-functions";
 
 const ChefOrders = () => {
   const dispatch = useDispatch();
@@ -135,6 +135,30 @@ const ChefOrders = () => {
               date={formatDateToDateString(order.created_at)}
             ></OrdersCard>
           ))}
+
+          {/* conditional rendenring of download button */}
+          {orders &&  <button className="text-right mt-5" onClick={()=> 
+            exportCSVFile(
+              [
+                {key:'name', name:'Name'}, 
+                {key:'food_choice', name:'Food Choice'}, 
+                {key:'drink_choice', name:'Drink Choice'}, 
+                {key:'comment', name:'Comment'},
+                {key:'date_ordered', name: "Date Ordered"}
+            ],
+            orders.map(order=> {
+              return {
+                name: order.name, 
+                food_choice: order.food_name, 
+                drink_choice: order.drink_name, 
+                comment: order.comment,
+                date_ordered: formatDateToDateAndTimeString(order.created_at)
+              }
+            }),
+            `${selectedDate}-orders`
+
+          ) 
+          }>Download</button>}
 
           {orders ? (
             <OrdersTable orders={orders} />
