@@ -14,7 +14,7 @@ const UserDashboard = () => {
   useEffect(() => {
     const dateNow = new Date();
     // console.log(dateNow.getHours())
-    if (dateNow.getHours() < 12) {
+    if (dateNow.getHours() < 11) {
       setMenuQueryDate(dateNow.toISOString().split("T")[0]);
       // console.log(dateNow.toISOString().split('T')[0])
       console.log(
